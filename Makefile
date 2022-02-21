@@ -1,5 +1,5 @@
 NAME = libftprintf.a
-SRC = 
+SRC = ft_printf.c utilities.c
 OBJS = $(SRC:.c=.o)
 WRNG = -Wall -Werror -Wextra
 

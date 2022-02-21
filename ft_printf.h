@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 16:07:36 by abackman          #+#    #+#             */
-/*   Updated: 2022/02/21 17:26:27 by abackman         ###   ########.fr       */
+/*   Updated: 2022/02/21 17:36:23 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_print
 	int		arg_num;
 	int		arg_cur;
 	int		f_width;
+	int		precision;
 	int		bytes;
 	char	f_char;
 	char	*buf;

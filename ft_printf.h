@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 16:07:36 by abackman          #+#    #+#             */
-/*   Updated: 2022/02/21 16:52:28 by abackman         ###   ########.fr       */
+/*   Updated: 2022/02/21 17:26:27 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ typedef struct s_print
 	char	f_char;
 	char	*buf;
 }	t_print;
-
+/*
 const void	(*f[8])(void *) = {
-	ft_getchar,
-	ft_atoi,
-	ft_atoi,
-	ft_float,
+	ft_getchar(),
+	ft_atoi(),
+	ft_atoi(),
+	ft_float(),
 
 };
-
+*/
 #endif

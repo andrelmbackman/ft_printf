@@ -65,7 +65,7 @@ static int	checkflag(const char *format, char *buf, t_print *print)
 		tmp = print_ptr(print->arg_lst);
 	if (tmp)
 	{
-		buf = strjoin_pro(buf, tmp);
+		//buf = strjoin_pro(buf, tmp); function that checks field width too, then strjoins and frees
 		free (tmp);
 		return (1);
 	}

@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 18:30:27 by abackman          #+#    #+#             */
-/*   Updated: 2022/02/17 17:26:53 by abackman         ###   ########.fr       */
+/*   Updated: 2022/02/21 16:25:17 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static int	checkflag(const char *format, char *buf, t_print *print)
 	if (*format == 'i' || *format == 'd')
 		tmp = ft_itoa(print->arg_lst);
 	else if (*format == 'c')
-		tmp =  getchar(print->arg_lst);
+		tmp =  ft_getchar(print->arg_lst);
 	else if (*format == 'p' || *format == 'P')
 		tmp = print_ptr(print->arg_lst);
 	if (tmp)
@@ -77,14 +77,17 @@ int	ft_printf(const char *format, ...)
 {
 	t_print	*print;
 	int		i;
+	int		ret;
 
 	print->arg_num = countargs(format);
 	i = 0;
+	ret = 0;
 	va_start(print->arg_lst, format);
 	print->arg_cur = 0;
-	while (print->arg_cur < print->arg_num)
+	while (*format++)
 	{
-		while (*format++ != '%' && *format != '\0')
+		if (*format == '%' && (*format - 1) != '%')
+			ret += 
 
 		print->arg_cur++;
 	}

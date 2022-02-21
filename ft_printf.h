@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 16:07:36 by abackman          #+#    #+#             */
-/*   Updated: 2022/02/17 16:57:47 by abackman         ###   ########.fr       */
+/*   Updated: 2022/02/21 16:52:28 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 # define CYAN "\033[0;36m"
 # define BLACK "\033[0;30m"
 # define WHITE "\033[0;37m"
-
-# define FLAGS "cdifFgGsuxXp"
+# define FLAGS1 "0-+ #"
+# define FLAGS2 "cdifFgGsuxXp"
 
 typedef struct s_print
 {
@@ -38,5 +38,13 @@ typedef struct s_print
 	char	f_char;
 	char	*buf;
 }	t_print;
+
+const void	(*f[8])(void *) = {
+	ft_getchar,
+	ft_atoi,
+	ft_atoi,
+	ft_float,
+
+};
 
 #endif

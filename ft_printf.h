@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 16:07:36 by abackman          #+#    #+#             */
-/*   Updated: 2022/02/21 17:36:23 by abackman         ###   ########.fr       */
+/*   Updated: 2022/02/22 18:50:54 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,26 +26,61 @@
 # define BLACK "\033[0;30m"
 # define WHITE "\033[0;37m"
 # define FLAGS1 "0-+ #"
-# define FLAGS2 "cdifFgGsuxXp"
+# define FLAGS2 "%cspdibouxXf"
+
+/*
+** Struct in which all useful information is stored
+*/
 
 typedef struct s_print
 {
-	va_list	arg_lst;
-	int		arg_num;
-	int		arg_cur;
-	int		f_width;
-	int		precision;
-	int		bytes;
-	char	f_char;
-	char	*buf;
+	va_list		arg_lst;
+	int			arg_num;
+	int			arg_cur;
+	int			width;
+	int			precision;
+	int			bytes;
+	char		f_char;
+	char		*str;
+	char		upper;
+	const char	*format
 }	t_print;
-/*
-const void	(*f[8])(void *) = {
-	ft_getchar(),
-	ft_atoi(),
-	ft_atoi(),
-	ft_float(),
 
-};
+/*
+** Print functions
 */
+
+int	pr_perc(t_print *print);
+int	pr_char(t_print *print);
+int	pr_str(t_print *print);
+int	pr_ptr(t_print *print);
+int	pr_num(t_print *print);
+int	pr_bin(t_print *print);
+int	pr_oct(t_print *print);
+int	pr_u(t_print *print);
+int	pr_hex(t_print *print);
+int	pr_float(t_print *print);
+
+
+/*
+** Function pointer and dispatch table
+*/
+
+typedef int	(*t_able)(t_print *print);
+
+static const t_able dispatch[26] = {
+	pr_perc,
+	pr_char,
+	pr_str,
+	pr_ptr,
+	pr_num,
+	pr_num,
+	pr_bin,
+	pr_oct,
+	pr_u,
+	pr_hex,
+	pr_hex,
+	pr_float,
+};
+
 #endif

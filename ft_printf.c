@@ -6,32 +6,11 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 18:30:27 by abackman          #+#    #+#             */
-/*   Updated: 2022/02/21 16:25:17 by abackman         ###   ########.fr       */
+/*   Updated: 2022/02/22 19:23:10 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-static int	countargs(const char *format)
-{
-	int	i;
-	int	ret;
-
-	i = 0;
-	ret = 0;
-	while (format[i] != '\0')
-	{
-		if (format[i] == '%' && format[i + 1] != '%')
-			ret++;
-		i++;
-	}
-	return (ret);
-}
-
-static char	*print_ptr(void **ptr)
-{
-
-}
 
 static void	get_field(const char *format, t_print *print)
 {
@@ -45,7 +24,7 @@ static void	get_field(const char *format, t_print *print)
 	}
 	while (ft_isdigit(*format))
 		i = (i * 10) + (*format++ - '0');
-	print->f_width = i;
+	print->width = i;
 }
 
 static int	checkflag(const char *format, char *buf, t_print *print)
@@ -53,7 +32,7 @@ static int	checkflag(const char *format, char *buf, t_print *print)
 	char	*tmp;
 
 	tmp = NULL;
-	print->f_width = 0;
+	print->width = 0;
 	print->f_char = ' ';
 	if (ft_isdigit(*format))
 		get_field(*format, print);
@@ -73,25 +52,59 @@ static int	checkflag(const char *format, char *buf, t_print *print)
 		return (0);
 }
 
+static void	ft_prints(int fd, char *str)
+{
+	if (str && fd >= 0)
+		write(fd, str, sizeof(str));
+}
+
+int	ft_vasprintf(char *str, const char *format, va_list ap)
+{
+	int	i;
+	int ret;
+
+	i = 0;
+	ret = 0;
+	while (format[i])
+	{
+		if (format[i] == '%')
+			i += convert_yes(str, format, ap);
+		else
+			i += convert_no(str, format);
+	}
+	return (ft_strlen(str));
+}
+
+int	ft_dprintf(int fd, const char *format, ...)
+{
+	t_print	*print;
+	int		ret;
+
+	print = (t_print *)malloc(sizeof(t_print));
+	if (!print)
+		return (-1);
+	ret = 0;
+	va_start(print->arg_lst, format);
+	ret = ft_vasprintf(print->str, format, print->arg_lst);
+	va_end(print->arg_lst);
+	ft_prints(fd, print->str);
+	free_struct(print);
+	return (ret);
+}
+
 int	ft_printf(const char *format, ...)
 {
 	t_print	*print;
-	int		i;
 	int		ret;
 
-	print->arg_num = countargs(format);
-	i = 0;
+	print = (t_print *)malloc(sizeof(t_print));
+	if (!print)
+		return (-1);
 	ret = 0;
 	va_start(print->arg_lst, format);
-	print->arg_cur = 0;
-	while (*format++)
-	{
-		if (*format == '%' && (*format - 1) != '%')
-			ret += 
-
-		print->arg_cur++;
-	}
+	ret = ft_vasprintf(print->str, format, print->arg_lst);
 	va_end(print->arg_lst);
-	print->bytes = (int *)ft_strlen(print->buf);
-	return (print->bytes);
+	ft_prints(STDOUT_FILENO, print->str);
+	free_struct(print);
+	return (ret);
 }

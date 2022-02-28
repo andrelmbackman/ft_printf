@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 16:07:36 by abackman          #+#    #+#             */
-/*   Updated: 2022/02/22 18:50:54 by abackman         ###   ########.fr       */
+/*   Updated: 2022/02/28 15:16:08 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 # define CYAN "\033[0;36m"
 # define BLACK "\033[0;30m"
 # define WHITE "\033[0;37m"
-# define FLAGS1 "0-+ #"
-# define FLAGS2 "%cspdibouxXf"
+# define FLAGS "0-+ #"
+# define SPECIFY "%cspdibouxXf"
 
 /*
 ** Struct in which all useful information is stored
@@ -43,7 +43,6 @@ typedef struct s_print
 	char		f_char;
 	char		*str;
 	char		upper;
-	const char	*format
 }	t_print;
 
 /*
@@ -82,5 +81,15 @@ static const t_able dispatch[26] = {
 	pr_hex,
 	pr_float,
 };
+
+/*
+** Other functions
+*/
+
+int		ft_strlen(char *str);
+int		ft_isdigit(int c);
+int		convert_no(char *str, const char *format);
+int		convert_yes(t_print *print, const char *format, va_list ap);
+char	*strjoin_pro(char *str1, char str2[]);
 
 #endif

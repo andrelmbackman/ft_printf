@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 16:07:36 by abackman          #+#    #+#             */
-/*   Updated: 2022/02/28 15:16:08 by abackman         ###   ########.fr       */
+/*   Updated: 2022/03/01 15:54:25 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@
 # define CYAN "\033[0;36m"
 # define BLACK "\033[0;30m"
 # define WHITE "\033[0;37m"
-# define FLAGS "0-+ #"
+# define FLAGS "0-+ #.*0123456789hlL"
 # define SPECIFY "%cspdibouxXf"
+# define ALL "0-+ #.*0123456789hlL%cspdibouxXf"
 
 /*
 ** Struct in which all useful information is stored
@@ -34,15 +35,14 @@
 
 typedef struct s_print
 {
-	va_list		arg_lst;
-	int			arg_num;
-	int			arg_cur;
+	va_list		ap;
+	int			len;
+	int			length;
 	int			width;
 	int			precision;
-	int			bytes;
 	char		f_char;
-	char		*str;
 	char		upper;
+	char		*str;
 }	t_print;
 
 /*
@@ -70,7 +70,7 @@ typedef int	(*t_able)(t_print *print);
 static const t_able dispatch[26] = {
 	pr_perc,
 	pr_char,
-	pr_str,
+	pr_str, /* if str == NULL, print (null) */
 	pr_ptr,
 	pr_num,
 	pr_num,
@@ -86,10 +86,11 @@ static const t_able dispatch[26] = {
 ** Other functions
 */
 
+void	ft_strdel(char **as);
 int		ft_strlen(char *str);
 int		ft_isdigit(int c);
 int		convert_no(char *str, const char *format);
-int		convert_yes(t_print *print, const char *format, va_list ap);
+int		convert_yes(t_print *print, const char *format);
 char	*strjoin_pro(char *str1, char str2[]);
 
 #endif

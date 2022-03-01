@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 18:30:27 by abackman          #+#    #+#             */
-/*   Updated: 2022/02/28 15:20:04 by abackman         ###   ########.fr       */
+/*   Updated: 2022/03/01 16:44:08 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,57 +58,82 @@ static void	ft_prints(int fd, char *str)
 		write(fd, str, sizeof(str));
 }
 
-int	ft_vasprintf(char *str, const char *format, va_list ap)
+static int	conv_print(t_print *print, const char *format)
 {
-	t_print	*print;
 	int	i;
-	int ret;
 
 	i = 0;
-	ret = 0;
-	print = (t_print *)malloc(sizeof(t_print));
-	print->str = str;
-	if (!print)
-		return (-1);
 	while (format[i])
 	{
 		if (format[i] == '%')
-			i += convert_yes(print, format, ap);
+		{
+			i++;
+			if (format[i] == '\0')
+				break ;
+			else if (!ft_strchr(ALL, format[i]))
+				i += convert_no(print->str, format);
+			else
+				i += convert_yes(print, format);
+		}
 		else
 			i += convert_no(print->str, format);
 	}
 	return (i);
 }
 
-int	ft_dprintf(int fd, const char *format, ...)
+int	ft_asprintf(char **str, const char *format, ...)
 {
-	char	*str;
-	va_list	ap;
 	int		ret;
+	t_print	*print;
 
 	ret = 0;
-	str = NULL;
-	va_start(ap, format);
-	ret = ft_vasprintf(str, format, ap);
-	va_end(ap);
-	ft_prints(fd, str);
-	free(str);
+	print = (t_print *)malloc(sizeof(t_print));
+	if (!print)
+		return (-1);
+	if (!ft_strlen(format))
+		return (0);
+	va_start(print->ap, format);
+	ret = conv_print(print->str, format);
+	str = &print->str;
+	va_end(print->ap);
+	return (ret);
+}
+
+int	ft_dprintf(int fd, const char *format, ...)
+{
+	int		ret;
+	t_print	*print;
+
+	ret = 0;
+	print = (t_print *)malloc(sizeof(t_print));
+	if (!print)
+		return (-1);
+	if (!ft_strlen(format))
+		return (0);
+	va_start(print->ap, format);
+	ret = conv_print(print, format);
+	va_end(print->ap);
+	ft_prints(fd, print->str);
+	free_struct(print);
 	return (ret);
 }
 
 int	ft_printf(const char *format, ...)
 {
-	char	*str;
-	va_list	ap;
 	int		ret;
+	t_print	*print;
 
 	ret = 0;
-	str = NULL;
-	va_start(ap, format);
-	ret = ft_vasprintf(str, format, ap);
-	va_end(ap);
-	ft_prints(STDOUT_FILENO, str);
-	free(str);
+	print = (t_print *)malloc(sizeof(t_print));
+	if (!print)
+		return (-1);
+	if (!ft_strlen(format))
+		return (0);
+	va_start(print->ap, format);
+	ret = conv_print(print, format);
+	va_end(print->ap);
+	ft_prints(STDOUT_FILENO, print->str);
+	free_struct(print);
 	return (ret);
 }
 

@@ -12,6 +12,10 @@
 
 #include "ft_printf.h"
 
+char	*p_strnew(char *str)
+{}
+char	*P_strjoin()
+{}
 int	convert_yes(char *str, const char *format, va_list ap)
 {
 	int	i;

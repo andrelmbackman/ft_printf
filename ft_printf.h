@@ -16,7 +16,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-# define RESET "\033[0m"
+# define EOC "\033[0m"
 # define RED "\033[0;31m"
 # define GREEN "\033[0;32m"
 # define BLUE "\033[0;34m"

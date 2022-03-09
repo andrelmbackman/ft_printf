@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 19:23:59 by abackman          #+#    #+#             */
-/*   Updated: 2022/03/09 11:41:22 by abackman         ###   ########.fr       */
+/*   Updated: 2022/03/09 14:49:25 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ char *p_strjoin(char *str, const char *format, int i)
 	}
 	while (k < j)
 		new[k++] = format[l++];
-	//printf("string: %s\n", new);
 	new[k] = '\0';
+	//printf("stringjoin: \"%s\"\n", new);
 	ft_strdel(&str);
 	return (new);
 }

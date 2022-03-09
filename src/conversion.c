@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 14:59:31 by abackman          #+#    #+#             */
-/*   Updated: 2022/03/09 11:57:14 by abackman         ###   ########.fr       */
+/*   Updated: 2022/03/09 14:49:11 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,15 @@ int	pr_str(t_print *print)
 		str = strnull();
 		i = 6;
 	}
-	//printf("PR_STR: i: %i\n", i);
-	else if (!print->str)
-		print->str = p_strnew(str, i);
-	else
+	//printf("PR_STR: i: %i\nstr: %s", i, print->str);
+	if (print->str)
 		print->str = p_strjoin(print->str, str, i);
+	else
+		print->str = p_strnew(str, i);
+	//printf("\nNEW: \"%s\"\n", print->str);
 	return (i);
 }
+
 int	pr_ptr(t_print *print)
 {
 	return (0);

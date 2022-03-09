@@ -6,13 +6,23 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 18:30:27 by abackman          #+#    #+#             */
+<<<<<<< HEAD
+/*   Updated: 2022/03/09 11:46:26 by abackman         ###   ########.fr       */
+=======
 /*   Updated: 2022/03/01 16:44:08 by abackman         ###   ########.fr       */
+>>>>>>> 3223fece55e77f0bda70863d36dc732ccafcdd93
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+<<<<<<< HEAD
+
+/*
+void	get_field(const char *format, t_print *print)
+=======
 /*
 static void	get_field(const char *format, t_print *print)
+>>>>>>> 3223fece55e77f0bda70863d36dc732ccafcdd93
 {
 	int	i;
 
@@ -59,6 +69,98 @@ static void	ft_prints(int fd, char *str)
 }
 
 static int	conv_print(t_print *print, const char *format)
+<<<<<<< HEAD
+{
+	int	i;
+	int	ret;
+
+	i = 0;
+	ret = 0;
+	while (format[i])
+	{
+		printf("conv_print:\n* * * i: %i\n* * * str: %s\n", i, print->str);
+		if (format[i] == '%')
+		{
+			i++;
+			if (format[i] == '\0')
+				break ;
+			else if (!ft_strchr(ALL, format[i]))
+				i += convert_no(print, &format[i]);
+			else
+			{
+				ret += convert_yes(print, &format[i]);
+				i++;
+			}
+		}
+		else
+			i += convert_no(print, &format[i]);
+	}
+	return (i);
+}
+
+int	ft_asprintf(char **str, const char *format, ...)
+{
+	int		ret;
+	t_print	*print;
+
+	ret = 0;
+	print = (t_print *)malloc(sizeof(t_print));
+	if (!print)
+		return (-1);
+	if (!ft_strlen(format))
+		return (0);
+	va_start(print->ap, format);
+	ret = conv_print(print, format);
+	str = &print->str;
+	va_end(print->ap);
+	return (ret);
+}
+
+int	ft_dprintf(int fd, const char *format, ...)
+{
+	int		ret;
+	t_print	*print;
+
+	ret = 0;
+	print = (t_print *)malloc(sizeof(t_print));
+	if (!print)
+		return (-1);
+	if (!ft_strlen(format))
+		return (0);
+	va_start(print->ap, format);
+	ret = conv_print(print, format);
+	va_end(print->ap);
+	ft_prints(fd, print->str);
+	free_struct(print);
+	return (ret);
+}
+
+int	ft_printf(const char *format, ...)
+{
+	int		ret;
+	t_print	*print;
+
+	ret = 0;
+	print = (t_print *)malloc(sizeof(t_print));
+	if (!print)
+		return (-1);
+	if (!ft_strlen(format))
+		return (0);
+	va_start(print->ap, format);
+	conv_print(print, format);
+	va_end(print->ap);
+	ft_prints(STDOUT_FILENO, print->str);
+	ret = ft_strlen(print->str);
+	free_struct(print);
+	return (ret);
+}
+
+int	main(void)
+{
+	printf("...MAIN...");
+	int i = ft_printf("%%hello%c\n%s", 'x', "goodbye");
+	printf("...\nreturn of ft_printf: %i\n", i);
+=======
 {
 	int	i;
 
@@ -140,5 +242,6 @@ int	ft_printf(const char *format, ...)
 int	main(void)
 {
 	ft_printf("%%\n");
+>>>>>>> 3223fece55e77f0bda70863d36dc732ccafcdd93
 	return(0);
 }

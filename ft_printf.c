@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 18:30:27 by abackman          #+#    #+#             */
-/*   Updated: 2022/03/09 14:10:32 by abackman         ###   ########.fr       */
+/*   Updated: 2022/03/09 14:50:19 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,14 @@ static int	checkflag(const char *format, char *buf, t_print *print)
 */
 static void	ft_prints(int fd, char *str)
 {
-	if (str && fd >= 0)
-		write(fd, str, sizeof(str));
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		write(fd, &str[i], 1);
+		i++;
+	}
 }
 
 static int	conv_print(t_print *print, const char *format)
@@ -68,7 +74,7 @@ static int	conv_print(t_print *print, const char *format)
 	ret = 0;
 	while (format[i])
 	{
-		printf("conv_print:\n* * * i: %i\n* * * str: %s\n", i, print->str);
+		//printf("conv_print:\n* * * i: %i\n* * * str: %s\n", i, print->str);
 		if (format[i] == '%')
 		{
 			i++;
@@ -78,7 +84,7 @@ static int	conv_print(t_print *print, const char *format)
 				i += convert_no(print, &format[i]);
 			else
 			{
-				ret += convert_yes(print, &format[i]);
+				convert_yes(print, &format[i]);
 				i++;
 			}
 		}
@@ -149,6 +155,6 @@ int	main(void)
 {
 	printf("...MAIN...");
 	int i = ft_printf("%%hello%c\n%s", 'x', "goodbye");
-	printf("...\nreturn of ft_printf: %i\n", i);
+	printf("\n...return of ft_printf: %i\n", i);
 	return(0);
 }

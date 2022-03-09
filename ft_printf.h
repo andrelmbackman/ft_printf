@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 16:07:36 by abackman          #+#    #+#             */
-/*   Updated: 2022/03/09 14:10:47 by abackman         ###   ########.fr       */
+/*   Updated: 2022/03/09 15:03:33 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_print
 	int			zero;
 	int			space;
 	int			upper;
+	int			plus;
 	char		f_char;
 	char		length;
 	char		*str;
@@ -105,5 +106,6 @@ char	*p_strjoin(char *str, const char *format, int i);
 char	*strjoin_pro(char *str1, char str2[]);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strdup(const char *s1);
+char	*ft_itoa_base(int num, int base);
 
 #endif

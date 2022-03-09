@@ -6,34 +6,14 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 18:30:27 by abackman          #+#    #+#             */
-/*   Updated: 2022/02/21 16:25:17 by abackman         ###   ########.fr       */
+/*   Updated: 2022/03/09 11:46:26 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	countargs(const char *format)
-{
-	int	i;
-	int	ret;
-
-	i = 0;
-	ret = 0;
-	while (format[i] != '\0')
-	{
-		if (format[i] == '%' && format[i + 1] != '%')
-			ret++;
-		i++;
-	}
-	return (ret);
-}
-
-static char	*print_ptr(void **ptr)
-{
-
-}
-
-static void	get_field(const char *format, t_print *print)
+/*
+void	get_field(const char *format, t_print *print)
 {
 	int	i;
 
@@ -45,7 +25,7 @@ static void	get_field(const char *format, t_print *print)
 	}
 	while (ft_isdigit(*format))
 		i = (i * 10) + (*format++ - '0');
-	print->f_width = i;
+	print->width = i;
 }
 
 static int	checkflag(const char *format, char *buf, t_print *print)
@@ -53,7 +33,7 @@ static int	checkflag(const char *format, char *buf, t_print *print)
 	char	*tmp;
 
 	tmp = NULL;
-	print->f_width = 0;
+	print->width = 0;
 	print->f_char = ' ';
 	if (ft_isdigit(*format))
 		get_field(*format, print);
@@ -72,26 +52,103 @@ static int	checkflag(const char *format, char *buf, t_print *print)
 	else
 		return (0);
 }
+*/
+static void	ft_prints(int fd, char *str)
+{
+	if (str && fd >= 0)
+		write(fd, str, sizeof(str));
+}
+
+static int	conv_print(t_print *print, const char *format)
+{
+	int	i;
+	int	ret;
+
+	i = 0;
+	ret = 0;
+	while (format[i])
+	{
+		printf("conv_print:\n* * * i: %i\n* * * str: %s\n", i, print->str);
+		if (format[i] == '%')
+		{
+			i++;
+			if (format[i] == '\0')
+				break ;
+			else if (!ft_strchr(ALL, format[i]))
+				i += convert_no(print, &format[i]);
+			else
+			{
+				ret += convert_yes(print, &format[i]);
+				i++;
+			}
+		}
+		else
+			i += convert_no(print, &format[i]);
+	}
+	return (i);
+}
+
+int	ft_asprintf(char **str, const char *format, ...)
+{
+	int		ret;
+	t_print	*print;
+
+	ret = 0;
+	print = (t_print *)malloc(sizeof(t_print));
+	if (!print)
+		return (-1);
+	if (!ft_strlen(format))
+		return (0);
+	va_start(print->ap, format);
+	ret = conv_print(print, format);
+	str = &print->str;
+	va_end(print->ap);
+	return (ret);
+}
+
+int	ft_dprintf(int fd, const char *format, ...)
+{
+	int		ret;
+	t_print	*print;
+
+	ret = 0;
+	print = (t_print *)malloc(sizeof(t_print));
+	if (!print)
+		return (-1);
+	if (!ft_strlen(format))
+		return (0);
+	va_start(print->ap, format);
+	ret = conv_print(print, format);
+	va_end(print->ap);
+	ft_prints(fd, print->str);
+	free_struct(print);
+	return (ret);
+}
 
 int	ft_printf(const char *format, ...)
 {
-	t_print	*print;
-	int		i;
 	int		ret;
+	t_print	*print;
 
-	print->arg_num = countargs(format);
-	i = 0;
 	ret = 0;
-	va_start(print->arg_lst, format);
-	print->arg_cur = 0;
-	while (*format++)
-	{
-		if (*format == '%' && (*format - 1) != '%')
-			ret += 
+	print = (t_print *)malloc(sizeof(t_print));
+	if (!print)
+		return (-1);
+	if (!ft_strlen(format))
+		return (0);
+	va_start(print->ap, format);
+	conv_print(print, format);
+	va_end(print->ap);
+	ft_prints(STDOUT_FILENO, print->str);
+	ret = ft_strlen(print->str);
+	free_struct(print);
+	return (ret);
+}
 
-		print->arg_cur++;
-	}
-	va_end(print->arg_lst);
-	print->bytes = (int *)ft_strlen(print->buf);
-	return (print->bytes);
+int	main(void)
+{
+	printf("...MAIN...");
+	int i = ft_printf("%%hello%c\n%s", 'x', "goodbye");
+	printf("...\nreturn of ft_printf: %i\n", i);
+	return(0);
 }

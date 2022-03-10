@@ -65,8 +65,7 @@ int	convert_yes(t_print *print, const char *format)
 	int	i;
 	
 	i = 0;
-	init_struct(print);
-	//i += get_field(format, print);
+	get_field(format, print);
 	while (*format != SPECIFY[i])
 		i++;
 	return (dispatch[i](print));

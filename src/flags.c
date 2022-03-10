@@ -12,7 +12,7 @@
 
 #include "../ft_printf.h"
 
-void	init_struct(t_print *print)
+static void	init_struct(t_print *print)
 {
 	print->len = 0;
 	print->width = 0;
@@ -26,11 +26,23 @@ void	init_struct(t_print *print)
 	print->length = 0;
 }
 
-void	get_field(const char *format, t_print *print)
+static void	get_length(const char *format, t_print *print)
+{
+
+}
+
+
+static void	get_prec(const char *format, t_print *print)
+{
+	
+}
+
+int	get_field(const char *format, t_print *print)
 {
 	int	i;
 
 	i = 0;
+	init_struct(print);
 	if (format[i] == '0')
 		print->f_char = '0';
 	else if (format[i] == ' ')
@@ -39,9 +51,4 @@ void	get_field(const char *format, t_print *print)
 	while (ft_isdigit(*format))
 		i = (i * 10) + (*format++ - '0');
 	print->width = i;
-}
-
-void	get_prec(const char *format, t_print *print)
-{
-	
 }

@@ -65,33 +65,32 @@ static void	ft_prints(int fd, char *str)
 	}
 }
 
-static int	conv_print(t_print *print, const char *format)
+static int	conv_print(t_print *p, const char *format)
 {
-	int	i;
 	int	ret;
 
-	i = 0;
+	p->i = 0;
 	ret = 0;
-	while (format[i])
+	while (format[p->i])
 	{
 		//printf("conv_print:\n* * * i: %i\n* * * str: %s\n", i, print->str);
-		if (format[i] == '%')
+		if (format[p->i] == '%')
 		{
-			i++;
-			if (format[i] == '\0')
+			p->i++;
+			if (format[p->i] == '\0')
 				break ;
-			else if (!ft_strchr(ALL, format[i]))
-				i += convert_no(print, &format[i]);
+			else if (!ft_strchr(ALL, format[p->i]))
+				p->i += convert_no(p, &format[p->i]);
 			else
 			{
-				convert_yes(print, &format[i]);
-				i++;
+				convert_yes(p, &format[p->i]);
+				p->i++;
 			}
 		}
 		else
-			i += convert_no(print, &format[i]);
+			p->i += convert_no(p, &format[p->i]);
 	}
-	return (i);
+	return (p->i);
 }
 
 int	ft_asprintf(char **str, const char *format, ...)

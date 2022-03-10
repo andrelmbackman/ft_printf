@@ -37,14 +37,15 @@
 typedef struct s_print
 {
 	va_list		ap;
-	int			len;
-	int			width;
-	int			precision;
-	int			hash;
-	int			zero;
-	int			space;
-	int			upper;
-	int			plus;
+	int		i;
+	int		len;
+	int		width;
+	int		precision;
+	int		hash;
+	int		zero;
+	int		space;
+	int		upper;
+	int		plus;
 	char		f_char;
 	char		length;
 	char		*str;
@@ -94,12 +95,13 @@ static const t_able dispatch[13] = {
 */
 
 void	free_struct(t_print *print);
-void	init_struct(t_print *print);
+
 void	ft_strdel(char **as);
 int		ft_strlen(const char *str);
 int		ft_isdigit(int c);
 int		convert_no(t_print *print, const char *format);
 int		convert_yes(t_print *print, const char *format);
+int	get_field(const char *format, t_print *print);
 char	*strnull();
 char	*p_strnew(const char *format, int i);
 char	*p_strjoin(char *str, const char *format, int i);

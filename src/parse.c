@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 19:23:59 by abackman          #+#    #+#             */
-/*   Updated: 2022/03/11 17:15:01 by abackman         ###   ########.fr       */
+/*   Updated: 2022/03/11 18:12:18 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,11 @@ int	convert_yes(t_print *print, const char *format)
 	get_field(format, print);
 	while (format[print->i] != SPECIFY[x])
 		x++;
-	return (dispatch[x](print));
+	if (format[print->i] == SPECIFY[x])
+		return (dispatch[x](print));
+	else
+		print->i--;
+	return (0);
 }
 
 int	convert_no(t_print *print, const char *format)

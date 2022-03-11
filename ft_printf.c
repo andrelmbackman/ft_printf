@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 18:30:27 by abackman          #+#    #+#             */
-/*   Updated: 2022/03/09 14:50:19 by abackman         ###   ########.fr       */
+/*   Updated: 2022/03/11 17:42:14 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,19 +73,19 @@ static int	conv_print(t_print *p, const char *format)
 	ret = 0;
 	while (format[p->i])
 	{
-		//printf("conv_print:\n* * * i: %i\n* * * str: %s\n", i, print->str);
+		//printf("conv_print:\n* * * i: %i\n* * * str: %s\n", p->i, p->str);
 		if (format[p->i] == '%')
 		{
 			p->i++;
 			if (format[p->i] == '\0')
 				break ;
-			else if (!ft_strchr(ALL, format[p->i]))
-				p->i += convert_no(p, &format[p->i]);
-			else
+			else if (ft_strchr(ALL, format[p->i]))
 			{
-				convert_yes(p, &format[p->i]);
+				convert_yes(p, format);
 				p->i++;
 			}
+			else
+				p->i += convert_no(p, &format[p->i]);
 		}
 		else
 			p->i += convert_no(p, &format[p->i]);
@@ -153,7 +153,7 @@ int	ft_printf(const char *format, ...)
 int	main(void)
 {
 	printf("...MAIN...");
-	int i = ft_printf("%%hello%c\n%s", 'x', "goodbye");
+	int i = ft_printf("%%hello%c\n%.10-0sX", 'x', "hello");
 	printf("\n...return of ft_printf: %i\n", i);
 	return(0);
 }

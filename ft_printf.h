@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 16:07:36 by abackman          #+#    #+#             */
-/*   Updated: 2022/03/09 15:03:33 by abackman         ###   ########.fr       */
+/*   Updated: 2022/03/11 17:41:44 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 
 typedef struct s_print
 {
-	va_list		ap;
+	va_list	ap;
 	int		i;
 	int		len;
 	int		width;
@@ -46,17 +46,20 @@ typedef struct s_print
 	int		space;
 	int		upper;
 	int		plus;
-	char		f_char;
-	char		length;
-	char		*str;
-	char		*tmp;
+	int		minus;
+	int		h;
+	int		l;
+	int		L;
+	char	f_char;
+	char	length;
+	char	*str;
+	char	*tmp;
 }	t_print;
 
 /*
 ** Print functions
 */
 
-int	pr_perc(t_print *print);
 int	pr_char(t_print *print);
 int	pr_str(t_print *print);
 int	pr_ptr(t_print *print);
@@ -66,6 +69,7 @@ int	pr_oct(t_print *print);
 int	pr_u(t_print *print);
 int	pr_hex(t_print *print);
 int	pr_float(t_print *print);
+int	pr_perc(t_print *print);
 
 
 /*
@@ -95,13 +99,16 @@ static const t_able dispatch[13] = {
 */
 
 void	free_struct(t_print *print);
-
 void	ft_strdel(char **as);
 int		ft_strlen(const char *str);
+int		ft_strcmp(const char *s1, const char *s2);
+char	*ft_strncpy(char *dst, const char *src, size_t len);
 int		ft_isdigit(int c);
+int		ft_isalnum(int c);
+int		ft_isalpha(int c);
 int		convert_no(t_print *print, const char *format);
 int		convert_yes(t_print *print, const char *format);
-int	get_field(const char *format, t_print *print);
+int		get_field(const char *format, t_print *print);
 char	*strnull();
 char	*p_strnew(const char *format, int i);
 char	*p_strjoin(char *str, const char *format, int i);

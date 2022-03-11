@@ -1,40 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strings.c                                          :+:      :+:    :+:   */
+/*   lib2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/09 11:12:35 by abackman          #+#    #+#             */
-/*   Updated: 2022/03/11 17:25:23 by abackman         ###   ########.fr       */
+/*   Created: 2022/03/11 17:37:42 by abackman          #+#    #+#             */
+/*   Updated: 2022/03/11 17:40:02 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
 
-char	*strnull(t_print *p, char *str, int i)
+int	ft_isalpha(int c)
 {
-	char	*tmp;
+	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
+		return (1);
+	else
+		return (0);
+}
 
-	if (str == NULL && (p->precision > 0 || p->precision == -1))
+int	ft_isdigit(int c)
+{
+	if (c >= '0' && c <= '9')
+		return (1);
+	else
+		return (0);
+}
+
+int	ft_isalnum(int c)
+{
+	if ((ft_isalpha(c) == 1) || (ft_isdigit(c) == 1))
 	{
-		tmp = (char *)malloc(7 * sizeof(char));
-		tmp[0] = '(';
-		tmp[1] = 'n';
-		tmp[2] = 'u';
-		tmp[3] = 'l';
-		tmp[4] = 'l';
-		tmp[5] = ')';
-		tmp[6] = '\0';
-		return (tmp);
+		return (1);
 	}
 	else
 	{
-		//return (NULL);
-		
-		tmp = (char *)malloc(1 * sizeof(char));
-		tmp[0] = '\0';
-		return(tmp);
-		
+		return (0);
 	}
 }

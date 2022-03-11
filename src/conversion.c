@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 14:59:31 by abackman          #+#    #+#             */
-/*   Updated: 2022/03/09 14:49:11 by abackman         ###   ########.fr       */
+/*   Updated: 2022/03/11 17:25:24 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	pr_char(t_print *print)
 	char	c;
 
 	c = (char)va_arg(print->ap, int);
+	printf("\nPrint char: %c\n", c);
 	str = (char *)malloc(2 * sizeof(char));
 	if (!str)
 		return (-1);
@@ -58,12 +59,13 @@ int	pr_str(t_print *print)
 	int		i;
 
 	str = va_arg(print->ap, char *);
-	i = ft_strlen(str) - print->precision;
-	if (str == NULL)
-	{
-		str = strnull();
-		i = 6;
-	}
+	if (str == NULL || !ft_strcmp(str, "") || print->precision == 0)
+		str = strnull(print, str, i);
+	printf("PR_STR: %s\n", str);
+	if (print->precision > 0)
+		i = print->precision;
+	else if (print->precision == -1)
+		i = ft_strlen(str);
 	//printf("PR_STR: i: %i\nstr: %s", i, print->str);
 	if (print->str)
 		print->str = p_strjoin(print->str, str, i);

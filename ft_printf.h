@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 16:07:36 by abackman          #+#    #+#             */
-/*   Updated: 2022/03/11 17:41:44 by abackman         ###   ########.fr       */
+/*   Updated: 2022/03/11 18:13:09 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ typedef int	(*t_able)(t_print *print);
 static const t_able dispatch[13] = {
 	pr_perc,
 	pr_char,
-	pr_str, /* if str == NULL, print (null) */
+	pr_str,
 	pr_ptr,
 	pr_num,
 	pr_num,

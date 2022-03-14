@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 16:07:36 by abackman          #+#    #+#             */
-/*   Updated: 2022/03/11 18:13:09 by abackman         ###   ########.fr       */
+/*   Updated: 2022/03/14 11:08:46 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,14 @@ typedef struct s_print
 	char	*str;
 	char	*tmp;
 }	t_print;
+
+/*
+** Main functions
+*/
+
+int	ft_printf(const char *format, ...);
+int	ft_dprintf(const char *format, ...);
+int	ft_asprintf(const char *format, ...);
 
 /*
 ** Print functions

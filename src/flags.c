@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:36:53 by abackman          #+#    #+#             */
-/*   Updated: 2022/03/11 17:50:21 by abackman         ###   ########.fr       */
+/*   Updated: 2022/03/14 13:33:13 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,5 +107,7 @@ int	get_field(const char *format, t_print *print)
 	printf("GET_FIELD3: %c PREC: %iEND\n", format[print->i], print->precision);
 	get_length(format, print);
 	printf("GET_FIELD4: %c PREC: %iEND\n", format[print->i], print->precision);
+	if (format[print->i] >= 'A' && format[print->i] <= 'Z')
+		print->upper = 1;
 	return (0);
 }

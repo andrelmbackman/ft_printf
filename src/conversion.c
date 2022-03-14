@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 14:59:31 by abackman          #+#    #+#             */
-/*   Updated: 2022/03/11 17:25:24 by abackman         ###   ########.fr       */
+/*   Updated: 2022/03/14 14:42:12 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,12 @@ int	pr_u(t_print *print)
 }
 int	pr_hex(t_print *print)
 {
+	char	upper;
+
+	upper = 0;
+	if (print->upper)
+		upper = -32;
+	// to upper: - 32
 	return (0);
 }
 int	pr_float(t_print *print)

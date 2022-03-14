@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 16:07:36 by abackman          #+#    #+#             */
-/*   Updated: 2022/03/14 11:08:46 by abackman         ###   ########.fr       */
+/*   Updated: 2022/03/14 11:11:16 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int	ft_asprintf(const char *format, ...);
 ** Print functions
 */
 
+int	pr_perc(t_print *print);
 int	pr_char(t_print *print);
 int	pr_str(t_print *print);
 int	pr_ptr(t_print *print);
@@ -77,8 +78,6 @@ int	pr_oct(t_print *print);
 int	pr_u(t_print *print);
 int	pr_hex(t_print *print);
 int	pr_float(t_print *print);
-int	pr_perc(t_print *print);
-
 
 /*
 ** Function pointer and dispatch table

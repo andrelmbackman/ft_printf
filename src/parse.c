@@ -6,11 +6,29 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 19:23:59 by abackman          #+#    #+#             */
-/*   Updated: 2022/03/11 18:12:18 by abackman         ###   ########.fr       */
+/*   Updated: 2022/03/15 18:28:34 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
+
+static void	init_struct(t_print *print)
+{
+	print->len = 0;
+	print->width = 0;
+	print->precision = -1;
+	print->hash = 0;
+	print->zero = 0;
+	print->space = 0;
+	print->upper = 0;
+	print->plus = 0;
+	print->minus = 0;
+	print->h = 0;
+	print->l = 0;
+	print->L = 0;
+	print->f_char = 0;
+	print->length = 0;
+}
 
 char	*p_strnew(const char *format, int i)
 {
@@ -63,7 +81,9 @@ int	convert_yes(t_print *print, const char *format)
 	int	x;
 	
 	x = 0;
-	get_field(format, print);
+	init_struct(print);
+	if (ft_strchr(FLAGS, format[print->i]))
+		get_field(format, print);
 	while (format[print->i] != SPECIFY[x])
 		x++;
 	if (format[print->i] == SPECIFY[x])

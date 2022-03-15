@@ -6,13 +6,13 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:36:53 by abackman          #+#    #+#             */
-/*   Updated: 2022/03/14 13:33:13 by abackman         ###   ########.fr       */
+/*   Updated: 2022/03/15 18:28:00 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
 
-static void	init_struct(t_print *print)
+void	init_struct(t_print *print)
 {
 	print->len = 0;
 	print->width = 0;
@@ -32,7 +32,7 @@ static void	init_struct(t_print *print)
 
 static void	get_width(const char *format, t_print *p)
 {
-	while (ft_strchr("0+- #", format[p->i]))
+	while (ft_strchr("0+- #*", format[p->i]))
 	{
 		if (format[p->i] == '0')
 			p->zero = 1;
@@ -47,8 +47,6 @@ static void	get_width(const char *format, t_print *p)
 		p->i++;
 	}
 	//printf("\nget_width: %cEND\n", format[p->i]);
-	if (p->minus)
-		p->zero = 0;
 	while (ft_isdigit((int)format[p->i]))
 	{
 		p->width = (p->width * 10) + (format[p->i] - '0');
@@ -98,10 +96,23 @@ static void	get_length(const char *format, t_print *p)
 }
 
 int	get_field(const char *format, t_print *print)
-{
-	init_struct(print);
-	printf("GET_FIELD1: str: \"%s\" char: \"%c\" PREC: %iEND\n", print->str, format[print->i], print->precision);
+{	
+	printf("\nGET_FIELD1: str: \"%s\" char: \"%c\" PREC: %iEND\n", print->str, format[print->i], print->precision);
 	get_width(format, print);
+	if (format[print->i] == '*')
+	{
+		print->width = va_arg(print->ap, int);
+		print->i++;
+	}
+	while (format[print->i] && format[print->i] == '*')
+		print->i++;
+	if (print->width < 0)
+	{
+		print->minus = 1;
+		print-> width *= -1;
+	}
+	if (print->minus)
+		print->zero = 0;
 	printf("GET_FIELD2: %c PREC: %iEND\n", format[print->i], print->precision);
 	get_prec(format, print);
 	printf("GET_FIELD3: %c PREC: %iEND\n", format[print->i], print->precision);

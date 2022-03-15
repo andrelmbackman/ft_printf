@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 14:59:31 by abackman          #+#    #+#             */
-/*   Updated: 2022/03/14 14:42:12 by abackman         ###   ########.fr       */
+/*   Updated: 2022/03/15 19:25:27 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,14 @@ int	pr_str(t_print *print)
 
 int	pr_ptr(t_print *print)
 {
+	char			*str;
+	int				i;
+	unsigned long	p;
+
+	p = va_arg(print->ap, unsigned long);
+	i = 0;
+	str = ultoa_base(p, 16, 0);
+	str = strjoin_pro("0x", str);
 	return (0);
 }
 int	pr_num(t_print *print)
@@ -102,7 +110,6 @@ int	pr_hex(t_print *print)
 	upper = 0;
 	if (print->upper)
 		upper = -32;
-	// to upper: - 32
 	return (0);
 }
 int	pr_float(t_print *print)

@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 18:30:27 by abackman          #+#    #+#             */
-/*   Updated: 2022/03/11 17:54:57 by abackman         ###   ########.fr       */
+/*   Updated: 2022/03/15 19:23:38 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,11 @@ int	ft_printf(const char *format, ...)
 int	main(void)
 {
 	printf("...MAIN...");
-	int i = ft_printf("%%hello%c\n%.10-0sX", 'x', "hello");
+	int i = ft_printf("\n%%hello%c\n%.4sX", 'x', "goodbye");
 	printf("\n...return of ft_printf: %i\n", i);
+
+	char	c1 = 'x';
+	char	*cp1 = &c1;
+	printf("\nprintf pointer: %p\n", cp1);
 	return(0);
 }

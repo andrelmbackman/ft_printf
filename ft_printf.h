@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 16:07:36 by abackman          #+#    #+#             */
-/*   Updated: 2022/03/14 11:11:16 by abackman         ###   ########.fr       */
+/*   Updated: 2022/03/15 19:24:13 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ typedef struct s_print
 */
 
 int	ft_printf(const char *format, ...);
-int	ft_dprintf(const char *format, ...);
-int	ft_asprintf(const char *format, ...);
+int	ft_dprintf(int fd, const char *format, ...);
+int	ft_asprintf(char **str, const char *format, ...);
 
 /*
 ** Print functions
@@ -106,22 +106,25 @@ static const t_able dispatch[13] = {
 */
 
 void	free_struct(t_print *print);
+void	str_reverse(char *str);
 void	ft_strdel(char **as);
 int		ft_strlen(const char *str);
 int		ft_strcmp(const char *s1, const char *s2);
-char	*ft_strncpy(char *dst, const char *src, size_t len);
 int		ft_isdigit(int c);
 int		ft_isalnum(int c);
 int		ft_isalpha(int c);
 int		convert_no(t_print *print, const char *format);
 int		convert_yes(t_print *print, const char *format);
 int		get_field(const char *format, t_print *print);
-char	*strnull();
+char	*zerostr(void);
+char	*strnull(t_print *p, char *str, int i);
+char	*ft_strncpy(char *dst, const char *src, size_t len);
 char	*p_strnew(const char *format, int i);
 char	*p_strjoin(char *str, const char *format, int i);
 char	*strjoin_pro(char *str1, char str2[]);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strdup(const char *s1);
-char	*ft_itoa_base(int num, int base);
+char	*ft_itoa_base(int num, int base, int upper);
+char	*ultoa_base(unsigned long num, int base, int upper);
 
 #endif

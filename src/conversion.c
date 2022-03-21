@@ -24,7 +24,7 @@ int	pr_perc(t_print *print)
 	if (print->str == NULL)
 		print->str = perc;
 	else
-		print->str = strjoin_pro(print->str, perc);
+		print->str = strjoin_pro(print->str, perc, 3);
 	if (print->str)
 		return (1);
 	else
@@ -46,7 +46,7 @@ int	pr_char(t_print *print)
 	if (print->str == NULL)
 		print->str = str;
 	else
-		print->str = strjoin_pro(print->str, str);
+		print->str = strjoin_pro(print->str, str, 3);
 	if (print->str)
 		return (1);
 	else
@@ -77,18 +77,25 @@ int	pr_str(t_print *print)
 
 int	pr_ptr(t_print *print)
 {
-	char			*str;
+	char			*tmp;
 	int				i;
 	unsigned long	p;
 
 	p = va_arg(print->ap, unsigned long);
 	i = 0;
-	str = ultoa_base(p, 16, 0);
-	str = strjoin_pro("0x", str);
+	printf("pr_ptr START\n");
+	tmp = ultoa_base(p, 16, 0);
+	tmp = strjoin_pro("0x", tmp, 2);
+	if (print->str)
+		print->str = strjoin_pro(print->str, tmp, 3);
+	else
+		print->str = tmp;
 	return (0);
 }
+
 int	pr_num(t_print *print)
 {
+	
 	return (0);
 }
 int	pr_bin(t_print *print)

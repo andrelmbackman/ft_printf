@@ -53,7 +53,7 @@ int	ft_strlen(const char *s)
 	return (i);
 }
 
-char	*strjoin_pro(char *str1, char *str2)
+char	*strjoin_pro(char *str1, char *str2, int n)
 {
 	int		i;
 	int		j;
@@ -75,7 +75,9 @@ char	*strjoin_pro(char *str1, char *str2)
 	while (str2[j] != '\0')
 		str[i++] = str2[j++];
 	str[i] = '\0';
-	ft_strdel(&str1);
-	ft_strdel(&str2);
+	if (n % 2)
+		ft_strdel(&str1);
+	if (n >= 2)
+		ft_strdel(&str2);
 	return (str);
 }

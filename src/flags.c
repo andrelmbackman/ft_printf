@@ -12,24 +12,6 @@
 
 #include "../ft_printf.h"
 
-void	init_struct(t_print *print)
-{
-	print->len = 0;
-	print->width = 0;
-	print->precision = -1;
-	print->hash = 0;
-	print->zero = 0;
-	print->space = 0;
-	print->upper = 0;
-	print->plus = 0;
-	print->minus = 0;
-	print->h = 0;
-	print->l = 0;
-	print->L = 0;
-	print->f_char = 0;
-	print->length = 0;
-}
-
 static void	get_width(const char *format, t_print *p)
 {
 	while (ft_strchr("0+- #*", format[p->i]))

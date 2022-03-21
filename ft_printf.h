@@ -15,7 +15,12 @@
 # include <stdarg.h>
 # include <unistd.h>
 # include <stdlib.h>
+
 # include <stdio.h>
+/*
+ *iyy DELETE Îî DELETEDELETEDELETEpp
+ *iyy DELETE Îî DELETEDELETEDELETE
+ */
 
 # define RESET "\033[0m"
 # define RED "\033[0;31m"
@@ -122,7 +127,7 @@ char	*strnull(t_print *p, char *str, int i);
 char	*ft_strncpy(char *dst, const char *src, size_t len);
 char	*p_strnew(const char *format, int i);
 char	*p_strjoin(char *str, const char *format, int i);
-char	*strjoin_pro(char *str1, char str2[]);
+char	*strjoin_pro(char *str1, char *str2, int n);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strdup(const char *s1);
 char	*ft_itoa_base(int num, int base, int upper);

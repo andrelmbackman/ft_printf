@@ -159,5 +159,6 @@ int	main(void)
 	char	c1 = 'x';
 	char	*cp1 = &c1;
 	printf("\nprintf pointer: %p\n", cp1);
+	ft_printf("\nft_printf pointer: %p", cp1);
 	return(0);
 }

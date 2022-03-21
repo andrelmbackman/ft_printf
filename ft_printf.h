@@ -31,7 +31,8 @@
 # define ALL "0-+ #.*0123456789hlL%cspdibouxXf"
 
 /*
-** Struct in which all useful information is stored
+** Struct in which the argument list and information about the flags, width
+** precision and length are stored.
 */
 
 typedef struct s_print

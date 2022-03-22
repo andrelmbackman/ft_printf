@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 16:07:36 by abackman          #+#    #+#             */
-/*   Updated: 2022/03/15 19:24:13 by abackman         ###   ########.fr       */
+/*   Updated: 2022/03/22 16:30:38 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ int		convert_no(t_print *print, const char *format);
 int		convert_yes(t_print *print, const char *format);
 int		get_field(const char *format, t_print *print);
 char	*zerostr(void);
+char	*zeropad(char *str, int total);
 char	*strnull(t_print *p, char *str, int i);
 char	*ft_strncpy(char *dst, const char *src, size_t len);
 char	*p_strnew(const char *format, int i);
@@ -130,7 +131,8 @@ char	*p_strjoin(char *str, const char *format, int i);
 char	*strjoin_pro(char *str1, char *str2, int n);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strdup(const char *s1);
-char	*ft_itoa_base(int num, int base, int upper);
-char	*ultoa_base(unsigned long num, int base, int upper);
+char	*ft_itoa_base(int num, int base, t_print *print);
+char	*ultoa_base(unsigned long num, int base, t_print *print);
+char	*insert_width(t_print *p);
 
 #endif

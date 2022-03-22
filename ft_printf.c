@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 18:30:27 by abackman          #+#    #+#             */
-/*   Updated: 2022/03/15 19:23:38 by abackman         ###   ########.fr       */
+/*   Updated: 2022/03/22 16:19:51 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,19 @@ int	main(void)
 
 	char	c1 = 'x';
 	char	*cp1 = &c1;
-	printf("\nprintf pointer: %p\n", cp1);
-	ft_printf("\nft_printf pointer: %p", cp1);
+	printf("\nprintf pointer:    %p\n", cp1);
+	ft_printf("ft_printf pointer: %p\n", cp1);
+	printf("printf NULL pointer:    %p\n", NULL);
+	ft_printf("ft_printf NULL pointer: %p\n", NULL);
+
+
+	printf("\nprintf    hex: %*+6.5x\n", -10, c1 + c1);
+	ft_printf("ft_printf hex: %#0.10x\n", c1 + c1);
+	printf("printf    HEX: %# 010X\n", c1 + c1);
+	ft_printf("ft_printf HEX: %# 010X\n", c1 + c1);
+
+	printf("\nprintf    int:%.2f\n", 0.035);
+
+	printf("\nprintf    str: %-010s\n", "hello");
 	return(0);
 }

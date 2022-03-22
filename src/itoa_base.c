@@ -6,13 +6,13 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 17:03:16 by abackman          #+#    #+#             */
-/*   Updated: 2022/03/15 19:26:24 by abackman         ###   ########.fr       */
+/*   Updated: 2022/03/16 12:16:57 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
 
-static size_t	itoa_base_len(long n, long base)
+static size_t	itoa_base_len(long n, int base)
 {
 	size_t	length;
 
@@ -26,10 +26,10 @@ static size_t	itoa_base_len(long n, long base)
 		if (base == 8)
 			return (11);
 	}
-	n /= base;
+	n /= (long)base;
 	while (n)
 	{
-		n /= base;
+		n /= (long)base;
 		length++;
 	}
 	return (length);
@@ -56,7 +56,7 @@ static char	*itoa_str(char *str, long num, int base, int up)
 	return (str);
 }
 
-char	*ft_itoa_base(int num, int base, int upper)
+char	*ft_itoa_base(int num, int base, t_print *print)
 {
 	char	*str;
 	int		up;
@@ -64,11 +64,11 @@ char	*ft_itoa_base(int num, int base, int upper)
 
 	n = (long)num;
 	up = 0;
-	if (upper)
+	if (print->upper)
 		up = -32;
 	if (num == 0)
 		return (zerostr());
-	str = (char *)malloc((itoa_base_len(n, (long)base) + 1) * sizeof(char));
+	str = (char *)malloc((itoa_base_len(n, base) + 1) * sizeof(char));
 	if (!str)
 		return (NULL);
 	if (n < 0)

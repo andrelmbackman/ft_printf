@@ -12,4 +12,16 @@
 
 #include "../ft_printf.h"
 
+int	ft_isdigit(int c)
+{
+	if (c >= '0' && c <= '9')
+		return (1);
+	else
+		return (0);
+}
 
+char	*ft_itoa_base(int num, int base)
+{
+	
+}
+//pr_float

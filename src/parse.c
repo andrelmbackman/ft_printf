@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 19:23:59 by abackman          #+#    #+#             */
-/*   Updated: 2022/03/15 18:28:34 by abackman         ###   ########.fr       */
+/*   Updated: 2022/03/22 13:33:35 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,16 @@ char	*p_strnew(const char *format, int i)
 	char	*str;
 	
 	j = 0;
-	//printf("P_STRNEW\n");
-	str = (char *)malloc(i + 1 * sizeof(char));
+	str = (char *)malloc(i * sizeof(char));
 	if (!str)
 		return (NULL);
-	while (j <= i)
+	while (j < i)
 	{
 		str[j] = format[j];
 		j++;
 	}
 	str[j] = '\0';
+	//printf("\nP_STRNEW: %s\n", str);
 	return (str);
 }
 
@@ -57,7 +57,7 @@ char *p_strjoin(char *str, const char *format, int i)
 	int		l;
 	
 	j = ft_strlen(str) + i;
-	//printf("P_STRINGJOIN j: %i\n", j);
+	//printf("\nP_STRINGJOIN str: \"%s\" format: \"%s\" i: %i\n", str, format, i);
 	new = (char *)malloc(j + 1 * sizeof(char));
 	if (!new)
 		return (NULL);
@@ -84,6 +84,8 @@ int	convert_yes(t_print *print, const char *format)
 	init_struct(print);
 	if (ft_strchr(FLAGS, format[print->i]))
 		get_field(format, print);
+	if (format[print->i] >= 'A' && format[print->i] <= 'Z')
+		print->upper = 1;
 	while (format[print->i] != SPECIFY[x])
 		x++;
 	if (format[print->i] == SPECIFY[x])

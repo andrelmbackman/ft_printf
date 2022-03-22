@@ -6,12 +6,34 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 11:11:25 by abackman          #+#    #+#             */
-/*   Updated: 2022/03/11 16:03:40 by abackman         ###   ########.fr       */
+/*   Updated: 2022/03/22 14:04:19 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
 
+char	*zeropad(char *str, int total)
+{
+	int		x;
+	int		y;
+	char	*new;
+
+	x = ft_strlen(str);
+	y = 0;
+	if (total <= x)
+		return (str);
+	new = (char *)malloc(total * sizeof(char));
+	if (!new)
+		return (str);
+	while (y < (total - x))
+		new[y++] = '0';
+	x = 0;
+	while (str[x])
+		new[y++] = str[x++];
+	new[y] = '\0';
+	ft_strdel(&str);
+	return (new);
+}
 
 /*
 int	ft_strncmp(const char *s1, const char *s2, size_t n)

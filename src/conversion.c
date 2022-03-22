@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 14:59:31 by abackman          #+#    #+#             */
-/*   Updated: 2022/03/22 13:57:15 by abackman         ###   ########.fr       */
+/*   Updated: 2022/03/22 19:25:17 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	pr_str(t_print *print)
 	}
 	else
 		print->str = p_strnew(tmp, i);
-	//printf("\nNEW: \"%s\"\n", print->str);
+	//print->str = insert_width(print);
 	return (i);
 }
 
@@ -127,6 +127,8 @@ int	pr_hex(t_print *print)
 		if (print->upper)
 			tmp[1] -= 32;
 	}
+	tmp = insert_width(print, tmp);
+	//printf("* * * TEMPTEMPTEMP * * *\"%s\"\n\n", tmp);
 	i = ft_strlen(tmp);
 	//printf("\n* * * PR_HEX * * *\nstr: %s\nhash: %i upper: %i", tmp, print->hash, print->upper);
 	if (print->str)

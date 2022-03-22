@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:36:53 by abackman          #+#    #+#             */
-/*   Updated: 2022/03/22 15:17:57 by abackman         ###   ########.fr       */
+/*   Updated: 2022/03/22 19:21:13 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	get_width(const char *format, t_print *p)
 	}
 	while (ft_isdigit((int)format[p->i]))
 		p->width = (p->width * 10) + (format[p->i++] - '0');
-	if (new_width < p->width)
+	if (new_width && new_width < p->width)
 		p->width = new_width;
 }
 
@@ -74,10 +74,7 @@ static void	get_prec(const char *format, t_print *p)
 		p->i++;
 	}
 	while (ft_isdigit(format[p->i]))
-	{
-		p->precision = (p->precision * 10) + (format[p->i] - '0');
-		p->i++;
-	}
+		p->precision = (p->precision * 10) + (format[p->i++] - '0');
 	while (format[p->i] && !ft_isalpha(format[p->i]))
 		p->i++;
 	if (check_neg)

@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 19:23:59 by abackman          #+#    #+#             */
-/*   Updated: 2022/03/22 13:33:35 by abackman         ###   ########.fr       */
+/*   Updated: 2022/03/22 17:36:41 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	init_struct(t_print *print)
 	print->h = 0;
 	print->l = 0;
 	print->L = 0;
-	print->f_char = 0;
+	print->conv = 0;
 	print->length = 0;
 }
 
@@ -89,7 +89,10 @@ int	convert_yes(t_print *print, const char *format)
 	while (format[print->i] != SPECIFY[x])
 		x++;
 	if (format[print->i] == SPECIFY[x])
+	{
+		print->conv = format[print->i];
 		return (dispatch[x](print));
+	}
 	else
 		print->i--;
 	return (0);

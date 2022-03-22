@@ -6,26 +6,56 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 15:06:15 by abackman          #+#    #+#             */
-/*   Updated: 2022/03/22 16:30:52 by abackman         ###   ########.fr       */
+/*   Updated: 2022/03/22 19:24:22 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
 
-static char	*pad_right(t_print *p, int width)
+static void	pad_right(t_print *p, char *new, char *tmp, int start)
 {
 	int		x;
 	int		y;
-	char	pad;
-	return (p->str);
+	
+	//printf("* * * PAD_RIGHT * * * start: %i\n", start);
+	x = ft_strlen(tmp);
+	y = 0;
+	if (p->precision != -1 && p->conv != 's' && p->zero)
+		return ;
+	while (y < x)
+	{
+		new[y] = tmp[y];
+		y++;
+	}
+	while (x < p->width)
+		new[x++] = ' ';
+	new[x] = '\0';
+	//ft_strdel(&p->str);
+	p->str = new;
 }
 
-static char	*pad_left(t_print *p, int width)
+static void	pad_left(t_print *p, char *new, char *tmp, int start)
 {
 	int		x;
-	int		y;
 	char	pad;
-	return (NULL);
+	
+	if (!p->zero)
+		start = 0;
+		//printf("* * * PAD_LEFT * * * start: %i\n", start);
+	x = ft_strlen(tmp);
+	if (p->zero)
+		pad = '0';
+	else
+		pad = ' ';
+	if (p->precision != -1 && p->conv != 's' && p->zero)
+		return ;
+	while (start < (p->width - x))
+		new[start++] = pad;
+	x = 0;
+	while (p->str[x])
+		new[start++] = tmp[x++];
+	new[start] = '\0';
+	//ft_strdel(&tmp);
 }
 /*
 static int	count_width(t_print *p)
@@ -42,16 +72,37 @@ static int	count_width(t_print *p)
 	return (x);
 }
 */
-char	*insert_width(t_print *p)
+static void	insert_hash(t_print *p, char *new)
 {
-	int		x;
-	char	*new;
+	if (p->conv == 'x' || p->conv == 'X')
+	{
+		new[0] = '0';
+		new[1] = p->conv;
+	}
+	else if (p->conv == 'o' || p->conv == 'O')
+		new[0] = '0';
+}
 
-	x = ft_strlen(p->str);
-	if (p->width < x)
-		return (p->str);
+char	*insert_width(t_print *p, char *tmp)
+{
+	char	*new;
+	int		i;
+
+	i = p->hash;
+	if (p->conv == 'x' || p->conv == 'X')
+		i *= 2;
+	//printf("\n* * * INSERT WIDTH * * * TMP: %s\np->width: %i HASH: %i\n", tmp, p->width, p->hash);
+	if (p->width < ft_strlen(tmp))
+		return (tmp);
+	new = (char *)malloc(p->width + i * sizeof(char));
+	if (!new)
+		return (tmp);
+	if (p->hash)
+		insert_hash(p, new);
 	if (p->minus)
-		new = pad_right(p, p->width);
+		pad_right(p, new, tmp, i);
 	else
-		new = pad_left(p, p->width);
+		pad_left(p, new, tmp, i);
+	ft_strdel(&tmp);
+	return (new);
 }

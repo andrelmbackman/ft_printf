@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 18:30:27 by abackman          #+#    #+#             */
-/*   Updated: 2022/03/22 19:26:00 by abackman         ###   ########.fr       */
+/*   Updated: 2022/03/23 16:56:00 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,26 +152,32 @@ int	ft_printf(const char *format, ...)
 
 int	main(void)
 {
+	/*
 	printf("...MAIN...");
 	int i = ft_printf("\n%%hello%c\n%.4sX", 'x', "goodbye");
 	printf("\n...return of ft_printf: %i\n", i);
-
+*/
 	char	c1 = 'x';
 	char	*cp1 = &c1;
-	printf("\nprintf pointer:    %p\n", cp1);
+	
+	printf("\nprintf    pointer: %p\n", cp1);
 	ft_printf("ft_printf pointer: %p\n", cp1);
-	printf("printf NULL pointer:    %p\n", NULL);
+	printf("printf    NULL pointer: %p\n", NULL);
 	ft_printf("ft_printf NULL pointer: %p\n", NULL);
 
 
-	//printf("\nprintf    hex: %*+6.5x\n", -10, c1 + c1);
-	//ft_printf("ft_printf hex: %*+6.5x\n", -10, c1 + c1);
-	printf("printf    HEX: %#010X\n", c1 + c1 + 1);
-	ft_printf("ft_printf HEX: %#010X\n", c1 + c1 + 1);
+	printf("\nprintf    hex: %*-6x\n", 10, c1 + c1);
+	ft_printf("ft_printf hex: %*-6x\n", 10, c1 + c1);
+	printf("printf    HEX: %#010.9X\n", c1 + c1 + 1);
+	ft_printf("ft_printf HEX: %#010.9X\n", c1 + c1 + 1);
+	
 
-/*
+	printf("\nprintf    str: %0-10sX\n", "hello");
+	ft_printf("ft_printf str: %0-10sX\n", "hello");
+	printf("\nprintf    str: %010sX\n", "world");
+	ft_printf("ft_printf str: %010sX\n", "world");
+	printf("printf    NUL: %s\n", '\0');
+	ft_printf("ft_printf NUL: %s\n", '\0');
 
-	printf("\nprintf    str: %-010s\n", "hello");
-*/
 	return(0);
 }

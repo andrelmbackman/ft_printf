@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 16:07:36 by abackman          #+#    #+#             */
-/*   Updated: 2022/03/22 18:54:17 by abackman         ###   ########.fr       */
+/*   Updated: 2022/03/23 16:16:37 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,6 @@ char	*ft_strchr(const char *s, int c);
 char	*ft_strdup(const char *s1);
 char	*ft_itoa_base(int num, int base, t_print *print);
 char	*ultoa_base(unsigned long num, int base, t_print *print);
-char	*insert_width(t_print *p, char *tmp);
+char	*insert_width(t_print *p, char *tmp, int free);
 
 #endif

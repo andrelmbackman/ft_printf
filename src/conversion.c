@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 14:59:31 by abackman          #+#    #+#             */
-/*   Updated: 2022/03/22 19:25:17 by abackman         ###   ########.fr       */
+/*   Updated: 2022/03/23 16:57:59 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,24 +56,27 @@ int	pr_char(t_print *print)
 int	pr_str(t_print *print)
 {
 	char	*tmp;
+	char	*new;
 	int		i;
 
 	tmp = va_arg(print->ap, char *);
-	if (tmp == NULL || !ft_strcmp(tmp, "") || print->precision == 0)
-		tmp = strnull(print, tmp, i);
-	//printf("PR_STR: %s\n", str);
+	printf("PR_STR: %s\n", tmp);
 	if (print->precision > 0)
 		i = print->precision;
 	else if (print->precision == -1)
 		i = ft_strlen(tmp);
-	//printf("PR_STR: i: %i\nstr: %s", i, print->str);
-	if (print->str)
-	{
-		print->str = p_strjoin(print->str, tmp, i);
-	}
+	//printf("\nPR_STR1: i: %i\nstr: \"%s\"", i, print->str);
+	if (tmp == NULL || !ft_strcmp(tmp, "") || print->precision == 0)
+		new = strnull(print, tmp, i);
 	else
-		print->str = p_strnew(tmp, i);
-	//print->str = insert_width(print);
+		new = insert_width(print, tmp, 0);
+	//printf("\nPR_STR2: NEW: \"%s\" P->STR: \"%s\"\n", new, print->str);
+	if (print->str)
+		print->str = strjoin_pro(print->str, new, 1);
+	else
+		print->str = ft_strdup(new);
+	ft_strdel(&new);
+	//printf("\nPR_STR3: i: %i\nstr: \"%s\"\nPR_STR3 p->str[i]: %c", i, print->str, print->conv);
 	return (i);
 }
 
@@ -127,7 +130,7 @@ int	pr_hex(t_print *print)
 		if (print->upper)
 			tmp[1] -= 32;
 	}
-	tmp = insert_width(print, tmp);
+	tmp = insert_width(print, tmp, 1);
 	//printf("* * * TEMPTEMPTEMP * * *\"%s\"\n\n", tmp);
 	i = ft_strlen(tmp);
 	//printf("\n* * * PR_HEX * * *\nstr: %s\nhash: %i upper: %i", tmp, print->hash, print->upper);
@@ -139,6 +142,7 @@ int	pr_hex(t_print *print)
 		//print->str = p_strnew(str, i);
 	return (i);
 }
+
 int	pr_float(t_print *print)
 {
 	return (0);

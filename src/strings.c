@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 11:12:35 by abackman          #+#    #+#             */
-/*   Updated: 2022/03/16 10:53:34 by abackman         ###   ########.fr       */
+/*   Updated: 2022/03/23 16:58:00 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,19 @@
 char	*strnull(t_print *p, char *str, int i)
 {
 	char	*tmp;
+	int		prec;
 
-	if (str == NULL && (p->precision > 0 || p->precision == -1))
+	prec = 6;
+	printf("\nSTRNULL\n");
+	if (str == NULL && p->precision != 0)
 	{
-		tmp = (char *)malloc(7 * sizeof(char));
-		tmp[0] = '(';
-		tmp[1] = 'n';
-		tmp[2] = 'u';
-		tmp[3] = 'l';
-		tmp[4] = 'l';
-		tmp[5] = ')';
-		tmp[6] = '\0';
+		
+		tmp = ft_strdup("(null)");
+		if (p->precision > 0 && prec > p->precision)
+		{
+			while (p->precision < prec)
+				tmp[prec--] = '\0';
+		}
 	}
 	else
 	{

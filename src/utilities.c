@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 15:49:35 by abackman          #+#    #+#             */
-/*   Updated: 2022/03/22 19:03:45 by abackman         ###   ########.fr       */
+/*   Updated: 2022/03/23 16:58:01 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ char	*strjoin_pro(char *str1, char *str2, int n)
 		str[i++] = str2[j++];
 	str[i] = '\0';
 	if (n % 2 == 1)
-		free(str1);
+		ft_strdel(&str1);
 	if (n >= 2)
-		free(str2);
+		ft_strdel(&str2);
 	return (str);
 }

@@ -6,11 +6,11 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 19:23:59 by abackman          #+#    #+#             */
-/*   Updated: 2022/03/23 16:58:00 by abackman         ###   ########.fr       */
+/*   Updated: 2022/03/24 15:43:31 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.h"
+#include "../includes/ft_printf.h"
 
 static void	init_struct(t_print *print)
 {
@@ -26,6 +26,7 @@ static void	init_struct(t_print *print)
 	print->h = 0;
 	print->l = 0;
 	print->L = 0;
+	print->z = 0;
 	print->conv = 0;
 	print->length = 0;
 }

@@ -6,52 +6,52 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 19:03:06 by abackman          #+#    #+#             */
-/*   Updated: 2022/03/16 12:16:55 by abackman         ###   ########.fr       */
+/*   Updated: 2022/03/24 15:49:34 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.h"
+#include "../includes/ft_printf.h"
 
-static size_t	ultoa_base_len(unsigned long n, int base)
+static size_t	ultoa_base_len(unsigned long long n, int base)
 {
 	size_t	length;
 
 	length = 1;
-	n /= (unsigned long)base;
+	n /= (unsigned long long)base;
 	while (n)
 	{
-		n /= (unsigned long)base;
+		n /= (unsigned long long)base;
 		length++;
 	}
 	return (length);
 }
 
-static char	*ultoa_str(char *str, unsigned long num, int base, int up)
+static char	*ultoa_str(char *str, unsigned long long num, int base, int up)
 {
-	int				i;
-	unsigned long	tmp;
+	int					i;
+	unsigned long long	tmp;
 
 	i = 0;
 	tmp = 0;
 	while (num != 0)
 	{
-		tmp = num % (unsigned long)base;
+		tmp = num % (unsigned long long)base;
 		if (tmp > 9)
 			str[i] = tmp - 10 + up + 'a';
 		else
 			str[i] = tmp + '0';
-		num = num / (unsigned long)base;
+		num = num / (unsigned long long)base;
 		i++;
 	}
 	str[i] = '\0';
 	return (str);
 }
 
-char	*ultoa_base(unsigned long num, int base, t_print *print)
+char	*ft_ultoa_base(unsigned long long num, int base, t_print *print)
 {
-	char			*str;
-	int				up;
-	unsigned long	n;
+	char				*str;
+	int					up;
+	unsigned long long	n;
 
 	up = 0;
 	n = num;

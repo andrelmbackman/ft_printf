@@ -6,13 +6,13 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 17:03:16 by abackman          #+#    #+#             */
-/*   Updated: 2022/03/16 12:16:57 by abackman         ###   ########.fr       */
+/*   Updated: 2022/03/24 15:42:54 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.h"
+#include "../includes/ft_printf.h"
 
-static size_t	itoa_base_len(long n, int base)
+static size_t	itoa_base_len(long long n, int base)
 {
 	size_t	length;
 
@@ -26,43 +26,43 @@ static size_t	itoa_base_len(long n, int base)
 		if (base == 8)
 			return (11);
 	}
-	n /= (long)base;
+	n /= (long long)base;
 	while (n)
 	{
-		n /= (long)base;
+		n /= (long long)base;
 		length++;
 	}
 	return (length);
 }
 
-static char	*itoa_str(char *str, long num, int base, int up)
+static char	*itoa_str(char *str, long long num, int base, int up)
 {
-	int		i;
-	long	tmp;
+	int			i;
+	long long	tmp;
 
 	i = 0;
 	tmp = 0;
 	while (num != 0)
 	{
-		tmp = num % (long)base;
+		tmp = num % (long long)base;
 		if (tmp > 9)
 			str[i] = tmp - 10 + up + 'a';
 		else
 			str[i] = tmp + '0';
-		num = num / (long)base;
+		num = num / (long long)base;
 		i++;
 	}
 	str[i] = '\0';
 	return (str);
 }
 
-char	*ft_itoa_base(int num, int base, t_print *print)
+char	*ft_itoa_base(long long num, int base, t_print *print)
 {
-	char	*str;
-	int		up;
-	long	n;
+	char		*str;
+	int			up;
+	long long	n;
 
-	n = (long)num;
+	n = num;
 	up = 0;
 	if (print->upper)
 		up = -32;
@@ -73,7 +73,7 @@ char	*ft_itoa_base(int num, int base, t_print *print)
 		return (NULL);
 	if (n < 0)
 		n *= -1;
-	printf("\nn: %li\n", n);
+	printf("\nn: %lli\n", n);
 	str = itoa_str(str, n, base, up);
 	up = 0;
 	while (str[up])

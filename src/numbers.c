@@ -6,11 +6,11 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 11:15:34 by abackman          #+#    #+#             */
-/*   Updated: 2022/03/09 14:26:28 by abackman         ###   ########.fr       */
+/*   Updated: 2022/03/24 15:43:24 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.h"
+#include "../includes/ft_printf.h"
 
 int	ft_isdigit(int c)
 {
@@ -19,9 +19,3 @@ int	ft_isdigit(int c)
 	else
 		return (0);
 }
-
-char	*ft_itoa_base(int num, int base)
-{
-	
-}
-//pr_float

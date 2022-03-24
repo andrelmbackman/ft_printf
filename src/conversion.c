@@ -6,21 +6,23 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 14:59:31 by abackman          #+#    #+#             */
-/*   Updated: 2022/03/23 16:57:59 by abackman         ###   ########.fr       */
+/*   Updated: 2022/03/24 16:46:20 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.h"
+#include "../includes/ft_printf.h"
 
 int	pr_perc(t_print *print)
 {
 	char	*perc;
 
+	printf("\nPR_PERC: width: %i", print->width);
 	perc = (char *)malloc(2 * sizeof(char));
 	if (!perc)
 		return (-1);
 	perc[0] = '%';
 	perc[1] = '\0';
+	perc = insert_width(print, perc, 1);
 	if (print->str == NULL)
 		print->str = perc;
 	else
@@ -43,6 +45,7 @@ int	pr_char(t_print *print)
 		return (-1);
 	str[0] = c;
 	str[1] = '\0';
+	str = insert_width(print, str, 1);
 	if (print->str == NULL)
 		print->str = str;
 	else
@@ -59,17 +62,25 @@ int	pr_str(t_print *print)
 	char	*new;
 	int		i;
 
+	i = 0;
 	tmp = va_arg(print->ap, char *);
-	printf("PR_STR: %s\n", tmp);
+	//printf("PR_STR: %s\n", tmp);
+	if (tmp == NULL || !ft_strcmp(tmp, "") || print->precision == 0)
+		new = strnull(print, tmp);
 	if (print->precision > 0)
 		i = print->precision;
 	else if (print->precision == -1)
-		i = ft_strlen(tmp);
+	{
+		if (tmp)
+			i = ft_strlen(tmp);
+		else
+			i = ft_strlen(new);
+	}
 	//printf("\nPR_STR1: i: %i\nstr: \"%s\"", i, print->str);
-	if (tmp == NULL || !ft_strcmp(tmp, "") || print->precision == 0)
-		new = strnull(print, tmp, i);
-	else
+	if (tmp)
 		new = insert_width(print, tmp, 0);
+	else
+		new = insert_width(print, new, 1);
 	//printf("\nPR_STR2: NEW: \"%s\" P->STR: \"%s\"\n", new, print->str);
 	if (print->str)
 		print->str = strjoin_pro(print->str, new, 1);
@@ -86,8 +97,9 @@ int	pr_ptr(t_print *print)
 	int				i;
 	unsigned long	p;
 
+	i = 0;
 	p = va_arg(print->ap, unsigned long);
-	tmp = ultoa_base(p, 16, print);
+	tmp = ft_ultoa_base(p, 16, print);
 	tmp = strjoin_pro("0x", tmp, 2);
 	i = ft_strlen(tmp);
 	if (print->str)
@@ -98,30 +110,16 @@ int	pr_ptr(t_print *print)
 		//print->str = p_strnew(str, i);
 	return (i);
 }
-int	pr_num(t_print *print)
-{
-	return (0);
-}
-int	pr_bin(t_print *print)
-{
-	return (0);
-}
-int	pr_oct(t_print *print)
-{
-	return (0);
-}
-int	pr_u(t_print *print)
-{
-	return (0);
-}
+
 int	pr_hex(t_print *print)
 {
-	char			*tmp;
-	int				i;
-	unsigned long	p;
+	char				*tmp;
+	int					i;
+	unsigned long long	p;
 
-	p = va_arg(print->ap, unsigned long);
-	tmp = ultoa_base(p, 16, print);
+	i = 0;
+	p = unsigned_length_mod(print);
+	tmp = ft_ultoa_base(p, 16, print);
 	if (print->precision != -1)
 		tmp = zeropad(tmp, print->precision);
 	if (print->hash)
@@ -145,5 +143,7 @@ int	pr_hex(t_print *print)
 
 int	pr_float(t_print *print)
 {
+	if (print)
+		return (1);
 	return (0);
 }

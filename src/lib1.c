@@ -6,11 +6,11 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 16:00:34 by abackman          #+#    #+#             */
-/*   Updated: 2022/03/22 13:24:50 by abackman         ###   ########.fr       */
+/*   Updated: 2022/03/24 15:43:04 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.h"
+#include "../includes/ft_printf.h"
 
 
 void	ft_strdel(char **as)

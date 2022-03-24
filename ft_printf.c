@@ -6,11 +6,11 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 18:30:27 by abackman          #+#    #+#             */
-/*   Updated: 2022/03/23 16:56:00 by abackman         ###   ########.fr       */
+/*   Updated: 2022/03/24 16:56:03 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "includes/ft_printf.h"
 
 /*
 void	get_field(const char *format, t_print *print)
@@ -53,17 +53,6 @@ static int	checkflag(const char *format, char *buf, t_print *print)
 		return (0);
 }
 */
-static void	ft_prints(int fd, char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		write(fd, &str[i], 1);
-		i++;
-	}
-}
 
 static int	conv_print(t_print *p, const char *format)
 {
@@ -105,10 +94,10 @@ int	ft_asprintf(char **str, const char *format, ...)
 	if (!ft_strlen(format))
 		return (0);
 	va_start(print->ap, format);
-	ret = conv_print(print, format);
+	conv_print(print, format);
 	str = &print->str;
 	va_end(print->ap);
-	return (ret);
+	return (ft_strlen(*str));
 }
 
 int	ft_dprintf(int fd, const char *format, ...)
@@ -123,9 +112,10 @@ int	ft_dprintf(int fd, const char *format, ...)
 	if (!ft_strlen(format))
 		return (0);
 	va_start(print->ap, format);
-	ret = conv_print(print, format);
+	conv_print(print, format);
 	va_end(print->ap);
-	ft_prints(fd, print->str);
+	ret = ft_strlen(print->str);
+	write(fd, print->str, (size_t)ret);
 	free_struct(print);
 	return (ret);
 }
@@ -144,19 +134,20 @@ int	ft_printf(const char *format, ...)
 	va_start(print->ap, format);
 	conv_print(print, format);
 	va_end(print->ap);
-	ft_prints(STDOUT_FILENO, print->str);
 	ret = ft_strlen(print->str);
+	write(STDOUT_FILENO, print->str, (size_t)ret);
 	free_struct(print);
 	return (ret);
 }
 
+/*
 int	main(void)
 {
-	/*
 	printf("...MAIN...");
 	int i = ft_printf("\n%%hello%c\n%.4sX", 'x', "goodbye");
 	printf("\n...return of ft_printf: %i\n", i);
-*/
+
+
 	char	c1 = 'x';
 	char	*cp1 = &c1;
 	
@@ -176,8 +167,32 @@ int	main(void)
 	ft_printf("ft_printf str: %0-10sX\n", "hello");
 	printf("\nprintf    str: %010sX\n", "world");
 	ft_printf("ft_printf str: %010sX\n", "world");
-	printf("printf    NUL: %s\n", '\0');
-	ft_printf("ft_printf NUL: %s\n", '\0');
 
+	printf("\nprintf    NUL: %-10sX\n", NULL);
+	ft_printf("ft_printf NUL: %-10sX\n", NULL);
+	printf("printf    NUL: %10.4s\n", NULL);
+	ft_printf("ft_printf NUL: %10.4s\n", NULL);
+	printf("printf    NUL: %s\n", NULL);
+	ft_printf("ft_printf NUL: %s\n", NULL);
+
+
+	long long	j = 99999999999;
+	long long	i = (short)j;
+	printf("\n%lli\n", i);
+	ft_printf("FT O:%#o\n", 0);
+    printf("PF O:%#o\n\n", 0);
+
+    ft_printf("FT D:{% 03d}\n", 0);
+    printf("PF D:{% 03d}\n\n", 0);
+
+    ft_printf("FT X:%.4x\n", 42);
+    printf("PF X:%.4x\n\n", 42);
+
+    ft_printf("FT X:{%#.5x}\n", 1);
+    printf("PF X:{%#.5x}\n\n", 1);
+
+    ft_printf("FT S:{%.*s}\n", -5, "42");
+    printf("PF S:{%.*s}\n\n", -5, "42"); 
 	return(0);
 }
+*/

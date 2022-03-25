@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 14:59:31 by abackman          #+#    #+#             */
-/*   Updated: 2022/03/24 16:46:20 by abackman         ###   ########.fr       */
+/*   Updated: 2022/03/25 18:56:50 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,14 @@ int	pr_perc(t_print *print)
 {
 	char	*perc;
 
-	printf("\nPR_PERC: width: %i", print->width);
+	//printf("\nPR_PERC: width: %i", print->width);
 	perc = (char *)malloc(2 * sizeof(char));
 	if (!perc)
 		return (-1);
 	perc[0] = '%';
 	perc[1] = '\0';
-	perc = insert_width(print, perc, 1);
+	if (print->width)
+		perc = insert_width(print, perc, 1);
 	if (print->str == NULL)
 		print->str = perc;
 	else
@@ -122,14 +123,14 @@ int	pr_hex(t_print *print)
 	tmp = ft_ultoa_base(p, 16, print);
 	if (print->precision != -1)
 		tmp = zeropad(tmp, print->precision);
-	if (print->hash)
+	if (print->hash && p != 0 && !print->width)
 	{
 		tmp = strjoin_pro("0x", tmp, 2);
 		if (print->upper)
 			tmp[1] -= 32;
 	}
+	printf("* * * HEXHEXHEX * * *\n\"%s\"\n\n", tmp);
 	tmp = insert_width(print, tmp, 1);
-	//printf("* * * TEMPTEMPTEMP * * *\"%s\"\n\n", tmp);
 	i = ft_strlen(tmp);
 	//printf("\n* * * PR_HEX * * *\nstr: %s\nhash: %i upper: %i", tmp, print->hash, print->upper);
 	if (print->str)

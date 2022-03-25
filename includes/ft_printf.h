@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 16:07:36 by abackman          #+#    #+#             */
-/*   Updated: 2022/03/24 16:51:37 by abackman         ###   ########.fr       */
+/*   Updated: 2022/03/25 18:21:45 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # define BLACK "\033[0;30m"
 # define WHITE "\033[0;37m"
 # define FLAGS "0-+ #.*0123456789hlL"
-# define SPECIFY "cspdibouxXf%"
+# define SPECIFY "%cspdibouxXf"
 # define ALL "0-+ #.*0123456789hlL%cspdibouxXf"
 
 /*
@@ -75,6 +75,7 @@ int	ft_asprintf(char **str, const char *format, ...);
 ** Print functions
 */
 
+int	pr_perc(t_print *print);
 int	pr_char(t_print *print);
 int	pr_str(t_print *print);
 int	pr_ptr(t_print *print);
@@ -84,7 +85,6 @@ int	pr_oct(t_print *print);
 int	pr_u(t_print *print);
 int	pr_hex(t_print *print);
 int	pr_float(t_print *print);
-int	pr_perc(t_print *print);
 
 /*
 ** Function pointer and dispatch table
@@ -93,6 +93,7 @@ int	pr_perc(t_print *print);
 typedef int	(*t_able)(t_print *print);
 
 static const t_able dispatch[13] = {
+	pr_perc,
 	pr_char,
 	pr_str,
 	pr_ptr,
@@ -104,7 +105,6 @@ static const t_able dispatch[13] = {
 	pr_hex,
 	pr_hex,
 	pr_float,
-	pr_perc,
 	NULL
 };
 
@@ -123,6 +123,7 @@ int		ft_isalpha(int c);
 int		convert_no(t_print *print, const char *format);
 int		convert_yes(t_print *print, const char *format);
 int		get_field(const char *format, t_print *print);
+char	*ft_strcpy(char *dst, const char *src);
 char	*zerostr(void);
 char	*zeropad(char *str, int total);
 char	*strnull(t_print *p, char *str);

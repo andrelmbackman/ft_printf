@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 19:03:06 by abackman          #+#    #+#             */
-/*   Updated: 2022/03/24 15:49:34 by abackman         ###   ########.fr       */
+/*   Updated: 2022/03/29 14:45:20 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static char	*ultoa_str(char *str, unsigned long long num, int base, int up)
 	return (str);
 }
 
-char	*ft_ultoa_base(unsigned long long num, int base, t_print *print)
+char	*ft_utoa_base(unsigned long long num, int base, t_print *print)
 {
 	char				*str;
 	int					up;

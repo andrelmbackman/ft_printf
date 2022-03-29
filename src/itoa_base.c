@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 17:03:16 by abackman          #+#    #+#             */
-/*   Updated: 2022/03/24 15:42:54 by abackman         ###   ########.fr       */
+/*   Updated: 2022/03/28 20:05:46 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,13 @@ char	*ft_itoa_base(long long num, int base, t_print *print)
 		up = -32;
 	if (num == 0)
 		return (zerostr());
+	if (num == (-9223372036854775807 - 1))
+		return (ft_strdup("-9223372036854775808"));
 	str = (char *)malloc((itoa_base_len(n, base) + 1) * sizeof(char));
 	if (!str)
 		return (NULL);
 	if (n < 0)
 		n *= -1;
-	printf("\nn: %lli\n", n);
 	str = itoa_str(str, n, base, up);
 	up = 0;
 	while (str[up])

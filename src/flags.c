@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:36:53 by abackman          #+#    #+#             */
-/*   Updated: 2022/03/25 18:56:52 by abackman         ###   ########.fr       */
+/*   Updated: 2022/03/29 18:53:12 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,18 @@ static void	get_width(const char *format, t_print *p)
 static void	get_prec(const char *format, t_print *p)
 {
 	int	check_neg;
+	int	save;
 
 	check_neg = 0;
+	save = 0;
 	if (format[p->i] != '.')
 		return ;
 	else
 		p->precision = 0;
 	p->i++;
-	if (format[p->i] == '-')
+	if (format[p->i] == '*')
+		save = va_arg(p->ap, int);
+	if (format[p->i] == '-' || save < 0)
 	{
 		check_neg = 1;
 		p->i++;
@@ -81,6 +85,8 @@ static void	get_prec(const char *format, t_print *p)
 	//printf("GET_PREC: p->i: %i precision: %i\n", p->i, p->precision);
 	//while (format[p->i] && !ft_strchr(SPECIFY, format[p->i]))
 	//	p->i++;
+	if (save)
+		p->precision = save;
 	if (check_neg)
 		p->precision = 0;
 }

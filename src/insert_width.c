@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 15:06:15 by abackman          #+#    #+#             */
-/*   Updated: 2022/03/25 18:56:49 by abackman         ###   ########.fr       */
+/*   Updated: 2022/03/29 18:20:18 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,23 +39,23 @@ static char	*pad_left(t_print *p, char *new, char *tmp, int start)
 	
 	pad = '0';
 	x = ft_strlen(tmp);
-	save = start;
 	new = ft_strcpy(new, (const char *)tmp);
-	printf("\n* * * PAD_LEFT1 * * *\nNEW: %s\nTMP: %s\nstart: %i\nx: %i\n", new, tmp, start, x);
-	if (!p->zero)
+	if (!p->zero || ((p->conv == 'd' || p->conv == 'i') && p->precision != -1))
 	{
 		start = 0;
 		pad = ' ';
 	}
-	if (p->precision != -1 && p->conv != 's' && p->zero)
-		return (tmp);
-	while (start < (p->width - x))
+	save = start;
+	//printf("\n* * * PAD_LEFT1 * * *\nNEW: %s\nTMP: %s\nstart: %i\nx: %i\nwidth: %i\n", new, tmp, start, x, p->width);
+	//if (p->precision != -1 && p->conv != 's')
+	//	return (tmp);
+	while (start < (p->width - x + save))
 		new[start++] = pad;
-	printf("* * * PAD_LEFT2 * * * NEW: %s TMP: %s\n", new, tmp);
 	x = save;
 	while (tmp[x])
 		new[start++] = tmp[x++];
 	new[start] = '\0';
+	//printf("* * * PAD_LEFT2 * * * NEW: %s TMP: %s\n", new, tmp);
 	return (new);
 }
 /*
@@ -72,7 +72,6 @@ static int	count_width(t_print *p)
 		x += tmp;
 	return (x);
 }
-*/
 static char	*insert_hash(t_print *p, char *tmp)
 {
 	if (p->conv == 'x' || p->conv == 'X')
@@ -85,8 +84,23 @@ static char	*insert_hash(t_print *p, char *tmp)
 	{
 		tmp = strjoin_pro("0", tmp, 2);
 	}
-	printf("\nINSERT_HASH\nTMP: %s\n", tmp);
+	//printf("\nINSERT_HASH\nTMP: %s\n", tmp);
 	return (tmp);
+}
+*/
+static int	width_start(t_print *p, char *tmp)
+{
+	int	i;
+
+	i = 0;
+	if (p->conv == 'o' || p->conv == 'O' || p->conv == 'x' || p->conv == 'X')
+		i = p->hash;
+	if (p->conv == 'x' || p->conv == 'X')
+		i *= 2;
+	else if ((p->conv == 'i' || p->conv == 'd') && (tmp[0] == '-' ||\
+	tmp[0] == '+'))
+		i = 1;
+	return (i);
 }
 
 char	*insert_width(t_print *p, char *tmp, int free)
@@ -95,28 +109,22 @@ char	*insert_width(t_print *p, char *tmp, int free)
 	int		i;
 
 	new = NULL;
-	i = 0;
+	i = width_start(p, tmp);
 	//printf("\n* * * INSERT WIDTH1 * * *\nNEW: \"%s\"\nTMP: \"%s\"\nstart: %i\np->width: %i\nHASH: %i\nMINUS: %i\n", new, tmp, i, p->width, p->hash, p->minus);
-	if (p->conv == 'o' || p->conv == 'O' || p->conv == 'x' || p->conv == 'X')
-		i = p->hash;
-	if (p->conv == 'x' || p->conv == 'X')
-		i *= 2;
-	if (p->width < ft_strlen(tmp))
-		return (ft_strdup(tmp));
-	new = (char *)malloc(p->width + i * sizeof(char));
+	if (p->width <= ft_strlen(tmp))
+		return (tmp);
+	new = (char *)malloc(p->width + i + 1 * sizeof(char));
 	if (!new)
-		return (ft_strdup(tmp));
-	if (p->hash && p->width)
-		tmp = insert_hash(p, tmp);
-	else
-		new = ft_strcpy(new, (const char *)tmp);
-	printf("\n* * * INSERT WIDTH2 * * *\nNEW: \"%s\"\nTMP: \"%s\"\nstart: %i\np->width: %i\nHASH: %i\nMINUS: %i\n", new, tmp, i, p->width, p->hash, p->minus);
+		return (tmp);
+	//if (p->hash && p->width)
+	//	tmp = insert_hash(p, tmp);
+	//printf("\n* * * INSERT WIDTH2 * * *\nNEW: \"%s\"\nTMP: \"%s\"\nstart: %i\np->width: %i\nHASH: %i\nMINUS: %i\n", new, tmp, i, p->width, p->hash, p->minus);
 	if (p->minus)
-		new = pad_right(p, new, tmp, i);
+		new = pad_right(p, new, tmp, 0);
 	else
 		new = pad_left(p, new, tmp, i);
 	//printf("\n* * * INSERT WIDTH3 * * *\nNEW: \"%s\"\nTMP: \"%s\"\nstart: %i\np->width: %i\nHASH: %i\nMINUS: %i\n", new, tmp, i, p->width, p->hash, p->minus);
-	if (free)
+	if (free == 1)
 		ft_strdel(&tmp);
 	return (new);
 }

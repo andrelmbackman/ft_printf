@@ -6,33 +6,106 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 11:11:25 by abackman          #+#    #+#             */
-/*   Updated: 2022/03/24 15:44:07 by abackman         ###   ########.fr       */
+/*   Updated: 2022/03/29 18:11:15 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-char	*zeropad(char *str, int total)
+static char	*fill_zeros(char *str, int total, long long num, int x)
 {
-	int		x;
 	int		y;
 	char	*new;
 
-	x = ft_strlen(str);
 	y = 0;
-	if (total <= x)
-		return (str);
-	new = (char *)malloc(total * sizeof(char));
+	if (num < 0)
+		new = (char *)malloc((total + 2) * sizeof(char));
+	else
+		new = (char *)malloc((total + 1) * sizeof(char));
 	if (!new)
-		return (str);
+		return (NULL);
+	if (num < 0)
+	{
+		new[0] = '-';
+		str[0] = '0';
+		y = 1;
+		x--;
+	}
+	//printf("1 FILL_ZEROS\nnew: %s\nstr: %s\ny: %i\nx: %i\ntotal: %i\n", new, str, y, x, total);
 	while (y < (total - x))
 		new[y++] = '0';
 	x = 0;
 	while (str[x])
 		new[y++] = str[x++];
 	new[y] = '\0';
-	ft_strdel(&str);
+	//printf("2 FILL_ZEROS\nnew: %s\nstr: %s\ny: %i\nx: %i\ntotal: %i\n", new, str, y, x, total);
 	return (new);
+}
+
+char	*zeropad(char *str, int total, long long num)
+{
+	int		len;
+	char	*new;
+
+	len = ft_strlen(str);
+	if (total < len)
+	{
+		if (str[0] == '0')
+			str[0] = '\0';
+		return (str);
+	}
+	else
+		new = fill_zeros(str, total, num, len);
+	if (!new)
+		return (str);
+	else
+	{
+		ft_strdel(&str);
+		return (new);
+	}
+}
+
+char	*insert_space_only(t_print *p, char *str)
+{
+	int	i;
+
+	i = 0;
+	//printf("\nINSERT_SPACE_ONLY\n");
+	ft_strdel(&str);
+	str = (char *)malloc((size_t)p->width * sizeof(char));
+	if (!str)
+		return (NULL);
+	while (i < p->width - 1)
+		str[i++] = ' ';
+	str[i] = '\0';
+	return (str);
+}
+
+int	ft_isprint(int c)
+{
+	if (c > 31 && c < 127)
+		return (1);
+	else
+		return (0);
+}
+
+void	init_struct(t_print *print)
+{
+	print->len = 0;
+	print->width = 0;
+	print->precision = -1;
+	print->hash = 0;
+	print->zero = 0;
+	print->space = 0;
+	print->upper = 0;
+	print->plus = 0;
+	print->minus = 0;
+	print->h = 0;
+	print->l = 0;
+	print->L = 0;
+	print->z = 0;
+	print->conv = 0;
+	print->length = 0;
 }
 
 /*

@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 16:07:36 by abackman          #+#    #+#             */
-/*   Updated: 2022/03/25 18:21:45 by abackman         ###   ########.fr       */
+/*   Updated: 2022/03/29 14:44:34 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 # include <stdio.h>
 /*
- *iyy DELETE Îî DELETEDELETEDELETEpp
+ *iyy DELETE Îî DELETEDELETEDELETEppppppppppppppppppppppppppp
  *iyy DELETE Îî DELETEDELETEDELETE
  */
 
@@ -43,7 +43,9 @@
 typedef struct s_print
 {
 	va_list	ap;
+	int		fd;
 	int		i;
+	int		ret;
 	int		len;
 	int		width;
 	int		precision;
@@ -60,7 +62,6 @@ typedef struct s_print
 	char	conv;
 	char	length;
 	char	*str;
-	char	*tmp;
 }	t_print;
 
 /*
@@ -109,10 +110,25 @@ static const t_able dispatch[13] = {
 };
 
 /*
+** ft_asprintf functions
+*/
+
+int		as_convert_yes(t_print *print, const char *format);
+int		as_convert_no(t_print *print, const char *format);
+
+/*
+** ft_printf and ft_dprintf functions
+*/
+
+int		convert_yes(t_print *print, const char *format);
+int		convert_no(t_print *print, const char *format);
+
+/*
 ** Other functions
 */
 
 void	free_struct(t_print *print);
+void	init_struct(t_print *print);
 void	str_reverse(char *str);
 void	ft_strdel(char **as);
 int		ft_strlen(const char *str);
@@ -120,12 +136,11 @@ int		ft_strcmp(const char *s1, const char *s2);
 int		ft_isdigit(int c);
 int		ft_isalnum(int c);
 int		ft_isalpha(int c);
-int		convert_no(t_print *print, const char *format);
-int		convert_yes(t_print *print, const char *format);
+int		ft_isprint(int c);
 int		get_field(const char *format, t_print *print);
 char	*ft_strcpy(char *dst, const char *src);
 char	*zerostr(void);
-char	*zeropad(char *str, int total);
+char	*zeropad(char *str, int total, long long num);
 char	*strnull(t_print *p, char *str);
 char	*ft_strncpy(char *dst, const char *src, size_t len);
 char	*p_strnew(const char *format, int i);
@@ -134,8 +149,9 @@ char	*strjoin_pro(char *str1, char *str2, int n);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strdup(const char *s1);
 char	*ft_itoa_base(long long num, int base, t_print *print);
-char	*ft_ultoa_base(unsigned long long num, int base, t_print *print);
+char	*ft_utoa_base(unsigned long long num, int base, t_print *print);
 char	*insert_width(t_print *p, char *tmp, int free);
+char	*insert_space_only(t_print *p, char *str);
 long long signed_length_mod(t_print *p);
 unsigned long long	unsigned_length_mod(t_print *p);
 

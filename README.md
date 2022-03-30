@@ -1,3 +1,3 @@
 # ft_printf
 
-substitute for printf, dprintf and asprintf.
+Own implementation of printf, dprintf and asprintf.

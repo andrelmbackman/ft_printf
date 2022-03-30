@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 13:10:23 by abackman          #+#    #+#             */
-/*   Updated: 2022/03/29 18:09:04 by abackman         ###   ########.fr       */
+/*   Updated: 2022/03/30 14:51:56 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,8 @@ int	pr_u(t_print *print)
 		print->str = strjoin_pro(print->str, tmp, 3);
 		//print->str = p_strjoin(print->str, str, i);
 	else
-		print->str = tmp;
-		//print->str = p_strnew(str, i);
+		print->str = p_strnew(tmp, i);
+		//print->str = tmp;
+	ft_strdel(&tmp);
 	return (i);
 }

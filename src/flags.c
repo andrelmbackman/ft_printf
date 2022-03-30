@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:36:53 by abackman          #+#    #+#             */
-/*   Updated: 2022/03/29 18:53:12 by abackman         ###   ########.fr       */
+/*   Updated: 2022/03/30 16:33:03 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,34 +61,36 @@ static void	get_width(const char *format, t_print *p)
 	//printf("GET_WIDTH FORMAT CHAR: %c i: %i width: %i\n", format[p->i], p->i, p->width);
 }
 
-static void	get_prec(const char *format, t_print *p)
+static void	get_prec(const char *format, t_print *p, int save)
 {
 	int	check_neg;
-	int	save;
 
 	check_neg = 0;
-	save = 0;
 	if (format[p->i] != '.')
 		return ;
 	else
 		p->precision = 0;
 	p->i++;
 	if (format[p->i] == '*')
-		save = va_arg(p->ap, int);
-	if (format[p->i] == '-' || save < 0)
 	{
-		check_neg = 1;
+		save = va_arg(p->ap, int);
 		p->i++;
 	}
+	if (format[p->i] == '-' || save < 0)
+		check_neg = 1;
+	if (format[p->i] == '-')
+		p->i++;
+	if (save < 0)
+		save *= -1;
 	while (ft_isdigit(format[p->i]) && format[p->i])
 		p->precision = (p->precision * 10) + (format[p->i++] - '0');
 	//printf("GET_PREC: p->i: %i precision: %i\n", p->i, p->precision);
 	//while (format[p->i] && !ft_strchr(SPECIFY, format[p->i]))
 	//	p->i++;
-	if (save)
-		p->precision = save;
 	if (check_neg)
 		p->precision = 0;
+	if (save)
+		p->precision = save;
 }
 
 static void	get_length(const char *format, t_print *p)
@@ -121,7 +123,7 @@ int	get_field(const char *format, t_print *print)
 	if (print->minus)
 		print->zero = 0;
 	//printf("GET_FIELD2: %c PREC: %i i: %i END\n", format[print->i], print->precision, print->i);
-	get_prec(format, print);
+	get_prec(format, print, 0);
 	//printf("GET_FIELD3: %c PREC: %i i: %i END\n", format[print->i], print->precision, print->i);
 	get_length(format, print);
 	//printf("GET_FIELD4: %c PREC: %i i: %i END\n", format[print->i], print->precision, print->i);

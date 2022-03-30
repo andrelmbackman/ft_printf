@@ -11,6 +11,7 @@ SRCS = ./src/conversion.c\
 	./src/lib1.c\
 	./src/lib2.c\
 	./src/numbers.c\
+	./src/as_parse.c\
 	./src/parse.c\
 	./src/strings.c\
 	./src/ultoa_base.c\

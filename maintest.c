@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   maintest.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 14:55:36 by abackman          #+#    #+#             */
-/*   Updated: 2022/03/30 14:56:29 by abackman         ###   ########.fr       */
+/*   Updated: 2022/03/31 16:40:20 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,6 @@ int	main(void)
 	printf("\n");
 	ft = ft_printf("{%05.*d}", -15, 42);
 	printf("\nPF return: %i\nFT return: %i\n", pf, ft);
-	*/
 	ft_printf("FT *S:{%.*s}\n", 0, "hello");
     printf("PF *S:{%.*s}\n\n", 0, "hello");
 
@@ -144,11 +143,57 @@ int	main(void)
 
     ft_printf("FT S:{%-5.s}\n","42");
     printf("PF S:{%-5.s}\n\n","42"); 
+	*/
 	/*
+	pf = printf("%#o", 0);
+	printf("\n");
+	ft = ft_printf("%#o", 0);
+	printf("\nPF return: %i\nFT return: %i\n", pf, ft);
+	pf = printf("@PF: %#.o %#.0o", 0, 0);
+	printf("\n");
+	ft = ft_printf("@FT: %#.o %#.0o", 0, 0);
+	printf("\nPF return: %i\nFT return: %i\n", pf, ft);
+	pf = printf("%s%s%s%s%s",
+		"1", "2", "3", "4", "5");
+	printf("\n");
+	ft = ft_printf("%s%s%s%s%s",
+		"1", "2", "3", "4", "5");
+	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
+	pf = printf("a%ob%oc%od",
+		0, 55555, 100000);
+	printf("\n");
+	ft = ft_printf("a%ob%oc%od",
+		0, 55555, 100000);
+	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
+	
+	pf = printf("%.0p, %.p", 0, 0);
+	printf("\n");
+	ft = ft_printf("%.0p, %.p", 0, 0);
+	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
+	
+	pf = printf("%.p, %.0p", 0, 0);
+	printf("\n");
+	ft = ft_printf("%.p, %.0p", 0, 0);
+	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
+	
+	pf = printf("%*d", 5, 42);
+	printf("\n");
+	ft = ft_printf("%*d", 5, 42);
+	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
+	
+	pf = printf("{%05.*d}", -15, 42);
+	printf("\n");
+	ft = ft_printf("{%05.*d}", -15, 42);
+	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
 	printf("%c", 0);
 	printf("\n");
 	ft_printf("%c", 0);
 	*/
+
+	pf = printf("{% 03d}", 0);
+	printf("\n");
+	ft = ft_printf("{% 03d}", 0);
+	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
 	//system("leaks a.out");
 	return (0);
 }

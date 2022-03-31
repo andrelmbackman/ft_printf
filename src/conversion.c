@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 14:59:31 by abackman          #+#    #+#             */
-/*   Updated: 2022/03/30 12:12:34 by abackman         ###   ########.fr       */
+/*   Updated: 2022/03/31 16:23:04 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,12 @@ int	pr_ptr(t_print *print)
 	i = 0;
 	p = va_arg(print->ap, unsigned long);
 	tmp = ft_utoa_base(p, 16, print);
+	i = ft_strlen(tmp);
+	if (print->precision != -1)
+	{
+		while (i >= print->precision)
+			tmp[i--] = '\0';
+	}
 	tmp = strjoin_pro("0x", tmp, 2);
 	tmp = insert_width(print, tmp, 1);
 	i = ft_strlen(tmp);

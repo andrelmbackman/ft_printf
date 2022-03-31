@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 15:06:15 by abackman          #+#    #+#             */
-/*   Updated: 2022/03/30 14:09:44 by abackman         ###   ########.fr       */
+/*   Updated: 2022/03/31 16:54:55 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,8 @@ static int	width_start(t_print *p, char *tmp)
 	else if ((p->conv == 'i' || p->conv == 'd') && (tmp[0] == '-' ||\
 	tmp[0] == '+'))
 		i = 1;
+/* 	else if ((p->conv == 'i' || p->conv == 'd') && (tmp[0] == '-' ||\
+	tmp[0] == '+' || tmp[0] == ' ')) */
 	return (i);
 }
 

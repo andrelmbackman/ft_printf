@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 15:06:15 by abackman          #+#    #+#             */
-/*   Updated: 2022/03/31 16:54:55 by abackman         ###   ########.fr       */
+/*   Updated: 2022/04/01 19:15:14 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,24 @@ static char	*pad_right(t_print *p, char *new, char *tmp, int start)
 		new[x++] = ' ';
 	new[x] = '\0';
 	//printf("\n* * * PAD_RIGHT * * *\nnew: \"%s\"\ntmp: \"%s\"\np->str: \"%s\"\n", new, tmp, p->str);
+	return (new);
+}
+
+static char	*swap_space(char *new)
+{
+	int		i;
+	
+	i = 0;
+	while (new[i])
+	{
+		if (new[i] == ' ')
+		{
+			new[i] = new[0];
+			new[0] = ' ';
+			break ;
+		}
+		i++;
+	}
 	return (new);
 }
 
@@ -55,6 +73,8 @@ static char	*pad_left(t_print *p, char *new, char *tmp, int start)
 	while (tmp[x])
 		new[start++] = tmp[x++];
 	new[start] = '\0';
+	if ((p->conv == 'd' || p->conv == 'i') && p->space)
+		new = swap_space(new);
 	//printf("* * * PAD_LEFT2 * * * NEW: %s TMP: %s\n", new, tmp);
 	return (new);
 }
@@ -94,16 +114,32 @@ static int	width_start(t_print *p, char *tmp)
 
 	i = 0;
 	if (p->conv == 'o' || p->conv == 'O' || p->conv == 'x' || p->conv == 'X')
+	{
 		i = p->hash;
-	if (p->conv == 'x' || p->conv == 'X')
-		i *= 2;
-	else if ((p->conv == 'i' || p->conv == 'd') && (tmp[0] == '-' ||\
-	tmp[0] == '+'))
-		i = 1;
+		if (p->conv == 'x' || p->conv == 'X')
+			i *= 2;
+	}
+	else if (p->conv == 'i' || p->conv == 'd')
+	{
+		if (tmp[0] == '+' || tmp[0] == '-')
+			i = 1;
+		if (tmp[0] == ' ')
+			i = 1;
+	}
 /* 	else if ((p->conv == 'i' || p->conv == 'd') && (tmp[0] == '-' ||\
 	tmp[0] == '+' || tmp[0] == ' ')) */
 	return (i);
 }
+/* static char	*insert_width_str(t_print *p, char *tmp, int free)
+{
+	char	*new;
+	int		start;
+	
+	start = 0;
+	if (tmp[0] == '+' || tmp[0] == '-' || tmp[0] == ' ')
+		start++;
+	
+} */
 
 char	*insert_width(t_print *p, char *tmp, int free)
 {
@@ -112,8 +148,11 @@ char	*insert_width(t_print *p, char *tmp, int free)
 
 	new = NULL;
 	i = width_start(p, tmp);
+	if (!p->width)
+		return (tmp);
 	//printf("\n* * * INSERT WIDTH1 * * *\nNEW: \"%s\"\nTMP: \"%s\"\nstart: %i\np->width: %i\nHASH: %i\nMINUS: %i\n", new, tmp, i, p->width, p->hash, p->minus);
-	if (p->width <= ft_strlen(tmp))
+	if (p->width <= ft_strlen(tmp) && (p->conv != 'd' || p->conv != 'i') &&\
+	p->width)
 		return (tmp);
 	new = (char *)malloc(p->width + i + 1 * sizeof(char));
 	if (!new)

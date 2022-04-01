@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 11:11:25 by abackman          #+#    #+#             */
-/*   Updated: 2022/03/29 18:11:15 by abackman         ###   ########.fr       */
+/*   Updated: 2022/04/01 15:56:55 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,16 +67,28 @@ char	*zeropad(char *str, int total, long long num)
 
 char	*insert_space_only(t_print *p, char *str)
 {
-	int	i;
+	int				i;
+	unsigned char	c;
 
 	i = 0;
-	//printf("\nINSERT_SPACE_ONLY\n");
+	c = (unsigned char)str[0];
 	ft_strdel(&str);
-	str = (char *)malloc((size_t)p->width * sizeof(char));
+	//printf("\nINSERT_SPACE_ONLY\n");
+	str = (char *)malloc((size_t)p->width + 1 * sizeof(char));
 	if (!str)
 		return (NULL);
-	while (i < p->width - 1)
-		str[i++] = ' ';
+	if (p->minus)
+	{
+		str[i++] = c;
+		while (i < p->width)
+			str[i++] = ' ';
+	}
+	else
+	{
+		while (i < p->width - 1)
+			str[i++] = ' ';
+		str[i++] = c;
+	}
 	str[i] = '\0';
 	return (str);
 }

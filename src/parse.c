@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:30:20 by abackman          #+#    #+#             */
-/*   Updated: 2022/03/31 15:41:31 by abackman         ###   ########.fr       */
+/*   Updated: 2022/04/01 19:21:20 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	convert_yes(t_print *print, const char *format)
 	}
 	else
 		print->i--;
-	return (0);
+	return (1);
 }
 
 int	convert_no(t_print *print, const char *format)

@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 14:59:31 by abackman          #+#    #+#             */
-/*   Updated: 2022/03/31 16:23:04 by abackman         ###   ########.fr       */
+/*   Updated: 2022/04/01 17:24:14 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	pr_char(t_print *print)
 	{
 		if (!ft_isprint(c))
 			str = insert_space_only(print, str);
-		else
+		else 
 			str = insert_width(print, str, 1);
 	}
 	if (print->str)
@@ -71,12 +71,13 @@ int	pr_str(t_print *print)
 
 	i = 0;
 	tmp = va_arg(print->ap, char *);
-	//printf("PR_STR: %s\n", tmp);
-	if (tmp == NULL || !ft_strcmp(tmp, "") || print->precision == 0)
+	if (tmp == NULL || !ft_strcmp(tmp, "") || (print->precision == 0 &&\
+	!print->check_neg))
 		new = strnull(print, tmp);
 	else
 		new = ft_strdup(tmp);
-	if (print->precision != -1)
+	//printf("PR_STR: \"%s\"\np->precision: %i\np->check_neg: %i", tmp, print->precision, print->check_neg);
+	if (print->precision != -1 && print->check_neg == 0)
 	{
 		while (new[print->precision] != '\0')
 		{
@@ -84,7 +85,7 @@ int	pr_str(t_print *print)
 			print->precision++;
 		}
 	}
-	//printf("\nPR_STR1: i: %i\nstr: \"%s\"", i, print->str);
+	//printf("\nPR_STR1: i: %i\nstr: \"%s\"", i, new);
 	new = insert_width(print, new, 1);
 	//printf("\nPR_STR2: NEW: \"%s\" P->STR: \"%s\"\n", new, print->str);
 	if (print->str)
@@ -134,8 +135,8 @@ int	pr_hex(t_print *print)
 	tmp = ft_utoa_base(p, 16, print);
 	if (print->precision != -1)
 		tmp = zeropad(tmp, print->precision, p);
-	//printf("\n* * * HEX1 * * *\nhash: %i\np: %lld\nprecision: %i\nminus: %i\n", print->hash, p, print->precision, print->minus);
-	if (print->hash != 0 && p != 0)
+	//printf("\n* * * HEX1 * * *\ntmp: \"%s\"\nhash: %i\np: %lld\nprecision: %i\nminus: %i\n", tmp, print->hash, p, print->precision, print->minus);
+	if (print->hash && p)
 	{
 		tmp = strjoin_pro("0x", tmp, 2);
 		if (print->upper)

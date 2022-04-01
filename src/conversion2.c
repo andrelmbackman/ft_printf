@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 13:10:23 by abackman          #+#    #+#             */
-/*   Updated: 2022/03/31 16:46:37 by abackman         ###   ########.fr       */
+/*   Updated: 2022/04/01 19:15:04 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	pr_num(t_print *print)
 	//printf("* * * TEMPTEMPTEMP * * *\"%s\"\n\n", tmp);
 	i = ft_strlen(tmp);
 	//printf("\n* * * PR_HEX * * *\nstr: %s\nhash: %i upper: %i", tmp, print->hash, print->upper);
+	
 	if (print->str)
 		print->str = strjoin_pro(print->str, tmp, 1);
 		//print->str = p_strjoin(print->str, str, i);
@@ -79,7 +80,9 @@ int	pr_oct(t_print *print)
 	if (print->precision != -1)
 		tmp = zeropad(tmp, print->precision, p);
 	//printf("\n* * * PR_OCT * * *\np: %llu\ntmp: %s\n", p, tmp);
-	if ((print->hash && p) || (print->hash && print->precision != -1))
+	//if ((print->hash && p) || (print->hash && print->precision != -1))
+	if (print->hash && (( p && print->precision == -1) ||\
+	(print->precision == 0)))
 	{
 		tmp = strjoin_pro("0", tmp, 2);
 		if (print->upper)
@@ -99,6 +102,7 @@ int	pr_oct(t_print *print)
 	ft_strdel(&tmp);
 	return (i);
 }
+
 int	pr_u(t_print *print)
 {
 	char				*tmp;

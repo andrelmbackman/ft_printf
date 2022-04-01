@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 16:07:36 by abackman          #+#    #+#             */
-/*   Updated: 2022/03/29 14:44:34 by abackman         ###   ########.fr       */
+/*   Updated: 2022/04/01 17:14:09 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_print
 	int		i;
 	int		ret;
 	int		len;
+	int		check_neg;
 	int		width;
 	int		precision;
 	int		hash;

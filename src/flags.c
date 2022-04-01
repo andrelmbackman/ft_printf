@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:36:53 by abackman          #+#    #+#             */
-/*   Updated: 2022/03/30 19:30:02 by abackman         ###   ########.fr       */
+/*   Updated: 2022/04/01 19:04:28 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,16 +56,17 @@ static void	get_width(const char *format, t_print *p)
 	}
 	while (ft_isdigit((int)format[p->i]) && format[p->i])
 		p->width = (p->width * 10) + (format[p->i++] - '0');
-	if (new_width && new_width < p->width)
+	if (new_width && !p->width)
 		p->width = new_width;
+	if (new_width && p->width && new_width < p->width)
+		p->width = new_width;
+	
 	//printf("GET_WIDTH FORMAT CHAR: %c i: %i width: %i\n", format[p->i], p->i, p->width);
 }
 
 static void	get_prec(const char *format, t_print *p, int save)
 {
-	int	check_neg;
-
-	check_neg = 0;
+	p->check_neg = 0;
 	if (format[p->i] != '.')
 		return ;
 	else
@@ -76,7 +77,7 @@ static void	get_prec(const char *format, t_print *p, int save)
 		p->i++;
 	}
 	if (format[p->i] == '-' || save < 0)
-		check_neg = 1;
+		p->check_neg = 1;
 	if (format[p->i] == '-')
 		p->i++;
 	if (save < 0)
@@ -86,9 +87,9 @@ static void	get_prec(const char *format, t_print *p, int save)
 	//printf("GET_PREC: p->i: %i precision: %i\n", p->i, p->precision);
 	//while (format[p->i] && !ft_strchr(SPECIFY, format[p->i]))
 	//	p->i++;
-	if (save)
+	if (save && !p->check_neg)
 		p->precision = save;
-	if (check_neg && !save)
+	else if (p->check_neg && !save)
 		p->precision = 0;
 }
 
@@ -112,11 +113,6 @@ int	get_field(const char *format, t_print *print)
 {	
 	//printf("\nGET_FIELD1: str: \"%s\" char: \"%c\" PREC: %iEND\n", print->str, format[print->i], print->precision);
 	get_width(format, print);
-	if (format[print->i] == '*')
-	{
-		print->width = va_arg(print->ap, int);
-		print->i++;
-	}
 	while (format[print->i] && format[print->i] == '*')
 		print->i++;
 	if (print->minus)
@@ -125,6 +121,8 @@ int	get_field(const char *format, t_print *print)
 	get_prec(format, print, 0);
 	//printf("GET_FIELD3: %c PREC: %i i: %i END\n", format[print->i], print->precision, print->i);
 	get_length(format, print);
+	if (print->precision != -1 && print->zero)
+		print->zero = 0;
 	//printf("GET_FIELD4: %c PREC: %i i: %i END\n", format[print->i], print->precision, print->i);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 14:59:31 by abackman          #+#    #+#             */
-/*   Updated: 2022/04/01 17:24:14 by abackman         ###   ########.fr       */
+/*   Updated: 2022/04/02 14:52:13 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,16 @@ int	pr_str(t_print *print)
 	int		i;
 
 	i = 0;
+	new = NULL;
+	tmp = NULL;
 	tmp = va_arg(print->ap, char *);
 	if (tmp == NULL || !ft_strcmp(tmp, "") || (print->precision == 0 &&\
 	!print->check_neg))
 		new = strnull(print, tmp);
 	else
 		new = ft_strdup(tmp);
-	//printf("PR_STR: \"%s\"\np->precision: %i\np->check_neg: %i", tmp, print->precision, print->check_neg);
-	if (print->precision != -1 && print->check_neg == 0)
+	//printf("PR_STR: \"%s\"\np->precision: %i\np->check_neg: %i", new, print->precision, print->check_neg);
+	if (print->precision > 0 && !print->check_neg)
 	{
 		while (new[print->precision] != '\0')
 		{
@@ -104,6 +106,7 @@ int	pr_ptr(t_print *print)
 	unsigned long	p;
 
 	i = 0;
+	p = 0;
 	p = va_arg(print->ap, unsigned long);
 	tmp = ft_utoa_base(p, 16, print);
 	i = ft_strlen(tmp);

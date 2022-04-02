@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 11:12:35 by abackman          #+#    #+#             */
-/*   Updated: 2022/03/24 15:56:33 by abackman         ###   ########.fr       */
+/*   Updated: 2022/04/02 14:57:41 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,19 @@
 char	*strnull(t_print *p, char *str)
 {
 	char	*tmp;
-	int		prec;
+	//int		prec;
 
-	prec = 6;
+	tmp = NULL;
+	//prec = 6;
 	if (str == NULL && p->precision != 0)
 	{
 		
 		tmp = ft_strdup("(null)");
-		if (p->precision > 0 && prec > p->precision)
+		/* if (p->precision > 0 && prec > p->precision)
 		{
 			while (prec >= p->precision)
 				tmp[prec--] = '\0';
-		}
+		} */
 	}
 	else
 	{
@@ -55,6 +56,7 @@ void	str_reverse(char *str)
 	int		i;
 	int		j;
 
+	tmp = 0;
 	i = 0;
 	j = 0;
 	while (str[j])

@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 11:11:25 by abackman          #+#    #+#             */
-/*   Updated: 2022/04/01 15:56:55 by abackman         ###   ########.fr       */
+/*   Updated: 2022/04/02 15:02:54 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,8 @@ int	ft_isprint(int c)
 void	init_struct(t_print *print)
 {
 	print->len = 0;
+	print->check_neg = 0;
+	print->save = 0;
 	print->width = 0;
 	print->precision = -1;
 	print->hash = 0;

@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:36:53 by abackman          #+#    #+#             */
-/*   Updated: 2022/04/01 19:04:28 by abackman         ###   ########.fr       */
+/*   Updated: 2022/04/02 14:51:17 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ static int	width_helper(const char *format, t_print *p)
 			width = va_arg(p->ap, int);
 		p->i++;
 	}
-	//printf("WIDTH HELPER2\n");
+	//printf("* * * WIDTH HELPER2* * *\n");
+	//printf("zero: %i\nplus: %i\nminus: %i\nspace: %i\nhash: %i\nwidth: %i\n\n", p->zero, p->plus, p->minus, p->space, p->hash, width);
 	return (width);
 }
 
@@ -48,10 +49,12 @@ static void	get_width(const char *format, t_print *p)
 {
 	int	new_width;
 
+	new_width = 0;
 	new_width = width_helper(format, p);
 	if (new_width < 0)
 	{
 		p->minus = 1;
+		p->save = 1;
 		new_width *= -1;
 	}
 	while (ft_isdigit((int)format[p->i]) && format[p->i])
@@ -87,7 +90,8 @@ static void	get_prec(const char *format, t_print *p, int save)
 	//printf("GET_PREC: p->i: %i precision: %i\n", p->i, p->precision);
 	//while (format[p->i] && !ft_strchr(SPECIFY, format[p->i]))
 	//	p->i++;
-	if (save && !p->check_neg)
+	p->save = save;
+	if (save && (!p->check_neg || !p->precision))
 		p->precision = save;
 	else if (p->check_neg && !save)
 		p->precision = 0;
@@ -111,14 +115,17 @@ static void	get_length(const char *format, t_print *p)
 
 int	get_field(const char *format, t_print *print)
 {	
+	int	save;
+	
+	save = 0;
 	//printf("\nGET_FIELD1: str: \"%s\" char: \"%c\" PREC: %iEND\n", print->str, format[print->i], print->precision);
 	get_width(format, print);
 	while (format[print->i] && format[print->i] == '*')
 		print->i++;
-	if (print->minus)
+	if (print->minus && !print->save)
 		print->zero = 0;
 	//printf("GET_FIELD2: %c PREC: %i i: %i END\n", format[print->i], print->precision, print->i);
-	get_prec(format, print, 0);
+	get_prec(format, print, save);
 	//printf("GET_FIELD3: %c PREC: %i i: %i END\n", format[print->i], print->precision, print->i);
 	get_length(format, print);
 	if (print->precision != -1 && print->zero)

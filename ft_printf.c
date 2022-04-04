@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 18:30:27 by abackman          #+#    #+#             */
-/*   Updated: 2022/04/02 14:56:39 by abackman         ###   ########.fr       */
+/*   Updated: 2022/04/04 19:03:21 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,14 @@ int	ft_asprintf(char **str, const char *format, ...)
 	t_print	*print;
 
 	ret = 0;
+	if (!ft_strlen(format))
+		return (0);
 	print = (t_print *)malloc(sizeof(t_print));
 	if (!print)
 		return (-1);
 	print->fd = 0;
-	if (!ft_strlen(format))
-		return (0);
+	print->str = NULL;
+	init_struct(print);
 	va_start(print->ap, format);
 	conv_asprint(print, format);
 	va_end(print->ap);
@@ -89,12 +91,14 @@ int	ft_dprintf(int fd, const char *format, ...)
 	t_print	*print;
 
 	ret = 0;
+	if (!ft_strlen(format))
+		return (0);
 	print = (t_print *)malloc(sizeof(t_print));
 	if (!print)
 		return (-1);
 	print->fd = fd;
-	if (!ft_strlen(format))
-		return (0);
+	print->str = NULL;
+	init_struct(print);
 	va_start(print->ap, format);
 	conv_print(print, format);
 	va_end(print->ap);
@@ -112,14 +116,15 @@ int	ft_printf(const char *format, ...)
 	ret = 0;
 	print = (t_print *)malloc(sizeof(t_print));
 	if (!print)
-		return (-1);
-	print->fd = STDOUT_FILENO;
-	if (!ft_strlen(format))
 		return (0);
 	va_start(print->ap, format);
-	conv_print(print, format);
+	if (!ft_strlen(format))
+		return (0);
+	init_struct(print);
+	print->fd = STDOUT_FILENO;
+	print->str = ft_strdup("");
+	ret = conv_print(print, format);
 	va_end(print->ap);
-	ret = print->ret;
 	free_struct(print);
 	return (ret);
 }

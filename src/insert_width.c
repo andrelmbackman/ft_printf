@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 15:06:15 by abackman          #+#    #+#             */
-/*   Updated: 2022/04/02 14:15:35 by abackman         ###   ########.fr       */
+/*   Updated: 2022/04/04 14:31:45 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ static char	*pad_left(t_print *p, char *new, char *tmp, int start)
 	x = ft_strlen(tmp);
 	new = ft_strcpy(new, (const char *)tmp);
 /* 	if (!p->zero || ((p->conv == 'd' || p->conv == 'i') && p->precision > 0 &&\
-	!p->zero && !p->minus && !p->save && !p->check_neg)) */
-	if ((!p->zero && p->conv != 'd' && p->conv != 'i') || ( !p->zero && !p->minus))
+	!p->zero && !p->minus && !p->w_save && !p->check_neg)) */
+	if ((!p->zero && p->conv != 'd' && p->conv != 'i') || (!p->zero && !p->minus && !p->p_save))
 	{
 		//printf("\n\n\nHERE\n\n\n");
 		start = 0;

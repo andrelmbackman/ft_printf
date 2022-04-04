@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 11:11:25 by abackman          #+#    #+#             */
-/*   Updated: 2022/04/02 15:02:54 by abackman         ###   ########.fr       */
+/*   Updated: 2022/04/04 20:23:41 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ char	*insert_space_only(t_print *p, char *str)
 	i = 0;
 	c = (unsigned char)str[0];
 	ft_strdel(&str);
-	//printf("\nINSERT_SPACE_ONLY\n");
 	str = (char *)malloc((size_t)p->width + 1 * sizeof(char));
 	if (!str)
 		return (NULL);
@@ -90,6 +89,10 @@ char	*insert_space_only(t_print *p, char *str)
 		str[i++] = c;
 	}
 	str[i] = '\0';
+	//printf("\nINSERT_SPACE_ONLY\n[%s]\n", str);
+	//write(1, "[", 1);
+	//write(1, str, 5);
+	//write(1, "]", 1);
 	return (str);
 }
 
@@ -103,9 +106,9 @@ int	ft_isprint(int c)
 
 void	init_struct(t_print *print)
 {
-	print->len = 0;
 	print->check_neg = 0;
-	print->save = 0;
+	print->w_save = 0;
+	print->p_save = 0;
 	print->width = 0;
 	print->precision = -1;
 	print->hash = 0;
@@ -119,7 +122,6 @@ void	init_struct(t_print *print)
 	print->L = 0;
 	print->z = 0;
 	print->conv = 0;
-	print->length = 0;
 }
 
 /*

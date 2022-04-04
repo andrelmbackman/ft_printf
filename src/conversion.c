@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 14:59:31 by abackman          #+#    #+#             */
-/*   Updated: 2022/04/02 14:52:13 by abackman         ###   ########.fr       */
+/*   Updated: 2022/04/04 20:42:53 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,37 @@ int	pr_perc(t_print *print)
 	perc[1] = '\0';
 	if (print->width)
 		perc = insert_width(print, perc, 1);
-	if (!print->str)
-		print->str = perc;
-	else
+	if (print->str != NULL)
 		print->str = strjoin_pro(print->str, perc, 3);
+	else
+		print->str = perc;
 	if (print->width)
 		return (print->width);
 	else
 		return (1);
 }
 
+/* static char	*nstrdup(char *tmp, int n)
+{
+	char	*new;
+	int		i;
+
+	i = 0;
+	new = (char *)malloc(n * sizeof(char));
+	while (i < n)
+	{
+		new[i] = tmp[i];
+		i++;
+	}
+	return (new);
+} */
+
 int	pr_char(t_print *print)
 {
 	char			*str;
 	unsigned char	c;
+	if (print->str != NULL)
+		ft_strdel(&print->str);
 
 	c = (unsigned char)va_arg(print->ap, int);
 	str = (char *)malloc(2 * sizeof(char));
@@ -51,12 +68,15 @@ int	pr_char(t_print *print)
 		else 
 			str = insert_width(print, str, 1);
 	}
-	if (print->str)
-		print->str = strjoin_pro(print->str, str, 2);
-	else
+	if (print->str != NULL)
+		print->str = strjoin_pro(print->str, str, 1);
+	else if (print->str == NULL)
 		print->str = str;
 	//printf("* * * CHAR * * *\nstr: \"%s\"\np->str: \"%s\"\n", str, print->str);
 	//ft_strdel(&str);
+	/* write(1, "{", 1);
+	write(1, str, 5);
+	write(1, "}", 1); */
 	if (print->width)
 		return (print->width);
 	else
@@ -90,10 +110,11 @@ int	pr_str(t_print *print)
 	//printf("\nPR_STR1: i: %i\nstr: \"%s\"", i, new);
 	new = insert_width(print, new, 1);
 	//printf("\nPR_STR2: NEW: \"%s\" P->STR: \"%s\"\n", new, print->str);
-	if (print->str)
+	if (print->str != NULL)
 		print->str = strjoin_pro(print->str, new, 1);
 	else
 		print->str = ft_strdup(new);
+		//print->str = new;
 	ft_strdel(&new);
 	//printf("\nPR_STR3: i: %i\nstr: \"%s\"\nPR_STR3 p->str[i]: %c", i, print->str, print->conv);
 	return (ft_strlen(print->str));
@@ -118,12 +139,13 @@ int	pr_ptr(t_print *print)
 	tmp = strjoin_pro("0x", tmp, 2);
 	tmp = insert_width(print, tmp, 1);
 	i = ft_strlen(tmp);
-	if (print->str)
-		print->str = strjoin_pro(print->str, tmp, 3);
+	if (print->str != NULL)
+		print->str = strjoin_pro(print->str, tmp, 1);
 		//print->str = p_strjoin(print->str, str, i);
 	else
-		print->str = tmp;
-		//print->str = p_strnew(str, i);
+		print->str = p_strnew(tmp, i);
+		//print->str = tmp;
+	ft_strdel(&tmp);
 	return (i);
 }
 
@@ -149,12 +171,13 @@ int	pr_hex(t_print *print)
 	tmp = insert_width(print, tmp, 1);
 	i = ft_strlen(tmp);
 	//printf("\n* * * PR_HEX * * *\nstr: %s\nhash: %i upper: %i", tmp, print->hash, print->upper);
-	if (print->str)
-		print->str = strjoin_pro(print->str, tmp, 3);
+	if (print->str != NULL)
+		print->str = strjoin_pro(print->str, tmp, 1);
 		//print->str = p_strjoin(print->str, str, i);
-	else
-		print->str = tmp;
-		//print->str = p_strnew(str, i);
+	else if (print->str == NULL)
+		print->str = p_strnew(tmp, i);
+		//print->str = tmp;
+	ft_strdel(&tmp);
 	return (i);
 }
 

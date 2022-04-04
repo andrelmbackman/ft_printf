@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 15:49:35 by abackman          #+#    #+#             */
-/*   Updated: 2022/03/29 17:48:40 by abackman         ###   ########.fr       */
+/*   Updated: 2022/04/04 19:08:43 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	free_struct(t_print *print)
 {
-	if (!print)
+	if (print == NULL)
 		return ;
-	else
+	else if (print != NULL)
 	{
-		if (print->str)
+		if (print->str != NULL)
 		{
 			free(print->str);
 			print->str = NULL;

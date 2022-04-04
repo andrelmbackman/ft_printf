@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 13:10:23 by abackman          #+#    #+#             */
-/*   Updated: 2022/04/02 15:02:37 by abackman         ###   ########.fr       */
+/*   Updated: 2022/04/04 18:57:53 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ int	pr_num(t_print *print)
 	p = signed_length_mod(print);
 	tmp = ft_itoa_base(p, 10, print);
 	//printf("PR_NUM PRECISION: %i\n", print->precision);
-	if (print->precision != -1)
+	if (print->precision != -1 && (!print->check_neg || !print->p_save))
 		tmp = zeropad(tmp, print->precision, p);
-	//printf("PR NUM AFTER ZEROPAD: \"%s\"\nprint->zero: %i\nprint->prec: %i\nprint->width: %i\n", tmp, print->zero, print->precision, print->width);
+	//printf("PR NUM AFTER ZEROPAD: \"%s\"\nprint->zero: %i\nprint->prec: %i\nprint->width: %i\nprint->p_save: %i\n", tmp, print->zero, print->precision, print->width, print->p_save);
 	if (print->space && p >= 0 && !print->plus)
 		tmp = strjoin_pro(" ", tmp, 2);
 	if (print->plus && p >= 0)
@@ -34,11 +34,12 @@ int	pr_num(t_print *print)
 	i = ft_strlen(tmp);
 	//printf("\n* * * PR_HEX * * *\nstr: %s\nhash: %i upper: %i", tmp, print->hash, print->upper);
 	
-	if (print->str)
+	if (print->str != NULL)
 		print->str = strjoin_pro(print->str, tmp, 1);
 		//print->str = p_strjoin(print->str, str, i);
-	else
-		print->str = p_strnew(tmp, i);
+	else if (print->str == NULL)
+		print->str = ft_strdup(tmp);
+		//print->str = p_strnew(tmp, i);
 		//print->str = tmp;
 	ft_strdel(&tmp);
 	return (i);
@@ -59,12 +60,13 @@ int	pr_bin(t_print *print)
 	//printf("* * * TEMPTEMPTEMP * * *\"%s\"\n\n", tmp);
 	i = ft_strlen(tmp);
 	//printf("\n* * * PR_HEX * * *\nstr: %s\nhash: %i upper: %i", tmp, print->hash, print->upper);
-	if (print->str)
-		print->str = strjoin_pro(print->str, tmp, 3);
+	if (print->str != NULL)
+		print->str = strjoin_pro(print->str, tmp, 1);
 		//print->str = p_strjoin(print->str, str, i);
-	else
-		print->str = tmp;
-		//print->str = p_strnew(str, i);
+	else if (print->str == NULL)
+		print->str = p_strnew(tmp, i);
+		//print->str = tmp;
+	ft_strdel(&tmp);
 	return (i);
 }
 
@@ -72,7 +74,7 @@ int	pr_oct(t_print *print)
 {
 	char				*tmp;
 	int					i;
-	unsigned long long	p;
+	unsigned long long	p;	
 
 	i = 0;
 	p = unsigned_length_mod(print);
@@ -93,10 +95,10 @@ int	pr_oct(t_print *print)
 	//printf("* * * 2TEMPTEMPTEMP * * *\"%s\"\n\n", tmp);
 	i = ft_strlen(tmp);
 	//printf("\n* * * PR_OCT * * *\nstr: \"%s\"\nhash: %i upper: %i", tmp, print->hash, print->upper);
-	if (print->str)
+	if (print->str != NULL)
 		print->str = strjoin_pro(print->str, tmp, 1);
 		//print->str = p_strjoin(print->str, str, i);
-	else
+	else if (print->str == NULL)
 		print->str = p_strnew(tmp, i);
 		//print->str = tmp;
 	ft_strdel(&tmp);
@@ -118,10 +120,10 @@ int	pr_u(t_print *print)
 	//printf("* * * TEMPTEMPTEMP * * *\"%s\"\n\n", tmp);
 	i = ft_strlen(tmp);
 	//printf("\n* * * PR_HEX * * *\nstr: %s\nhash: %i upper: %i", tmp, print->hash, print->upper);
-	if (print->str)
-		print->str = strjoin_pro(print->str, tmp, 3);
+	if (print->str != NULL)
+		print->str = strjoin_pro(print->str, tmp, 1);
 		//print->str = p_strjoin(print->str, str, i);
-	else
+	else if (print->str == NULL)
 		print->str = p_strnew(tmp, i);
 		//print->str = tmp;
 	ft_strdel(&tmp);

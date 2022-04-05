@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 14:59:31 by abackman          #+#    #+#             */
-/*   Updated: 2022/04/04 20:42:53 by abackman         ###   ########.fr       */
+/*   Updated: 2022/04/05 17:30:06 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,21 +32,6 @@ int	pr_perc(t_print *print)
 	else
 		return (1);
 }
-
-/* static char	*nstrdup(char *tmp, int n)
-{
-	char	*new;
-	int		i;
-
-	i = 0;
-	new = (char *)malloc(n * sizeof(char));
-	while (i < n)
-	{
-		new[i] = tmp[i];
-		i++;
-	}
-	return (new);
-} */
 
 int	pr_char(t_print *print)
 {
@@ -90,8 +75,6 @@ int	pr_str(t_print *print)
 	int		i;
 
 	i = 0;
-	new = NULL;
-	tmp = NULL;
 	tmp = va_arg(print->ap, char *);
 	if (tmp == NULL || !ft_strcmp(tmp, "") || (print->precision == 0 &&\
 	!print->check_neg))
@@ -131,11 +114,6 @@ int	pr_ptr(t_print *print)
 	p = va_arg(print->ap, unsigned long);
 	tmp = ft_utoa_base(p, 16, print);
 	i = ft_strlen(tmp);
-	if (print->precision != -1)
-	{
-		while (i >= print->precision)
-			tmp[i--] = '\0';
-	}
 	tmp = strjoin_pro("0x", tmp, 2);
 	tmp = insert_width(print, tmp, 1);
 	i = ft_strlen(tmp);
@@ -179,11 +157,4 @@ int	pr_hex(t_print *print)
 		//print->str = tmp;
 	ft_strdel(&tmp);
 	return (i);
-}
-
-int	pr_float(t_print *print)
-{
-	if (print)
-		return (1);
-	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 14:55:36 by abackman          #+#    #+#             */
-/*   Updated: 2022/04/04 20:17:36 by abackman         ###   ########.fr       */
+/*   Updated: 2022/04/05 20:11:34 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <limits.h>
+#include <float.h>
 #include "./includes/ft_printf.h"
 # define RESET "\033[0m"
 # define RED "\033[0;31m"
@@ -344,14 +345,60 @@ int	main(void)
 	ft = ft_printf("%llX, %llX", 0llu, ULLONG_MAX);
 	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
 
-	pf = printf("[%-5c]", 0);
+	void	*s_hello = &free;
+	pf = printf("%p", s_hello);
 	printf("\n");
-	*/
-	ft = ft_printf("[%-5c]", 0);
+	ft = ft_printf("%p", s_hello);
 	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
+
+	pf = printf("%.*p", 5, s_hello);
+	printf("\n");
+	ft = ft_printf("%.*p", 5, s_hello);
+	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
+	*/
+
 	/*
+	pf = printf("%.0p, %.p", 0, 0);
+	printf("\n");
+	ft = printf("%.0p, %.p", 0, 0);
+	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
+
+	pf = printf("%.p, %.0p", 0, 0);
+	printf("\n");
+	ft = ft_printf("%.p, %.0p", 0, 0);
+	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
 
 	*/
+
+	long double	f1;
+	long double f2;
+
+	f1 = 0.05;
+	f2 = 1.35;
+
+	printf("\n* * * FLOATS * * *\n");
+	printf("0.05: %Lf\n1.35: %Lf\n", f1, f2);
+	printf("0.05 with 0 precision: %.0Lf\n1.35 with 0 precision: %.0Lf\n", f1, f2);
+	printf("0.05 with 1 precision: %.1Lf\n1.35 with 1 precision: %.1Lf\n", f1, f2);
+	printf("0.05 with 10 precision: %.10Lf\n1.35 with 0 precision: %.10Lf\n", f1, f2);
+
+	f1 = 1.0 / 3.0;
+	f2 = 0.5;
+	printf("\n1 / 3 with 0  precision: %.0Lf\n0.555 with 0  precision: %.0Lf\n", f1, f2);
+	printf("1 / 3 with 1  precision: %.1Lf\n0.555 with 1  precision: %.1Lf\n", f1, f2);
+	printf("1 / 3 with 10 precision: %.10Lf\n0.555 with 10 precision: %.10Lf\n", f1, f2);
+	
+	char *tmp;
+	double div1 = 1000;
+	asprintf(&tmp, "%f", DBL_MAX / div1);
+	int	tmplen = ft_strlen(tmp);
+	printf("DBL_MAX: %f\n\nDBL_STR: %s\n\nlen: %i\n", -DBL_MAX, tmp, tmplen);
+	free(tmp);
+	asprintf(&tmp, "%llu", ULLONG_MAX);
+	tmplen = ft_strlen(tmp);
+	printf("\nULLONG_MAX: %llu\n\nULLONG_STR: %s\n\nlen: %i\n\n", ULLONG_MAX, tmp, tmplen);
+	
+	printf("0 float: %.f\n-0 float: %.f\n", 0.0, -0.0);
 	//system("leaks a.out");
 	return (0);
 }

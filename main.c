@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 14:55:36 by abackman          #+#    #+#             */
-/*   Updated: 2022/04/05 20:11:34 by abackman         ###   ########.fr       */
+/*   Updated: 2022/04/06 16:57:39 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -295,6 +295,7 @@ int	main(void)
 	printf("\n");
 	ft = ft_printf("{%05.*d}", -15, 42);
 	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
+	
 	pf = printf("%.03s", NULL);
 	printf("\n");
 	ft = ft_printf("%.03s", NULL);
@@ -360,7 +361,7 @@ int	main(void)
 	/*
 	pf = printf("%.0p, %.p", 0, 0);
 	printf("\n");
-	ft = printf("%.0p, %.p", 0, 0);
+	ft = ft_printf("%.0p, %.p", 0, 0);
 	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
 
 	pf = printf("%.p, %.0p", 0, 0);
@@ -368,7 +369,6 @@ int	main(void)
 	ft = ft_printf("%.p, %.0p", 0, 0);
 	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
 
-	*/
 
 	long double	f1;
 	long double f2;
@@ -399,6 +399,12 @@ int	main(void)
 	printf("\nULLONG_MAX: %llu\n\nULLONG_STR: %s\n\nlen: %i\n\n", ULLONG_MAX, tmp, tmplen);
 	
 	printf("0 float: %.f\n-0 float: %.f\n", 0.0, -0.0);
+	*/
+
+	pf = printf("%.4f", 5.025);
+	printf("\n");
+	ft = ft_printf("%.4f", 5.025);
+	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
 	//system("leaks a.out");
 	return (0);
 }

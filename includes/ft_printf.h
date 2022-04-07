@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 16:07:36 by abackman          #+#    #+#             */
-/*   Updated: 2022/04/06 15:04:12 by abackman         ###   ########.fr       */
+/*   Updated: 2022/04/07 19:31:12 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,9 @@ char	*ft_itoa_base(long long num, int base, t_print *print);
 char	*ft_utoa_base(unsigned long long num, int base, t_print *print);
 char	*insert_width(t_print *p, char *tmp, int free);
 char	*insert_space_only(t_print *p, char *str);
+double	init_dot(long double num, long long whole, int prec);
 long long signed_length_mod(t_print *p);
 unsigned long long	unsigned_length_mod(t_print *p);
+long double	float_length_mod(t_print *p);
 
 #endif

@@ -16,7 +16,8 @@ SRCS = ./src/conversion.c\
 	./src/strings.c\
 	./src/ultoa_base.c\
 	./src/utilities.c\
-	./src/utilities2.c
+	./src/utilities2.c\
+	./src/float.c
 
 OBJS = $(SRCS:.c=.o)
 

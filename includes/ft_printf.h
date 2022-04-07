@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 16:07:36 by abackman          #+#    #+#             */
-/*   Updated: 2022/04/02 13:14:29 by abackman         ###   ########.fr       */
+/*   Updated: 2022/04/06 15:04:12 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,10 @@ typedef struct s_print
 	int		fd;
 	int		i;
 	int		ret;
-	int		len;
+	//int		len;
 	int		check_neg;
-	int		save;
+	int		w_save;
+	int		p_save;
 	int		width;
 	int		precision;
 	int		hash;
@@ -62,7 +63,6 @@ typedef struct s_print
 	int		L;
 	int		z;
 	char	conv;
-	char	length;
 	char	*str;
 }	t_print;
 
@@ -139,12 +139,12 @@ int		ft_isdigit(int c);
 int		ft_isalnum(int c);
 int		ft_isalpha(int c);
 int		ft_isprint(int c);
+int		ll_len(long long n);
 int		get_field(const char *format, t_print *print);
 char	*ft_strcpy(char *dst, const char *src);
 char	*zerostr(void);
 char	*zeropad(char *str, int total, long long num);
 char	*strnull(t_print *p, char *str);
-char	*ft_strncpy(char *dst, const char *src, size_t len);
 char	*p_strnew(const char *format, int i);
 char	*p_strjoin(char *str, const char *format, int i);
 char	*strjoin_pro(char *str1, char *str2, int n);

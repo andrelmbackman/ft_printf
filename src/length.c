@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 13:28:13 by abackman          #+#    #+#             */
-/*   Updated: 2022/04/06 11:57:01 by abackman         ###   ########.fr       */
+/*   Updated: 2022/04/07 17:39:39 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,16 @@ unsigned long long	unsigned_length_mod(t_print *p)
 	else
 		i = (unsigned int)va_arg(p->ap, unsigned int);
 	return (i);
+}
+
+long double	float_length_mod(t_print *p)
+{
+	long double	num;
+
+	num = 0;
+	if (p->L)
+		num = (long double)va_arg(p->ap, long double);
+	else
+		num = (double)va_arg(p->ap, double);
+	return (num);
 }

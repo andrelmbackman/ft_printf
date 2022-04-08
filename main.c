@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 14:55:36 by abackman          #+#    #+#             */
-/*   Updated: 2022/04/07 20:12:50 by abackman         ###   ########.fr       */
+/*   Updated: 2022/04/08 15:24:09 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -399,8 +399,8 @@ int	main(void)
 	printf("\nULLONG_MAX: %llu\n\nULLONG_STR: %s\n\nlen: %i\n\n", ULLONG_MAX, tmp, tmplen);
 	
 	printf("0 float: %.f\n-0 float: %.f\n", 0.0, -0.0);
-	*/
 
+	
 	pf = printf("%0 10fX", 5.015);
 	printf("\n");
 	ft = ft_printf("%0 10fX", 5.015);
@@ -410,8 +410,33 @@ int	main(void)
 	printf("\n");
 	ft = ft_printf("%#.15f", -0.00005000);
 	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
+
+	float f1 = 1.0;
 	
+	pf = printf("%#.f %#.0f %#.15Lf", f1, f1, f1);
+	printf("\n");
+	ft = ft_printf("%#.f %#.0f %#.15Lf", f1, f1, f1);
+	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
+
+	f1 = -0.0;
+	
+	pf = printf("%#.f %#.0f %#.15Lf", f1, f1, f1);
+	printf("\n");
+	ft = ft_printf("%#.f %#.0f %#.15Lf", f1, f1, f1);
+	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
+
+	pf = printf("%10.f", f1);
+	printf("\n");
+	ft = ft_printf("%10.f", f1);
+	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
+	*/
+
+	pf = printf("%0#10.1f", -0.0);
+	printf("\n");
+	ft = ft_printf("%0#10.1f", -0.0);
+	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
 	/*
+
 	pf = printf("{%f}{%lf}{%Lf}", 1.42, 1.42, 1.42l);
 	printf("\n");
 	ft = ft_printf("{%f}{%lf}{%Lf}", 1.42, 1.42, 1.42l);

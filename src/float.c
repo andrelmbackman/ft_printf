@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 17:30:30 by abackman          #+#    #+#             */
-/*   Updated: 2022/04/07 20:13:30 by abackman         ###   ########.fr       */
+/*   Updated: 2022/04/08 15:19:53 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,12 @@ static long double	ftoa_rounding(int precision, long double num)
 	return (bank);
 }
 
-static char	*decimal_str(int prec, long long tmp, char *buf)
+static char	*decimal_str(t_print *p, int prec, long long tmp, char *buf)
 {
 	int	i;
 
 	i = 0;
+	//printf("\nDECIMAL_STR\nprec: %i\ntmp: %lli\n", prec, tmp);
 	if (tmp < 0)
 		tmp *= -1;
 	while (tmp > 0)
@@ -44,17 +45,16 @@ static char	*decimal_str(int prec, long long tmp, char *buf)
 		tmp /= 10;
 	}
 	while (i < prec)
-	{
 		buf[i++] = '0';
-	}
+	if (!p->width)
+		buf[i++] = '.';
 	if (prec > 0)
 	{
-		buf[i++] = '.';
 		buf[i] = '\0';
 		str_reverse(buf);
 	}
 	else
-		buf[0] = '\0';
+		buf[i - 2] = '\0';
 	return (buf);
 }
 
@@ -66,6 +66,7 @@ long long whole)
 	double				dot;
 	int					prec;
 
+	dot = 0.0;
 	if (p->precision == -1)
 		prec = 6;
 	else
@@ -76,7 +77,7 @@ long long whole)
 	buf = (char *)malloc(prec + 2 * sizeof(char));
 	if (!buf)
 		return (NULL);
-	buf = decimal_str(prec, tmp, buf);
+	buf = decimal_str(p, prec, tmp, buf);
 	buf = strjoin_pro(nbr, buf, 3);
 	return (buf);
 }

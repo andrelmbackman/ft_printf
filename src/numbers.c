@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 11:15:34 by abackman          #+#    #+#             */
-/*   Updated: 2022/04/07 19:40:33 by abackman         ###   ########.fr       */
+/*   Updated: 2022/04/08 14:56:13 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,17 @@ int	ft_isdigit(int c)
 
 double	init_dot(long double num, long long whole, int prec)
 {
-	double		power10[10];
+	//double		power10[10];
+	double		power;
 	double		dot;
 
+	power = 1;
+	dot = 0;
+	while (dot++ < prec)
+		power *= 10;
+	
+	/* if (prec > 9)
+		prec = 9;
 	power10[0] = 1;
 	power10[1] = 10;
 	power10[2] = 100;
@@ -35,6 +43,8 @@ double	init_dot(long double num, long long whole, int prec)
 	power10[7] = 10000000;
 	power10[8] = 100000000;
 	power10[9] = 1000000000;
-	dot = (num - whole) * power10[prec];
+ */	//dot = (num - whole) * power10[prec];
+	dot = (num - whole) * power;
+	//printf("\n* * INIT DOT * *\nnum: %Lf\nwhole: %lli\nprec: %i\ndot: %f\n", num, whole, prec, dot);
 	return (dot);
 }

@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 11:11:25 by abackman          #+#    #+#             */
-/*   Updated: 2022/04/04 20:23:41 by abackman         ###   ########.fr       */
+/*   Updated: 2022/04/19 14:10:28 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ void	init_struct(t_print *print)
 	print->precision = -1;
 	print->hash = 0;
 	print->zero = 0;
+	print->fl_zero = 0;
 	print->space = 0;
 	print->upper = 0;
 	print->plus = 0;

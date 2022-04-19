@@ -6,11 +6,23 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:30:20 by abackman          #+#    #+#             */
-/*   Updated: 2022/04/04 20:45:03 by abackman         ###   ########.fr       */
+/*   Updated: 2022/04/19 13:37:55 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
+
+static void	print_conversion(t_print *p, int bytes)
+{
+	int	ret;
+
+	ret = 0;
+	if (p->conv == 'c')
+		p->ret += write(p->fd, p->str, bytes);
+	else
+		p->ret += write(p->fd, p->str, (size_t)ft_strlen(p->str));
+	ft_strdel(&p->str);
+}
 
 int	convert_yes(t_print *print, const char *format)
 {
@@ -32,11 +44,13 @@ int	convert_yes(t_print *print, const char *format)
 		print->conv = format[print->i];
 		ret += dispatch[x](print);
 		//printf("* * * CONVERT_YES * * *\nSPECIFY[x] = %c i: %i\np->i: %i\nstr: \"%s\"\nret: %i\n", SPECIFY[x], x, print->i, print->str, ret);
-		if (print->str != NULL)
+		/* if (print->str != NULL)
 		{
 			print->ret += write(print->fd, print->str, ret);
 			ft_strdel(&print->str);
-		}
+		} */
+		if (print->str != NULL)
+			print_conversion(print, ret);
 	}
 	else
 		print->i--;

@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 14:55:36 by abackman          #+#    #+#             */
-/*   Updated: 2022/04/08 15:24:09 by abackman         ###   ########.fr       */
+/*   Updated: 2022/04/19 20:25:14 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -400,11 +400,19 @@ int	main(void)
 	
 	printf("0 float: %.f\n-0 float: %.f\n", 0.0, -0.0);
 
+	*/
 	
-	pf = printf("%0 10fX", 5.015);
+	pf = printf("%0 10f", 5.015);
 	printf("\n");
-	ft = ft_printf("%0 10fX", 5.015);
+	ft = ft_printf("%0 10f", 5.015);
 	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
+
+	pf = printf("%0 10f", 3.141593);
+	printf("\n");
+	ft = ft_printf("%0 10f", 3.141593);
+	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
+	
+	/*
 
 	pf = printf("%#.15f", -0.00005000);
 	printf("\n");
@@ -429,13 +437,106 @@ int	main(void)
 	printf("\n");
 	ft = ft_printf("%10.f", f1);
 	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
-	*/
 
 	pf = printf("%0#10.1f", -0.0);
 	printf("\n");
 	ft = ft_printf("%0#10.1f", -0.0);
 	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
-	/*
+
+
+	pf = printf("%+ 10.2f", 10.355);
+	printf("\n");
+	ft = ft_printf("%+ 10.2f", 10.355);
+	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
+
+	pf = printf("%10.1f", 10.55);
+	printf("\n");
+	ft = ft_printf("%10.1f", 10.55);
+	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
+	
+	pf = printf("%010.1f", -0.0);
+	printf("\n");
+	ft = ft_printf("%010.1f", -0.0);
+	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
+	
+	pf = printf("%f\n", 9.9999997);
+	printf("\n");
+	ft = ft_printf("%f\n", 9.9999997);
+	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
+	
+	pf = printf("%f\n", 9.999999);
+	printf("\n");
+	ft = ft_printf("%f\n", 9.999999);
+	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
+
+
+
+	pf = printf("%0 f", 0.011719);
+	printf("\n");
+	ft = ft_printf("%0 f", 0.011719);
+	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
+
+	pf = printf("%+0f", 0.011719);
+	printf("\n");
+	ft = ft_printf("%+0f", 0.011719);
+	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
+	
+	pf = printf("%010f", 0.011719);
+	printf("\n");
+	ft = ft_printf("%010f", 0.011719);
+	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
+
+	pf = printf("%#010f", 0.011719);
+	printf("\n");
+	ft = ft_printf("%#010f", 0.011719);
+	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
+	
+	
+	pf = printf("%0#10.1f", -0.050000);
+	printf("\n");
+	ft = ft_printf("%0#10.1f",-0.050000);
+	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
+	
+	pf = printf("%0#10.2f", 0.005000);
+	printf("\n");
+	ft = ft_printf("%0#10.2f", 0.005000);
+	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
+	
+	pf = printf("{%0#10.1f}", 0.250000);
+	printf("\n");
+	ft = ft_printf("{%0#10.1f}", 0.250000);
+	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
+
+	pf = printf("%#.f %#.0f %#.15f\n", -3.500000, -3.500000, -3.500000);
+	printf("\n");
+	ft = ft_printf("%#.f %#.0f %#.15f\n", -3.500000, -3.500000, -3.500000);
+	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
+
+	pf = printf("{%0#10.1f}", 0.150000);
+	printf("\n");
+	ft = ft_printf("{%0#10.1f}", 0.150000);
+	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
+
+	pf = printf("{%.1f}", 0.150000);
+	printf("\n");
+	ft = ft_printf("{%.1f}", 0.150000);
+	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
+
+	pf = printf("{%.0f}", -0.500000);
+	printf("\n");
+	ft = ft_printf("{%.0f}", -0.500000);
+	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
+
+	printf("\n* * * DOT CHECK * * *\n");
+	printf("just zero: {%f}\n", 0.0);
+	printf("zero point zero: {%f}\n", 0.0);
+	printf("zero with zero flag: {%0f}\n", 0.0);
+	printf("zero with minus flag: {%-f}\n", 0.0);
+	printf("zero with plus flag: {%+f}\n", 0.0);
+	printf("zero with . precision: {% .f}\n", 0.0);
+	printf("zero with zero precision: {% .0f}\n", 0.0);
+
+	
 
 	pf = printf("{%f}{%lf}{%Lf}", 1.42, 1.42, 1.42l);
 	printf("\n");

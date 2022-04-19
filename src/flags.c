@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:36:53 by abackman          #+#    #+#             */
-/*   Updated: 2022/04/04 17:20:52 by abackman         ###   ########.fr       */
+/*   Updated: 2022/04/19 14:10:54 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ static int	width_helper(const char *format, t_print *p)
 	while (ft_strchr("0+- #*", format[p->i]))
 	{
 		if (format[p->i] == '0')
+		{
 			p->zero = 1;
+			p->fl_zero = 1;
+		}
 		else if (format[p->i] == '+')
 			p->plus = 1;
 		else if (format[p->i] == '-')

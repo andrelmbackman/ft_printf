@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 17:30:30 by abackman          #+#    #+#             */
-/*   Updated: 2022/04/08 15:19:53 by abackman         ###   ########.fr       */
+/*   Updated: 2022/04/19 20:23:35 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,39 @@
 
 static long double	ftoa_rounding(int precision, long double num)
 {
-	long double	bank;
-	long double	tmp;
-	int			i;
+	long double			bank;
+	long double			round_check;
+	unsigned long long	new_prec;
+	unsigned long long	i;
 
 	bank = 0.5;
-	tmp = 10.0;
+	round_check = 0.0;
 	i = 0;
-	if (num < 0)
-		bank *= -1;
-	while (i < precision)
+	if (precision == 0 && num < 1.0)
+		return (0.0);
+	else if (precision == -1)
+		new_prec = 6;
+	else
+		new_prec = (unsigned long long)precision;
+	while (i++ < new_prec)
+		bank /= 10.0;
+	new_prec = 1;
+	while (precision++ <= (int)i)
+		new_prec *= 10;
+	round_check = (long double) (bank + num) * new_prec;
+	new_prec = (unsigned long long) round_check;
+	i = new_prec;
+	while (i % 10 == 0 && i > 10)
+		i /= 10;
+	//printf("\nROUNDING\nround_check: %Lf\nnew_prec: %llu\nnew_perc / 10: %llu\nprecision: %i\n\n",\
+	//	round_check, new_prec, i, precision);
+	if (i > 1 && (new_prec % 2 != 0 || i % 2 != 0))
+		return (0.0);
+	else
 	{
-		bank /= tmp;
-		i++;
+		//printf("\n* * * RETURNING BANK * * *\n\n");
+		return (bank);
 	}
-	return (bank);
 }
 
 static char	*decimal_str(t_print *p, int prec, long long tmp, char *buf)
@@ -46,7 +64,8 @@ static char	*decimal_str(t_print *p, int prec, long long tmp, char *buf)
 	}
 	while (i < prec)
 		buf[i++] = '0';
-	if (!p->width)
+	//printf("\nDECIMAL STR\np->hash: %i\np->precision: %i\n\n", p->hash, p->precision);
+	if (p->precision != 0 || p->hash)
 		buf[i++] = '.';
 	if (prec > 0)
 	{
@@ -70,8 +89,7 @@ long long whole)
 	if (p->precision == -1)
 		prec = 6;
 	else
-		prec = p->precision;
-	num += ftoa_rounding(prec, num);
+		prec = p->precision;	
 	dot = init_dot(num, whole, prec);
 	tmp = (long long)dot;
 	buf = (char *)malloc(prec + 2 * sizeof(char));
@@ -81,20 +99,7 @@ long long whole)
 	buf = strjoin_pro(nbr, buf, 3);
 	return (buf);
 }
-/* 
-static char	*ftoa(t_print *p, long double num)
-{
-	char				*nbr;
-	char				*dot;
-	char				*ret;
-	long long			whole;
 
-	whole = (long long)num;
-	nbr = ft_itoa_base(whole, 10, p);
-	dot = after_decimal(p, num, whole);
-	ret = strjoin_pro(nbr, dot, 2);
-	return (ret);
-} */
 static char	*float_signs(t_print *p, char *old, long double num)
 {
 	int		len;
@@ -119,24 +124,27 @@ int	pr_float(t_print *p)
 	char			*nbr_str;
 	long double		num;
 	unsigned long	whole;
-	int				tmp;
+	int				ret;
 	long double		save;
 
-	tmp = 0;
+	ret = 0;
 	num = float_length_mod(p);
 	save = num;
 	if (num < 0 || 1 / num < 0)
 		num *= -1;
+	if (p->precision != 0 || num != 0.0)
+		num += ftoa_rounding(p->precision, num);
 	whole = (unsigned long)num;
 	nbr_str = ft_utoa_base(whole, 10, p);
 	nbr_str = after_decimal(p, nbr_str, num, whole);
 	nbr_str = float_signs(p, nbr_str, save);
-	nbr_str = insert_width(p, nbr_str, 1);
-	tmp = ft_strlen((const char *)nbr_str);
+	//nbr_str = insert_width(p, nbr_str, 1);
+	nbr_str = fl_width(p, nbr_str);
+	ret = ft_strlen((const char *)nbr_str);
 	if (p->str != NULL)
 		p->str = strjoin_pro(p->str, nbr_str, 1);
 	else if (p->str == NULL)
-		p->str = p_strnew((const char *)nbr_str, tmp);
+		p->str = p_strnew((const char *)nbr_str, ret);
 	ft_strdel(&nbr_str);
-	return (tmp);
+	return (ret);
 }

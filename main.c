@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 14:55:36 by abackman          #+#    #+#             */
-/*   Updated: 2022/04/19 20:25:14 by abackman         ###   ########.fr       */
+/*   Updated: 2022/04/20 17:03:38 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -400,7 +400,9 @@ int	main(void)
 	
 	printf("0 float: %.f\n-0 float: %.f\n", 0.0, -0.0);
 
-	*/
+
+
+*/
 	
 	pf = printf("%0 10f", 5.015);
 	printf("\n");
@@ -412,7 +414,8 @@ int	main(void)
 	ft = ft_printf("%0 10f", 3.141593);
 	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
 	
-	/*
+/*
+
 
 	pf = printf("%#.15f", -0.00005000);
 	printf("\n");
@@ -438,6 +441,7 @@ int	main(void)
 	ft = ft_printf("%10.f", f1);
 	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
 
+*/
 	pf = printf("%0#10.1f", -0.0);
 	printf("\n");
 	ft = ft_printf("%0#10.1f", -0.0);
@@ -449,6 +453,8 @@ int	main(void)
 	ft = ft_printf("%+ 10.2f", 10.355);
 	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
 
+
+
 	pf = printf("%10.1f", 10.55);
 	printf("\n");
 	ft = ft_printf("%10.1f", 10.55);
@@ -459,14 +465,14 @@ int	main(void)
 	ft = ft_printf("%010.1f", -0.0);
 	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
 	
-	pf = printf("%f\n", 9.9999997);
+	pf = printf("%f", 9.9999997);
 	printf("\n");
-	ft = ft_printf("%f\n", 9.9999997);
+	ft = ft_printf("%f", 9.9999997);
 	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
 	
-	pf = printf("%f\n", 9.999999);
+	pf = printf("%f", 9.999999);
 	printf("\n");
-	ft = ft_printf("%f\n", 9.999999);
+	ft = ft_printf("%f", 9.999999);
 	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
 
 
@@ -512,6 +518,8 @@ int	main(void)
 	ft = ft_printf("%#.f %#.0f %#.15f\n", -3.500000, -3.500000, -3.500000);
 	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
 
+
+
 	pf = printf("{%0#10.1f}", 0.150000);
 	printf("\n");
 	ft = ft_printf("{%0#10.1f}", 0.150000);
@@ -522,11 +530,18 @@ int	main(void)
 	ft = ft_printf("{%.1f}", 0.150000);
 	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
 
+
 	pf = printf("{%.0f}", -0.500000);
 	printf("\n");
 	ft = ft_printf("{%.0f}", -0.500000);
 	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
 
+	pf = printf("{%.1f}", 0.250000);
+	printf("\n");
+	ft = ft_printf("{%.1f}", 0.250000);
+	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
+	
+/*
 	printf("\n* * * DOT CHECK * * *\n");
 	printf("just zero: {%f}\n", 0.0);
 	printf("zero point zero: {%f}\n", 0.0);

@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 17:30:30 by abackman          #+#    #+#             */
-/*   Updated: 2022/04/20 17:46:13 by abackman         ###   ########.fr       */
+/*   Updated: 2022/04/21 16:04:48 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,10 @@ long long whole)
 	if (p->precision == -1)
 		prec = 6;
 	else
-		prec = p->precision;	
+		prec = p->precision;
 	dot = init_dot(num, whole, prec);
 	tmp = (long long)dot;
+	//printf("\n* * * AFTER DECIMAL * * *\ndot: %f\n(long long)dot %lli\n", dot, tmp);
 	buf = (char *)malloc(prec + 2 * sizeof(char));
 	if (!buf)
 		return (NULL);
@@ -93,11 +94,12 @@ int	pr_float(t_print *p)
 	ret = 0;
 	num = float_length_mod(p);
 	save = num;
-	if (num < 0 || 1 / num < 0)
+	if (num < 0.000000 || 1 / num < 0)
 		num *= -1;
 	if (p->precision != 0 || num > 0.999999)
-		num += ftoa_rounding(p->precision, num);
+		num = ftoa_rounding(p->precision, num);
 	whole = (unsigned long)num;
+	//printf("\n* * * 6 * * *\n whole: %lu\nnum: %Lf\n", whole, save);
 	nbr_str = ft_utoa_base(whole, 10, p);
 	nbr_str = after_decimal(p, nbr_str, num, whole);
 	nbr_str = float_signs(p, nbr_str, save);

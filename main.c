@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 14:55:36 by abackman          #+#    #+#             */
-/*   Updated: 2022/04/20 17:03:38 by abackman         ###   ########.fr       */
+/*   Updated: 2022/04/21 20:58:53 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -402,9 +402,9 @@ int	main(void)
 
 
 
-*/
 	
-	pf = printf("%0 10f", 5.015);
+*/
+	/* pf = printf("%0 10f", 5.015);
 	printf("\n");
 	ft = ft_printf("%0 10f", 5.015);
 	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
@@ -414,7 +414,7 @@ int	main(void)
 	ft = ft_printf("%0 10f", 3.141593);
 	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
 	
-/*
+
 
 
 	pf = printf("%#.15f", -0.00005000);
@@ -441,7 +441,7 @@ int	main(void)
 	ft = ft_printf("%10.f", f1);
 	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
 
-*/
+
 	pf = printf("%0#10.1f", -0.0);
 	printf("\n");
 	ft = ft_printf("%0#10.1f", -0.0);
@@ -539,6 +539,51 @@ int	main(void)
 	pf = printf("{%.1f}", 0.250000);
 	printf("\n");
 	ft = ft_printf("{%.1f}", 0.250000);
+	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
+
+	
+	pf = printf("{%.0f}", -3.5);
+	printf("\n");
+	ft = ft_printf("{%.0f}", -3.5);
+	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
+
+	pf = printf("{%.1f}", 0.25);
+	printf("\n");
+	ft = ft_printf("{%.1f}", 0.25);
+	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft); */
+
+	/* int my_return;
+	int	real_return;
+	printf("\n\n * * * * * Hash flag with argument value zero:  * * * * *\n\n");
+
+	printf("\nInput: %.o %.0o\n\n", 0, 0);
+	my_return = ft_printf("My ft_printf: %.o %.0o $\n", 0, 0);
+	real_return = printf("Real  printf: %.o %.0o $\n", 0, 0);
+	if(my_return != real_return)
+		printf("My ft_printf return is %d, but it should be %d.\n", my_return, real_return);
+
+	printf("\nInput: %5.o %5.0o\n\n", 0, 0);
+	my_return = ft_printf("My ft_printf: %5.o %5.0o $\n", 0, 0);
+	real_return = printf("Real  printf: %5.o %5.0o $\n", 0, 0);
+	if(my_return != real_return)
+		printf("My ft_printf return is %d, but it should be %d.\n", my_return, real_return);
+
+	printf("\nInput: %#.o %#.0o\n\n", 0, 0);
+	my_return = ft_printf("My ft_printf: %#.o %#.0o $\n", 0, 0);
+	real_return = printf("Real  printf: %#.o %#.0o $\n", 0, 0);
+	if(my_return != real_return)
+		printf("My ft_printf return is %d, but it should be %d.\n", my_return, real_return);
+
+	printf("\nInput: %#-8.o %#.0o\n\n", 0, 0);
+	my_return = ft_printf("My ft_printf: %#-8.o %#.0o $\n", 0, 0);
+	real_return = printf("Real  printf: %#-8.o %#.0o $\n", 0, 0);
+	if(my_return != real_return)
+		printf("My ft_printf return is %d, but it should be %d.\n", my_return, real_return);
+ */
+
+	pf = printf("{%#.0o}", 42);
+	printf("\n");
+	ft = ft_printf("{%#.0o}", 42);
 	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
 	
 /*

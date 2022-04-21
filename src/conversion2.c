@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 13:10:23 by abackman          #+#    #+#             */
-/*   Updated: 2022/04/04 18:57:53 by abackman         ###   ########.fr       */
+/*   Updated: 2022/04/21 21:14:40 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,22 +74,29 @@ int	pr_oct(t_print *print)
 {
 	char				*tmp;
 	int					i;
-	unsigned long long	p;	
+	int					new_prec;
+	unsigned long long	p;
 
 	i = 0;
 	p = unsigned_length_mod(print);
 	tmp = ft_utoa_base(p, 8, print);
-	if (print->precision != -1)
-		tmp = zeropad(tmp, print->precision, p);
-	//printf("\n* * * PR_OCT * * *\np: %llu\ntmp: %s\n", p, tmp);
-	//if ((print->hash && p) || (print->hash && print->precision != -1))
-	if (print->hash && (( p && print->precision == -1) ||\
-	(print->precision == 0)))
+	new_prec = print->precision;
+	if (print->hash && p && new_prec != 0)
 	{
-		tmp = strjoin_pro("0", tmp, 2);
-		if (print->upper)
-			tmp[1] -= 32;
+		if (new_prec == -1)
+			new_prec = ft_strlen(tmp) + 1;
+		else
+			new_prec++;
 	}
+	if (new_prec != -1)
+		tmp = zeropad(tmp, new_prec, p);
+	//printf("\n* * * PR_OCT * * *\np: %llu\ntmp: %s\n", p, tmp);
+	//if (print->hash && ((p && print->precision == -1) ||\
+	//(print->precision == 0)))
+	/* if ((print->hash && p && print->precision == -1) || (print->hash && !p))
+	*/
+	if ((!p && !print->precision && print->hash))
+		tmp = strjoin_pro("0", tmp, 2);
 	//printf("* * * 1TEMPTEMPTEMP * * *\"%s\"\n\n", tmp);
 	tmp = insert_width(print, tmp, 1);
 	//printf("* * * 2TEMPTEMPTEMP * * *\"%s\"\n\n", tmp);

@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 14:55:36 by abackman          #+#    #+#             */
-/*   Updated: 2022/04/21 20:58:53 by abackman         ###   ########.fr       */
+/*   Updated: 2022/04/22 16:28:52 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -581,10 +581,43 @@ int	main(void)
 		printf("My ft_printf return is %d, but it should be %d.\n", my_return, real_return);
  */
 
-	pf = printf("{%#.0o}", 42);
+	/* pf = printf("{%#2.8o}", 42);
 	printf("\n");
-	ft = ft_printf("{%#.0o}", 42);
+	ft = ft_printf("{%#2.8o}", 42);
 	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
+	
+	pf = printf("{%#2.5o}", 0);
+	printf("\n");
+	ft = ft_printf("{%#2.5o}", 0);
+	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
+
+	pf = printf("zero only hash {%#o}", 0);
+	printf("\n");
+	ft = ft_printf("zero only hash {%#o}", 0);
+	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
+
+	pf = printf("{%#.o}", 0);
+	printf("\n");
+	ft = ft_printf("{%#.o}", 0);
+	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
+	*/
+
+	/* pf = printf("{%lli}", -0);
+	printf("\n");
+	ft = ft_printf("{%lli}", -0);
+	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft); */
+
+	/* unsigned long	bin;
+
+	bin = 0;
+	while (bin <= 10)
+	{
+		ft_printf("binary %-3lu: {%lb}\n", bin, bin);
+		bin++;
+	}
+	bin = ULONG_MAX;
+	//printf("PRINTF ULONG MAX: %lu\n", bin);
+	ft_printf("binary %-3lu: {%lb}\n", bin, bin); */
 	
 /*
 	printf("\n* * * DOT CHECK * * *\n");
@@ -618,6 +651,29 @@ int	main(void)
 	ft = ft_printf("{%f}{%lf}{%Lf}", -1444565444646.6465424242242454654, -1444565444646.6465424242242454654, -1444565444646.6465424242242454654l);
 	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
 	*/
+
+	
+	/* static char	a01;
+	static unsigned char a02;
+	static short a03;
+	static unsigned short a04;
+	static int a05;
+	static unsigned int a06;
+	static long a07;
+	static unsigned long a08;
+	static long long a09;
+	static unsigned long long a10;
+	static char *a11;
+	static void *a12;
+	
+
+	pf = printf("%-32p%-32p%-32p%-32p%-32p%-32p%-32p%-32p%-32p%-32p%-32p%-32p",&a01,&a02,&a03,&a04,&a05,&a06,&a07,&a08,&a09,&a10,&a11,&a12);
+	printf("\n");
+	ft = ft_printf("%-32p%-32p%-32p%-32p%-32p%-32p%-32p%-32p%-32p%-32p%-32p%-32p",&a01,&a02,&a03,&a04,&a05,&a06,&a07,&a08,&a09,&a10,&a11,&a12);
+	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft); */
+
+	
 	//system("leaks a.out");
+	
 	return (0);
 }

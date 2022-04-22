@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:30:20 by abackman          #+#    #+#             */
-/*   Updated: 2022/04/19 13:37:55 by abackman         ###   ########.fr       */
+/*   Updated: 2022/04/22 17:31:01 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,10 @@ int	convert_yes(t_print *print, const char *format)
 		x++;
 	if (format[print->i] == SPECIFY[x])
 	{
-		//ft_strdel(&print->str);
 		print->conv = format[print->i];
-		ret += dispatch[x](print);
-		//printf("* * * CONVERT_YES * * *\nSPECIFY[x] = %c i: %i\np->i: %i\nstr: \"%s\"\nret: %i\n", SPECIFY[x], x, print->i, print->str, ret);
-		/* if (print->str != NULL)
-		{
-			print->ret += write(print->fd, print->str, ret);
+		if (print->conv == 'c' && print->str != NULL)
 			ft_strdel(&print->str);
-		} */
+		ret += g_dispatch[x](print);
 		if (print->str != NULL)
 			print_conversion(print, ret);
 	}

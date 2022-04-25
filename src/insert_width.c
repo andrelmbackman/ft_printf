@@ -6,11 +6,15 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 15:06:15 by abackman          #+#    #+#             */
-/*   Updated: 2022/04/22 17:40:09 by abackman         ###   ########.fr       */
+/*   Updated: 2022/04/25 15:16:56 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
+
+/*
+** Pads the converted string to it's right.
+*/
 
 static char	*pad_right(t_print *p, char *new, char *tmp, int start)
 {
@@ -30,6 +34,10 @@ static char	*pad_right(t_print *p, char *new, char *tmp, int start)
 	return (new);
 }
 
+/*
+** Swaps the first space character found for the first character in a string.
+*/
+
 static char	*swap_space(char *new)
 {
 	int		i;
@@ -47,6 +55,10 @@ static char	*swap_space(char *new)
 	}
 	return (new);
 }
+
+/*
+** Pads the converted string to it's left.
+*/
 
 static char	*pad_left(t_print *p, char *new, char *tmp, int start)
 {
@@ -75,6 +87,10 @@ static char	*pad_left(t_print *p, char *new, char *tmp, int start)
 	return (new);
 }
 
+/*
+** Finds the starting point of the padding.
+*/
+
 static int	width_start(t_print *p, char *tmp)
 {
 	int	i;
@@ -95,6 +111,10 @@ static int	width_start(t_print *p, char *tmp)
 	}
 	return (i);
 }
+
+/*
+** Inserts the necessary padding if width is specified for a conversion.
+*/
 
 char	*insert_width(t_print *p, char *tmp, int free)
 {

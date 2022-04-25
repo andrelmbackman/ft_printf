@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:30:20 by abackman          #+#    #+#             */
-/*   Updated: 2022/04/25 12:34:40 by abackman         ###   ########.fr       */
+/*   Updated: 2022/04/25 15:44:42 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,12 @@ static void	print_conversion(t_print *p, int bytes)
 		p->ret += write(p->fd, p->str, (size_t)ft_strlen(p->str));
 	ft_strdel(&p->str);
 }
+
+/*
+** Called when a valid flag or conversion specifier is found. Parses through
+** the format string, stores information about flags and specifiers in the
+** t_print struct and then performs the conversion, if given a valid specifier.
+*/
 
 int	convert_yes(t_print *print, const char *format)
 {
@@ -51,6 +57,11 @@ int	convert_yes(t_print *print, const char *format)
 		print->i--;
 	return (1);
 }
+
+/*
+** Parses through the format string until the next conversion or the null
+** terminator, then writes what was found.
+*/
 
 int	convert_no(t_print *print, const char *format)
 {

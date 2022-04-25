@@ -6,11 +6,15 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 13:10:23 by abackman          #+#    #+#             */
-/*   Updated: 2022/04/22 17:36:39 by abackman         ###   ########.fr       */
+/*   Updated: 2022/04/25 16:35:48 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
+
+/*
+** Conversion for signed integers.
+*/
 
 int	pr_num(t_print *print)
 {
@@ -37,6 +41,10 @@ int	pr_num(t_print *print)
 	return (i);
 }
 
+/*
+** Conversion of an unsigned int to binary string.
+*/
+
 int	pr_bin(t_print *print)
 {
 	char				*tmp;
@@ -57,6 +65,10 @@ int	pr_bin(t_print *print)
 	ft_strdel(&tmp);
 	return (i);
 }
+
+/*
+** Octal conversion.
+*/
 
 int	pr_oct(t_print *print)
 {
@@ -84,6 +96,10 @@ int	pr_oct(t_print *print)
 	ft_strdel(&tmp);
 	return (i);
 }
+
+/*
+** Conversion for unsigned integers.
+*/
 
 int	pr_u(t_print *print)
 {

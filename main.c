@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 14:55:36 by abackman          #+#    #+#             */
-/*   Updated: 2022/04/22 16:28:52 by abackman         ###   ########.fr       */
+/*   Updated: 2022/04/25 17:53:47 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -672,7 +672,50 @@ int	main(void)
 	ft = ft_printf("%-32p%-32p%-32p%-32p%-32p%-32p%-32p%-32p%-32p%-32p%-32p%-32p",&a01,&a02,&a03,&a04,&a05,&a06,&a07,&a08,&a09,&a10,&a11,&a12);
 	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft); */
 
-	
+	pf = printf("{%.0f}", -3.5);
+	printf("\n");
+	ft = ft_printf("{red}{%.0f}", -3.5);
+	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
+
+	pf = printf("{%.1f}", 0.25);
+	printf("\n");
+	ft = ft_printf("{green}{%.1f}", 0.25);
+	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
+
+	pf = printf("{%.1f}", 0.26);
+	printf("\n");
+	ft = ft_printf("{blue}{%.1f}", 0.26);
+	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
+
+	pf = printf("{%010c}", 'c');
+	printf("\n");
+	ft = ft_printf("{yellow}{%010c}", 'c');
+	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
+
+	pf = printf("pf test color\n");
+	ft = ft_printf("{purple}ft test color\n");
+	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
+
+	pf = printf("pf test color\n");
+	ft = ft_printf("{cyan}ft test color\n");
+	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
+
+	pf = printf("pf test color\n");
+	ft = ft_printf("{black}ft test color\n");
+	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
+
+	pf = printf("pf test color\n");
+	ft = ft_printf("{white}ft test color\n");
+	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
+
+	pf = printf("pf test color\n");
+	ft = ft_printf("{eoc}ft test color\n");
+	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
+
+	pf = printf("{{}}{pf test color}\n");
+	ft = ft_printf("{{}}{pf test color}\n");
+	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
+
 	//system("leaks a.out");
 	
 	return (0);

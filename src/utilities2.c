@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 11:11:25 by abackman          #+#    #+#             */
-/*   Updated: 2022/04/25 12:41:10 by abackman         ###   ########.fr       */
+/*   Updated: 2022/04/25 15:39:47 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,10 @@ static char	*fill_zeros(char *str, int total, long long num, int x)
 	return (new);
 }
 
+/*
+** Pads numerical conversions with zeros.
+*/
+
 char	*zeropad(char *str, int total, long long num)
 {
 	int		len;
@@ -62,6 +66,10 @@ char	*zeropad(char *str, int total, long long num)
 		return (new);
 	}
 }
+
+/*
+** Used to pad c-conversion with space when the character is not printable.
+*/
 
 char	*insert_space_only(t_print *p, char *str)
 {
@@ -90,6 +98,10 @@ char	*insert_space_only(t_print *p, char *str)
 	return (str);
 }
 
+/*
+** Returns 1 if c has the value of a printable character and 0 if it does not.
+*/
+
 int	ft_isprint(int c)
 {
 	if (c > 31 && c < 127)
@@ -97,6 +109,10 @@ int	ft_isprint(int c)
 	else
 		return (0);
 }
+
+/*
+** Initializes the values used for flag checks before every conversion.
+*/
 
 void	init_struct(t_print *print)
 {

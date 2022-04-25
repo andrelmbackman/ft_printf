@@ -9,6 +9,7 @@ Bonuses that printf does not handle:
 
 *-flag:
 - Use the asterisk to specify field width or precision in the argument preceding the conversion.
+- 
 example: ft_printf("%*s", 20, "Hello World!");
 
 colours:
@@ -21,4 +22,5 @@ colours:
 - cyan
 - black
 - white
+- 
 example: ft_printf("{purple}Hello World!");

@@ -6,11 +6,15 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 14:59:31 by abackman          #+#    #+#             */
-/*   Updated: 2022/04/22 17:35:19 by abackman         ###   ########.fr       */
+/*   Updated: 2022/04/25 17:56:58 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
+
+/*
+** Conversion for %%-specifier.
+*/
 
 int	pr_perc(t_print *print)
 {
@@ -32,6 +36,10 @@ int	pr_perc(t_print *print)
 	else
 		return (1);
 }
+
+/*
+** Conversion for %c-specifier.
+*/
 
 int	pr_char(t_print *print)
 {
@@ -61,6 +69,10 @@ int	pr_char(t_print *print)
 		return (1);
 }
 
+/*
+** Conversion for %s-specifier.
+*/
+
 int	pr_str(t_print *print)
 {
 	char	*tmp;
@@ -88,6 +100,10 @@ int	pr_str(t_print *print)
 	return (ft_strlen(print->str));
 }
 
+/*
+** Conversion for %p-specifier.
+*/
+
 int	pr_ptr(t_print *print)
 {
 	char			*tmp;
@@ -109,6 +125,10 @@ int	pr_ptr(t_print *print)
 	ft_strdel(&tmp);
 	return (i);
 }
+
+/*
+** Conversion for %x and %X-specifier, unsigned number to hexadecimal.
+*/
 
 int	pr_hex(t_print *print)
 {

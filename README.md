@@ -9,7 +9,7 @@
 
 #### *-flag:
 - Use the asterisk to specify field width or precision in the argument preceding the conversion.
-- 
+
 example: ft_printf("%*s", 20, "Hello World!");
 
 #### colours:
@@ -22,5 +22,5 @@ example: ft_printf("%*s", 20, "Hello World!");
 - cyan
 - black
 - white
-- 
+
 example: ft_printf("{purple}Hello World!");

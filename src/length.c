@@ -6,13 +6,13 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 13:28:13 by abackman          #+#    #+#             */
-/*   Updated: 2022/04/22 16:32:06 by abackman         ###   ########.fr       */
+/*   Updated: 2022/04/25 12:32:04 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-long long signed_length_mod(t_print *p)
+long long	signed_length_mod(t_print *p)
 {
 	long long	i;
 
@@ -32,8 +32,8 @@ long long signed_length_mod(t_print *p)
 
 unsigned long long	unsigned_length_mod(t_print *p)
 {
-	unsigned long long i;
-	
+	unsigned long long	i;
+
 	i = 0;
 	if (p->l == 1 || p->z)
 		i = (unsigned long)va_arg(p->ap, unsigned long);

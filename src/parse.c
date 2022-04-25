@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:30:20 by abackman          #+#    #+#             */
-/*   Updated: 2022/04/22 17:31:01 by abackman         ###   ########.fr       */
+/*   Updated: 2022/04/25 12:34:40 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	convert_yes(t_print *print, const char *format)
 {
 	int	x;
 	int	ret;
-	
+
 	x = 0;
 	ret = 0;
 	init_struct(print);

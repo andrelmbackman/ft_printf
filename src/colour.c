@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:52:52 by abackman          #+#    #+#             */
-/*   Updated: 2022/04/25 17:56:32 by abackman         ###   ########.fr       */
+/*   Updated: 2022/04/25 19:27:35 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	check_colour(t_print *p, const char	*format)
 	int	i;
 
 	i = 0;
-	while (format[i] != '}' && i < 8)
+	while (format[i] != '}' && i < 8 && format[i] != '%')
 	{
 		if (format[i] == '\0')
 			break ;

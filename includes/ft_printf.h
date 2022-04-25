@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 16:07:36 by abackman          #+#    #+#             */
-/*   Updated: 2022/04/22 16:48:50 by abackman         ###   ########.fr       */
+/*   Updated: 2022/04/25 17:47:23 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,6 @@
 # include <stdarg.h>
 # include <unistd.h>
 # include <stdlib.h>
-
-# include <stdio.h>
-/*
- *iyy DELETE Îî DELETEDELETEDELETEppppppppppppppppppppppppppp
- *iyy DELETE Îî DELETEDELETEDELETE
- */
 
 # define RESET "\033[0m"
 # define RED "\033[0;31m"
@@ -130,13 +124,11 @@ int					convert_no(t_print *print, const char *format);
 ** Other functions
 */
 
+int					check_colour(t_print *p, const char	*format);
 int					ft_strlen(const char *str);
 int					ft_strcmp(const char *s1, const char *s2);
 int					ft_isdigit(int c);
-int					ft_isalnum(int c);
-int					ft_isalpha(int c);
 int					ft_isprint(int c);
-int					ll_len(long long n);
 int					get_field(const char *format, t_print *print);
 void				free_struct(t_print *print);
 void				init_struct(t_print *print);

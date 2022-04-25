@@ -1,18 +1,18 @@
 # ft_printf
 
-Own implementation of printf, dprintf and asprintf.
+## Own implementation of printf, dprintf and asprintf.
 
-###Bonuses that printf does not handle:
+### Bonuses that printf does not handle:
 
-####%b-conversion:
+#### %b-conversion:
 - Coverts an unsigned integer into binary string.
 
-####*-flag:
+#### *-flag:
 - Use the asterisk to specify field width or precision in the argument preceding the conversion.
 - 
 example: ft_printf("%*s", 20, "Hello World!");
 
-####colours:
+#### colours:
 - eoc(end of colour)
 - red
 - green

@@ -6,11 +6,15 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 17:44:44 by abackman          #+#    #+#             */
-/*   Updated: 2022/04/25 12:39:08 by abackman         ###   ########.fr       */
+/*   Updated: 2022/04/25 15:27:11 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
+
+/*
+** Simplified banker's rounding for floats. Rounds to the nearest, ties to even.
+*/
 
 long double	ftoa_rounding(int prec, long double num)
 {

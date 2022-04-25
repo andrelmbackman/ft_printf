@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 11:11:25 by abackman          #+#    #+#             */
-/*   Updated: 2022/04/22 16:31:29 by abackman         ###   ########.fr       */
+/*   Updated: 2022/04/25 12:41:10 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,13 @@ static char	*fill_zeros(char *str, int total, long long num, int x)
 		str[0] = '0';
 		y = 1;
 		x--;
-	}
-	//printf("1 FILL_ZEROS\nnew: %s\nstr: %s\ny: %i\nx: %i\ntotal: %i\n", new, str, y, x, total);
+	}	
 	while (y < (total - x))
 		new[y++] = '0';
 	x = 0;
 	while (str[x])
 		new[y++] = str[x++];
 	new[y] = '\0';
-	//printf("2 FILL_ZEROS\nnew: %s\nstr: %s\ny: %i\nx: %i\ntotal: %i\n", new, str, y, x, total);
 	return (new);
 }
 
@@ -89,10 +87,6 @@ char	*insert_space_only(t_print *p, char *str)
 		str[i++] = c;
 	}
 	str[i] = '\0';
-	//printf("\nINSERT_SPACE_ONLY\n[%s]\n", str);
-	//write(1, "[", 1);
-	//write(1, str, 5);
-	//write(1, "]", 1);
 	return (str);
 }
 
@@ -124,52 +118,3 @@ void	init_struct(t_print *print)
 	print->z = 0;
 	print->conv = 0;
 }
-
-/*
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
-{
-	int				i;
-	unsigned char	ch1;
-	unsigned char	ch2;
-
-	i = 0;
-	if (n < 1)
-		return (0);
-	while (s1[i] == s2[i] && (s1[i] != '\0') && (s2[i] != '\0') && n > 0)
-	{
-		i++;
-		n--;
-	}
-	if (n == 0)
-	{
-		ch1 = (unsigned char)s1[i - 1];
-		ch2 = (unsigned char)s2[i - 1];
-		return (ch1 - ch2);
-	}
-	else
-	{
-		ch1 = (unsigned char)s1[i];
-		ch2 = (unsigned char)s2[i];
-		return (ch1 - ch2);
-	}
-}
-
-char	*ft_strdup(const char *s1)
-{
-	size_t	i;
-	char	*str;
-
-	i = ft_strlen(s1);
-	str = (char *)malloc((i + 1) * sizeof(char));
-	if (str == NULL)
-		return (NULL);
-	i = 0;
-	while (s1[i] != '\0')
-	{
-		str[i] = s1[i];
-		i++;
-	}
-	str[i] = '\0';
-	return (str);
-}
-*/

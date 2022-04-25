@@ -9,7 +9,6 @@ SRCS = ./src/conversion.c\
 	./src/itoa_base.c\
 	./src/length.c\
 	./src/lib1.c\
-	./src/lib2.c\
 	./src/numbers.c\
 	./src/as_parse.c\
 	./src/parse.c\

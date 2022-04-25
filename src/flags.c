@@ -6,11 +6,16 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:36:53 by abackman          #+#    #+#             */
-/*   Updated: 2022/04/22 17:37:49 by abackman         ###   ########.fr       */
+/*   Updated: 2022/04/25 16:27:31 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
+
+/*
+** Functions that parse through the format string and stores data about them
+** in the t_print struct.
+*/
 
 static int	width_helper(const char *format, t_print *p)
 {

@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 16:00:34 by abackman          #+#    #+#             */
-/*   Updated: 2022/04/25 12:33:03 by abackman         ###   ########.fr       */
+/*   Updated: 2022/04/25 16:21:11 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,26 @@ int	ft_strcmp(const char *s1, const char *s2)
 	c1 = (unsigned char)s1[i];
 	c2 = (unsigned char)s2[i];
 	return (c1 - c2);
+}
+
+int	ft_isdigit(int c)
+{
+	if (c >= '0' && c <= '9')
+		return (1);
+	else
+		return (0);
+}
+
+char	*ft_strcpy(char *dst, const char *src)
+{
+	int	i;
+
+	i = 0;
+	while (src[i] != '\0')
+	{
+		dst[i] = src[i];
+		i++;
+	}	
+	dst[i] = '\0';
+	return (dst);
 }

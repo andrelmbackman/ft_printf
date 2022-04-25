@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 14:55:36 by abackman          #+#    #+#             */
-/*   Updated: 2022/04/25 17:53:47 by abackman         ###   ########.fr       */
+/*   Updated: 2022/04/25 19:31:48 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -705,15 +705,15 @@ int	main(void)
 	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
 
 	pf = printf("pf test color\n");
-	ft = ft_printf("{white}ft test color\n");
+	ft = ft_printf("{eoc}ft test color\n{eoc}");
 	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
 
 	pf = printf("pf test color\n");
-	ft = ft_printf("{eoc}ft test color\n");
+	ft = ft_printf("{eoc}ft test color\n{red}");
 	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
 
 	pf = printf("{{}}{pf test color}\n");
-	ft = ft_printf("{{}}{pf test color}\n");
+	ft = ft_printf("{white}{{}}{pf test color}\n{eoc}");
 	printf("\nPF return: %i\nFT return: %i\n\n", pf, ft);
 
 	//system("leaks a.out");

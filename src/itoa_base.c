@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 17:03:16 by abackman          #+#    #+#             */
-/*   Updated: 2022/04/22 17:41:56 by abackman         ###   ########.fr       */
+/*   Updated: 2022/04/25 12:27:12 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,21 @@ static char	*itoa_str(char *str, long long num, int base, int up)
 {
 	int			i;
 	long long	tmp;
+	long long	n;
 
 	i = 0;
 	tmp = 0;
-	while (num != 0)
+	n = num;
+	if (n < 0)
+		n *= -1;
+	while (n != 0)
 	{
-		tmp = num % (long long)base;
+		tmp = n % (long long)base;
 		if (tmp > 9)
 			str[i] = tmp - 10 + up + 'a';
 		else
 			str[i] = tmp + '0';
-		num = num / (long long)base;
+		n = n / (long long)base;
 		i++;
 	}
 	str[i] = '\0';
@@ -60,9 +64,7 @@ char	*ft_itoa_base(long long num, int base, t_print *print)
 {
 	char		*str;
 	int			up;
-	long long	n;
 
-	n = num;
 	up = 0;
 	if (print->upper)
 		up = -32;
@@ -70,12 +72,10 @@ char	*ft_itoa_base(long long num, int base, t_print *print)
 		return (zerostr());
 	if (num == (-9223372036854775807 - 1))
 		return (ft_strdup("-9223372036854775808"));
-	str = (char *)malloc((itoa_base_len(n, base) + 1) * sizeof(char));
+	str = (char *)malloc((itoa_base_len(num, base) + 1) * sizeof(char));
 	if (!str)
 		return (NULL);
-	if (n < 0)
-		n *= -1;
-	str = itoa_str(str, n, base, up);
+	str = itoa_str(str, num, base, up);
 	up = 0;
 	while (str[up])
 		up++;

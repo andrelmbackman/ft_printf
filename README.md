@@ -5,10 +5,10 @@ Own implementation of printf, dprintf and asprintf.
 Bonuses that printf does not handle:
 
 %b-conversion:
-- coverts an unsigned integer into binary string.
+- Coverts an unsigned integer into binary string.
 
 *-flag:
-- use the asterisk to specify field width or precision in the argument preceding the conversion
+- Use the asterisk to specify field width or precision in the argument preceding the conversion.
 example: ft_printf("%*s", 20, "Hello World!");
 
 colours:

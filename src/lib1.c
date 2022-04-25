@@ -6,11 +6,15 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 16:00:34 by abackman          #+#    #+#             */
-/*   Updated: 2022/04/25 16:21:11 by abackman         ###   ########.fr       */
+/*   Updated: 2022/04/25 16:32:14 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
+
+/*
+** Some simple but necessary libft functions.
+*/
 
 void	ft_strdel(char **as)
 {
@@ -54,4 +58,14 @@ char	*ft_strcpy(char *dst, const char *src)
 	}	
 	dst[i] = '\0';
 	return (dst);
+}
+
+int	ft_strlen(const char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i] != '\0')
+		i++;
+	return (i);
 }

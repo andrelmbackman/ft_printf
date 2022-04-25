@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:30:20 by abackman          #+#    #+#             */
-/*   Updated: 2022/04/25 15:44:42 by abackman         ###   ########.fr       */
+/*   Updated: 2022/04/25 19:28:21 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ int	convert_yes(t_print *print, const char *format)
 
 /*
 ** Parses through the format string until the next conversion or the null
-** terminator, then writes what was found.
+** terminator, then writes what was found. If using printf and printing to
+** standard output, it will also stop at the curly bracket (used for colours).
 */
 
 int	convert_no(t_print *print, const char *format)
@@ -68,8 +69,16 @@ int	convert_no(t_print *print, const char *format)
 	int	i;
 
 	i = 0;
-	while (format[i] != '\0' && format[i] != '%')
-		i++;
+	if (print->fd == STDOUT_FILENO)
+	{
+		while (format[i] != '\0' && format[i] != '%' && format[i] != '{')
+			i++;
+	}
+	else
+	{
+		while (format[i] != '\0' && format[i] != '%')
+			i++;
+	}
 	print->ret += write(print->fd, format, i);
 	return (i);
 }

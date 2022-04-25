@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 14:59:31 by abackman          #+#    #+#             */
-/*   Updated: 2022/04/25 17:56:58 by abackman         ###   ########.fr       */
+/*   Updated: 2022/04/25 18:48:06 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,12 +92,13 @@ int	pr_str(t_print *print)
 			new[print->precision++] = '\0';
 	}
 	new = insert_width(print, new, 1);
+	i = ft_strlen(new);
 	if (print->str != NULL)
 		print->str = strjoin_pro(print->str, new, 1);
 	else
 		print->str = ft_strdup(new);
 	ft_strdel(&new);
-	return (ft_strlen(print->str));
+	return (i);
 }
 
 /*
@@ -120,8 +121,8 @@ int	pr_ptr(t_print *print)
 	i = ft_strlen(tmp);
 	if (print->str != NULL)
 		print->str = strjoin_pro(print->str, tmp, 1);
-	else
-		print->str = p_strnew(tmp, i);
+	else if (print->str == NULL)
+		print->str = ft_strdup(tmp);
 	ft_strdel(&tmp);
 	return (i);
 }
@@ -152,7 +153,7 @@ int	pr_hex(t_print *print)
 	if (print->str != NULL)
 		print->str = strjoin_pro(print->str, tmp, 1);
 	else if (print->str == NULL)
-		print->str = p_strnew(tmp, i);
+		print->str = ft_strdup(tmp);
 	ft_strdel(&tmp);
 	return (i);
 }

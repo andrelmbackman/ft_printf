@@ -6,39 +6,11 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 19:23:59 by abackman          #+#    #+#             */
-/*   Updated: 2022/04/22 17:00:16 by abackman         ###   ########.fr       */
+/*   Updated: 2022/04/25 15:51:16 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
-
-static int	as_pr_char(t_print *print)
-{
-	char			*str;
-	unsigned char	c;
-
-	c = (unsigned char)va_arg(print->ap, int);
-	str = (char *)malloc(2 * sizeof(char));
-	if (!str)
-		return (-1);
-	str[0] = c;
-	str[1] = '\0';
-	if (print->width)
-	{
-		if (!ft_isprint(c))
-			str = insert_space_only(print, str);
-		else
-			str = insert_width(print, str, 1);
-	}
-	if (print->str != NULL)
-		print->str = strjoin_pro(print->str, str, 1);
-	else if (print->str == NULL)
-		print->str = str;
-	if (print->width)
-		return (print->width);
-	else
-		return (1);
-}
 
 char	*p_strnew(const char *format, int i)
 {
@@ -100,10 +72,7 @@ int	as_convert_yes(t_print *print, const char *format)
 	if (format[print->i] == SPECIFY[x])
 	{
 		print->conv = format[print->i];
-		if (print->conv == 'c')
-			ret = as_pr_char(print);
-		else
-			ret = g_dispatch[x](print);
+		ret += g_dispatch[x](print);
 	}
 	else
 		print->i--;

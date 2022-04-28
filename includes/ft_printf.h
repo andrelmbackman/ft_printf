@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 16:07:36 by abackman          #+#    #+#             */
-/*   Updated: 2022/04/25 17:47:23 by abackman         ###   ########.fr       */
+/*   Updated: 2022/04/28 16:58:48 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include <stdarg.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdio.h>
 
 # define RESET "\033[0m"
 # define RED "\033[0;31m"
@@ -121,6 +122,14 @@ int					convert_yes(t_print *print, const char *format);
 int					convert_no(t_print *print, const char *format);
 
 /*
+** Length modifiers
+*/
+
+unsigned long long	unsigned_length_mod(t_print *p);
+long double			float_length_mod(t_print *p);
+long long			signed_length_mod(t_print *p);
+
+/*
 ** Other functions
 */
 
@@ -149,15 +158,8 @@ t_print *print);
 char				*fl_width(t_print *p, char *str);
 char				*insert_width(t_print *p, char *tmp, int free);
 char				*insert_space_only(t_print *p, char *str);
-double				init_dot(long double num, long long whole, int prec);
+long double			init_dot(long double num, unsigned long long whole, \
+int prec);
 long double			ftoa_rounding(int precision, long double num);
-
-/*
-** Length modifiers
-*/
-
-unsigned long long	unsigned_length_mod(t_print *p);
-long double			float_length_mod(t_print *p);
-long long			signed_length_mod(t_print *p);
 
 #endif

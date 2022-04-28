@@ -6,26 +6,44 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 17:30:30 by abackman          #+#    #+#             */
-/*   Updated: 2022/04/22 17:38:31 by abackman         ###   ########.fr       */
+/*   Updated: 2022/04/28 16:22:52 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
+static int	ll_len(long long num)
+{
+	int				len;
+	long long		tmp;
+
+	tmp = num;
+	len = 0;
+	if (tmp == 0)
+		return (1);
+	while (tmp)
+	{
+		tmp /= 10;
+		len++;
+	}
+	return (len);
+}
 
 static char	*decimal_str(t_print *p, int prec, long long tmp, char *buf)
 {
 	int	i;
+	int	len;
 
 	i = 0;
 	if (tmp < 0)
 		tmp *= -1;
+	len = ll_len(tmp);
+	while (i < prec - len)
+		buf[i++] = '0';
 	while (tmp > 0)
 	{
 		buf[i++] = tmp % 10 + '0';
 		tmp /= 10;
 	}
-	while (i < prec)
-		buf[i++] = '0';
 	if (p->precision != 0 || p->hash)
 		buf[i++] = '.';
 	if (prec > 0)
@@ -39,11 +57,11 @@ static char	*decimal_str(t_print *p, int prec, long long tmp, char *buf)
 }
 
 static char	*after_decimal(t_print *p, char *nbr, long double num, \
-long long whole)
+unsigned long long whole)
 {
 	char				*buf;
 	long long			tmp;
-	double				dot;
+	long double			dot;
 	int					prec;
 
 	dot = 0.0;
@@ -82,11 +100,11 @@ static char	*float_signs(t_print *p, char *old, long double num)
 
 int	pr_float(t_print *p)
 {
-	char			*nbr_str;
-	long double		num;
-	unsigned long	whole;
-	int				ret;
-	long double		save;
+	char				*nbr_str;
+	long double			num;
+	unsigned long long	whole;
+	int					ret;
+	long double			save;
 
 	ret = 0;
 	num = float_length_mod(p);
@@ -95,7 +113,7 @@ int	pr_float(t_print *p)
 		num *= -1;
 	if (p->precision != 0 || num > 0.999999)
 		num = ftoa_rounding(p->precision, num);
-	whole = (unsigned long)num;
+	whole = (unsigned long long)num;
 	nbr_str = ft_utoa_base(whole, 10, p);
 	nbr_str = after_decimal(p, nbr_str, num, whole);
 	nbr_str = float_signs(p, nbr_str, save);

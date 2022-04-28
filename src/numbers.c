@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 11:15:34 by abackman          #+#    #+#             */
-/*   Updated: 2022/04/25 17:56:19 by abackman         ###   ########.fr       */
+/*   Updated: 2022/04/28 16:22:31 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,21 @@
 ** Helper functions for float conversion.
 */
 
-double	init_dot(long double num, long long whole, int prec)
+long double	init_dot(long double num, unsigned long long whole, int prec)
 {
-	double		power;
-	double		dot;
+	long double		power;
+	long double		dot;
+	int				new_prec;
 
 	power = 1;
 	dot = 0;
-	while (dot++ < prec)
+	if (prec > 18)
+		new_prec = 19;
+	else
+		new_prec = prec;
+	while (dot++ < new_prec)
 		power *= 10;
-	dot = (num - whole) * power;
+	dot = (num - (long double)whole) * power;
 	return (dot);
 }
 

@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 17:44:44 by abackman          #+#    #+#             */
-/*   Updated: 2022/04/25 15:27:11 by abackman         ###   ########.fr       */
+/*   Updated: 2022/04/28 16:24:29 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,10 @@ long double	ftoa_rounding(int prec, long double num)
 	pow = 1.0;
 	if (prec == -1)
 		nprec = 6;
-	else
+	else if (prec < 19)
 		nprec = prec;
-	if (prec == 0)
-	{
-		nprec = 1;
-		pow /= 10;
-	}
+	else
+		nprec = 19;
 	while (i++ < nprec)
 		pow *= 10;
 	tmp = num;

@@ -6,7 +6,7 @@
 /*   By: abackman <abackman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 15:06:15 by abackman          #+#    #+#             */
-/*   Updated: 2022/04/25 15:16:56 by abackman         ###   ########.fr       */
+/*   Updated: 2022/04/28 16:41:14 by abackman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static char	*pad_left(t_print *p, char *new, char *tmp, int start)
 	x = ft_strlen(tmp);
 	new = ft_strcpy(new, (const char *)tmp);
 	if ((!p->zero && p->conv != 'd' && p->conv != 'i' && p->conv != 'f') || \
-	(!p->zero && !p->minus && !p->p_save))
+	(!p->zero && !p->minus && !p->p_save) || (p->zero && p->precision == 0))
 	{
 		start = 0;
 		pad = ' ';

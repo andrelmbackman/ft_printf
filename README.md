@@ -2,6 +2,9 @@
 
 ## Own implementation of printf, dprintf and asprintf.
 
+### To test:
+run Make at the root of the repository, include "ft_printf.h" in your main .c-file, then compile your file with libftprintf.a
+
 ### Bonuses that printf does not handle:
 
 #### %b-conversion:

@@ -8,7 +8,7 @@
 ##### 3. compile your file with libftprintf.a
 #### example: [ gcc your_file.c libftprintf.a -I./includes ]
 
-### Bonuses that printf does not handle:
+### Bonuses that C library printf does not handle:
 
 
 #### colours:

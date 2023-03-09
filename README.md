@@ -30,10 +30,10 @@
 <img width="356" alt="Screen Shot 2022-04-29 at 5 53 41 PM" src="https://user-images.githubusercontent.com/88145164/165969915-96296305-7f8d-4433-b58b-4cc5d1ffa5dd.png">
 <img width="278" alt="Screen Shot 2022-04-29 at 5 54 19 PM" src="https://user-images.githubusercontent.com/88145164/165969925-747fa62d-a701-4c5b-a11c-4a5b2b6abdf7.png">
 
-+ Banker's rounding on floats and doubles.
-
-
 
 <img width="281" alt="Screen Shot 2022-04-27 at 4 18 29 PM" src="https://user-images.githubusercontent.com/88145164/165527008-421e79d1-559b-4e20-9fbd-a67008536f03.png">
 <img width="177" alt="Screen Shot 2022-04-27 at 4 18 11 PM" src="https://user-images.githubusercontent.com/88145164/165527020-4f1c0d26-078e-4f8c-b70c-56a14d9838df.png">
+
+
+#### Banker's rounding on floats and doubles.
 

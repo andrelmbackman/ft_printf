@@ -1,12 +1,32 @@
 # ft_printf
 
-## Own implementation of printf, dprintf and asprintf.
+## Implementation of printf, dprintf and asprintf.
 
 ### To test:
 ##### 1. run Make at the root of the repository
 ##### 2. include "ft_printf.h" in your main .c-file
 ##### 3. compile your file with libftprintf.a
 #### example: [ gcc your_file.c libftprintf.a -I./includes ]
+
+### Conversions
+- %c: character
+- %d, %i: integer
+- %s: string
+- %p: pointer
+- %x, %X: hexadecimal
+- %o, %O: octal
+- %u: unsigned integer
+- %f: float
+### Flags: 
+| Flag     |  Description  |
+|----------|---------------|
+| 0        | zero-pad      |
+| [number] | width         |
+| +        | attach a '+'-sign to positive numbers
+| -[number]| left-justified width
+| *        | specify the value as one of the variable arguments
+| .        | precision
+| [space]  | pad non-negative numbers with one space character
 
 ### Bonuses that C library printf does not handle:
 
